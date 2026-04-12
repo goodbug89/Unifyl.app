@@ -10,9 +10,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/goodbug89/Unifyl/releases">Download</a> · 
-  <a href="https://github.com/goodbug89/Unifyl">Source Code</a> · 
-  <a href="https://github.com/goodbug89/Unifyl/issues">Report Bug</a>
+  <a href="https://github.com/goodbug89/Unifyl.app/releases">Download</a> · 
+  <a href="https://github.com/goodbug89/Unifyl.app/issues">Report Bug</a>
 </p>
 
 ---
@@ -99,16 +98,6 @@ Collect files from multiple directories into a virtual folder. Perform batch cop
 | **Free** | $0 | Dual-pane, tabs, basic search, FTP/SFTP, ZIP, 2 cloud connections |
 | **Pro** | $49.99 (one-time) | Everything: AI features, all archives, all protocols, multi rename, compare/sync, developer tools, themes |
 
-## Building from Source
-
-```bash
-git clone https://github.com/goodbug89/Unifyl.git
-cd Unifyl
-make build
-```
-
-Open `Unifyl.xcodeproj` in Xcode 16+ and run.
-
 ## License
 
 Copyright © 2026 Unifyl. All rights reserved.
@@ -116,5 +105,5 @@ Copyright © 2026 Unifyl. All rights reserved.
 ## Links
 
 - [Website](https://goodbug89.github.io/Unifyl.app)
-- [Releases](https://github.com/goodbug89/Unifyl/releases)
-- [Issues](https://github.com/goodbug89/Unifyl/issues)
+- [Releases](https://github.com/goodbug89/Unifyl.app/releases)
+- [Issues](https://github.com/goodbug89/Unifyl.app/issues)
