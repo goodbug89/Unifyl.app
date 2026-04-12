@@ -96,7 +96,7 @@ Collect files from multiple directories into a virtual folder. Perform batch cop
 | Tier | Price | Includes |
 |---|---|---|
 | **Free** | $0 | Dual-pane, tabs, basic search, FTP/SFTP, ZIP, 2 cloud connections |
-| **Pro** | $49.99 (one-time) | Everything: AI features, all archives, all protocols, multi rename, compare/sync, developer tools, themes |
+| **Pro** | $39.99 (one-time) | Everything: AI features, all archives, all protocols, multi rename, compare/sync, developer tools, themes |
 
 ## License
 
