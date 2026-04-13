@@ -120,7 +120,7 @@ Batch rename with find-replace, regex, numbering, EXIF data, and AI suggestions.
 - File compare (text diff, binary hex, image overlay, directory sync)
 - 3-way merge with conflict resolution
 - Checksum verification (MD5, SHA-256, Blake3)
-- Cloud connections (FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive)
+- Remote connections (FTP, SFTP, WebDAV, S3, SMB)
 - macOS tags with color-coded display
 - Undo/redo for file operations
 - VoiceOver accessibility support
