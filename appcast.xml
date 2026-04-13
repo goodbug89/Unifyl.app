@@ -36,6 +36,7 @@
                 url="https://github.com/goodbug89/Unifyl/releases/download/v1.0.0/Unifyl-1.0.0.dmg"
                 sparkle:version="1"
                 sparkle:shortVersionString="1.0.0"
+                sparkle:edSignature="xNk+/kbdls0b78oaQQLRWjZ/r6FtqByVr/Q6QjFsblytPiXxmirBUDjfe205Lr1h/mKHvOnh66IVvGu5OSasBw=="
                 length="11645073"
                 type="application/octet-stream"
             />
