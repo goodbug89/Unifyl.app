@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.net/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Unifyl Updates</title>
+        <link>https://goodbug89.github.io/Unifyl.app/appcast.xml</link>
+        <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
+        <language>en</language>
+        <!--
+            Add new <item> blocks here for each release.
+            After building and notarizing:
+            1. Run: sparkle/bin/sign_update Unifyl-1.0.0.dmg
+            2. Copy the edSignature and length into the enclosure below
+            3. Upload the .dmg to GitHub Releases
+            4. Update the url, version, and signature
+        -->
+        <item>
+            <title>Version 1.0.0</title>
+            <description><![CDATA[
+                <h2>Unifyl 1.0.0 — Initial Release</h2>
+                <ul>
+                    <li>Dual-pane file management with tabs and workspaces</li>
+                    <li>AI-powered semantic search, smart tagging, and AI rename</li>
+                    <li>Archive virtual folders (ZIP, 7z, TAR, RAR, and more)</li>
+                    <li>10 built-in viewers (text, hex, image, PDF, video, audio, web, markdown, code, media info)</li>
+                    <li>Advanced search with Smart Folders</li>
+                    <li>File compare, directory sync, and 3-way merge</li>
+                    <li>Git integration, inline terminal, and developer tools</li>
+                    <li>12 themes, SVG icon packs, and 120+ custom keyboard shortcuts</li>
+                    <li>Cloud and remote connections (FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive)</li>
+                    <li>Full VoiceOver accessibility support</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 13 Apr 2026 00:00:00 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.0.0/Unifyl-1.0.0.dmg"
+                sparkle:version="1"
+                sparkle:shortVersionString="1.0.0"
+                sparkle:edSignature="REPLACE_AFTER_SIGNING"
+                length="0"
+                type="application/octet-stream"
+            />
+        </item>
+    </channel>
+</rss>
