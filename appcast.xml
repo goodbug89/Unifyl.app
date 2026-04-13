@@ -5,14 +5,6 @@
         <link>https://goodbug89.github.io/Unifyl.app/appcast.xml</link>
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
-        <!--
-            Add new <item> blocks here for each release.
-            After building and notarizing:
-            1. Run: sparkle/bin/sign_update Unifyl-1.0.0.dmg
-            2. Copy the edSignature and length into the enclosure below
-            3. Upload the .dmg to GitHub Releases
-            4. Update the url, version, and signature
-        -->
         <item>
             <title>Version 1.0.0</title>
             <description><![CDATA[
