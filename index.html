@@ -8,508 +8,114 @@
     <meta name="theme-color" content="#0A0E1A">
     <meta property="og:title" content="Unifyl — AI-Powered File Manager for macOS">
     <meta property="og:description" content="Total Commander's depth. ForkLift's polish. Intelligence built in.">
-    <meta property="og:image" content="icon-512.png">
+    <meta property="og:image" content="screenshots/hero-dual-pane.png">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon-512.png">
     <style>
         :root {
-            --bg-deep: #0A0E1A;
+            --bg: #0A0E1A;
             --bg-card: #12172B;
-            --bg-card-hover: #1A2040;
             --accent: #6C8AFF;
             --accent-bright: #8FA8FF;
-            --accent-glow: rgba(108, 138, 255, 0.15);
-            --text-primary: #E8ECF4;
-            --text-secondary: #8B95B0;
-            --text-muted: #5A6380;
+            --accent-glow: rgba(108, 138, 255, 0.12);
+            --text: #E8ECF4;
+            --text2: #8B95B0;
+            --text3: #5A6380;
             --border: rgba(108, 138, 255, 0.12);
-            --gradient-start: #6C8AFF;
-            --gradient-end: #A78BFA;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-            background: var(--bg-deep);
-            color: var(--text-primary);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
+        /* NAV */
+        nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 14px 0; background: rgba(10,14,26,0.88); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-weight: 700; font-size: 18px; }
+        .nav-brand img { width: 30px; height: 30px; border-radius: 7px; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+        .nav-links a:hover { color: var(--text); }
+        .btn-nav { background: var(--accent); color: #fff!important; padding: 7px 18px; border-radius: 8px; font-weight: 600; }
 
-        /* ===== NAV ===== */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-            padding: 16px 0;
-            background: rgba(10, 14, 26, 0.85);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid var(--border);
-        }
-        .nav-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 32px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 700;
-            font-size: 18px;
-            letter-spacing: -0.02em;
-        }
-        .nav-brand img {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-        }
-        .nav-links { display: flex; gap: 28px; align-items: center; }
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--text-primary); }
-        .btn-nav {
-            background: var(--accent);
-            color: #fff !important;
-            padding: 8px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.2s, transform 0.15s;
-        }
-        .btn-nav:hover { background: var(--accent-bright); transform: translateY(-1px); }
+        /* HERO */
+        .hero { padding: 150px 32px 60px; text-align: center; position: relative; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 900px; height: 500px; background: radial-gradient(ellipse, rgba(108,138,255,0.07) 0%, transparent 70%); pointer-events: none; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-glow); border: 1px solid var(--border); border-radius: 100px; padding: 5px 14px; font-size: 13px; color: var(--accent-bright); font-weight: 500; margin-bottom: 24px; }
+        .hero-badge .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.4} }
+        .hero h1 { font-size: clamp(40px,6vw,68px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.08; margin-bottom: 18px; background: linear-gradient(135deg, var(--text) 0%, var(--accent-bright) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 19px; color: var(--text2); max-width: 540px; margin: 0 auto 36px; line-height: 1.65; }
+        .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #6C8AFF, #A78BFA); color: #fff; padding: 13px 30px; border-radius: 12px; font-size: 16px; font-weight: 600; text-decoration: none; transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 24px rgba(108,138,255,0.25); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(108,138,255,0.35); }
 
-        /* ===== HERO ===== */
-        .hero {
-            padding: 160px 32px 100px;
-            text-align: center;
-            position: relative;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 600px;
-            background: radial-gradient(ellipse, rgba(108, 138, 255, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--accent-glow);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            padding: 6px 16px;
-            font-size: 13px;
-            color: var(--accent-bright);
-            font-weight: 500;
-            margin-bottom: 28px;
-        }
-        .hero-badge .dot {
-            width: 6px; height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-        .hero h1 {
-            font-size: clamp(42px, 6vw, 72px);
-            font-weight: 800;
-            letter-spacing: -0.035em;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-bright) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .hero p {
-            font-size: 20px;
-            color: var(--text-secondary);
-            max-width: 560px;
-            margin: 0 auto 40px;
-            line-height: 1.7;
-        }
-        .hero-actions {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            color: #fff;
-            padding: 14px 32px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 24px rgba(108, 138, 255, 0.25);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(108, 138, 255, 0.35);
-        }
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            padding: 14px 32px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            border: 1px solid var(--border);
-            transition: transform 0.2s, background 0.2s;
-        }
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            background: var(--bg-card-hover);
-        }
+        /* SCREENSHOT */
+        .screenshot { max-width: 1100px; margin: 0 auto 60px; padding: 0 32px; }
+        .screenshot img { width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+        .screenshot-caption { text-align: center; font-size: 13px; color: var(--text3); margin-top: 12px; }
 
-        /* ===== APP PREVIEW ===== */
-        .app-preview {
-            max-width: 960px;
-            margin: 0 auto 80px;
-            padding: 0 32px;
-        }
-        .preview-window {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
-        }
-        .preview-titlebar {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.03);
-            border-bottom: 1px solid var(--border);
-        }
-        .traffic-light {
-            width: 12px; height: 12px;
-            border-radius: 50%;
-        }
-        .tl-red { background: #FF5F57; }
-        .tl-yellow { background: #FEBC2E; }
-        .tl-green { background: #28C840; }
-        .preview-body {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 380px;
-        }
-        .preview-pane {
-            padding: 16px;
-        }
-        .preview-pane:first-child {
-            border-right: 1px solid var(--border);
-        }
-        .preview-pathbar {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
-            margin-bottom: 12px;
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-        .preview-pathbar .current { color: var(--text-primary); font-weight: 500; }
-        .preview-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            font-family: 'SF Mono', 'Menlo', monospace;
-        }
-        .preview-row.selected {
-            background: rgba(108, 138, 255, 0.12);
-            color: var(--accent-bright);
-        }
-        .preview-row .icon { width: 16px; text-align: center; }
-        .preview-row .size {
-            margin-left: auto;
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-        .preview-fkey-bar {
-            display: flex;
-            justify-content: center;
-            gap: 2px;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.02);
-            border-top: 1px solid var(--border);
-        }
-        .fkey {
-            font-size: 10px;
-            padding: 4px 10px;
-            border-radius: 4px;
-            color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.03);
-            font-family: 'SF Mono', 'Menlo', monospace;
-        }
+        /* SECTIONS */
+        section { max-width: 1200px; margin: 0 auto; padding: 80px 32px; }
+        .section-label { display: inline-block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: 10px; }
+        .section-title { font-size: clamp(26px,4vw,38px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 14px; }
+        .section-desc { font-size: 16px; color: var(--text2); max-width: 580px; margin-bottom: 40px; }
 
-        /* ===== SECTIONS ===== */
-        section {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 80px 32px;
-        }
-        .section-label {
-            display: inline-block;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--accent);
-            margin-bottom: 12px;
-        }
-        .section-title {
-            font-size: clamp(28px, 4vw, 40px);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 16px;
-        }
-        .section-desc {
-            font-size: 17px;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin-bottom: 48px;
-        }
+        /* FEATURE SHOWCASE — image + text side by side */
+        .showcase { display: flex; gap: 40px; align-items: center; margin-bottom: 60px; }
+        .showcase.reverse { flex-direction: row-reverse; }
+        .showcase-img { flex: 1; min-width: 0; }
+        .showcase-img img { width: 100%; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
+        .showcase-text { flex: 0 0 340px; }
+        .showcase-text h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+        .showcase-text p { font-size: 15px; color: var(--text2); line-height: 1.7; }
 
-        /* ===== FEATURE GRID ===== */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 28px;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-        .feature-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(108, 138, 255, 0.25);
-        }
-        .feature-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: var(--accent-glow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            margin-bottom: 18px;
-        }
-        .feature-card h3 {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .feature-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.65;
-        }
+        /* GALLERY */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 32px; }
+        .gallery-item { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); transition: transform .2s; }
+        .gallery-item:hover { transform: translateY(-3px); }
+        .gallery-item img { width: 100%; display: block; }
+        .gallery-item .label { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 14px; background: linear-gradient(transparent, rgba(0,0,0,0.85)); font-size: 13px; font-weight: 600; }
 
-        /* ===== HIGHLIGHT SECTION ===== */
-        .highlight-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-        }
-        .highlight-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 20px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-        }
-        .highlight-item .hi-icon {
-            font-size: 20px;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-        .highlight-item h4 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        .highlight-item p {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
+        /* FEATURE GRID (small cards) */
+        .mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 32px; }
+        .mini-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .mini-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+        .mini-card p { font-size: 13px; color: var(--text2); line-height: 1.6; }
 
-        /* ===== PRICING ===== */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .price-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 36px 28px;
-            text-align: center;
-            position: relative;
-        }
-        .price-card.featured {
-            border-color: var(--accent);
-            box-shadow: 0 0 40px rgba(108, 138, 255, 0.1);
-        }
-        .price-card.featured::before {
-            content: 'MOST POPULAR';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            color: #fff;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            padding: 4px 16px;
-            border-radius: 100px;
-        }
-        .price-card h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .price-amount {
-            font-size: 42px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin: 16px 0 4px;
-        }
-        .price-amount span { font-size: 16px; font-weight: 400; color: var(--text-muted); }
-        .price-note {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
-        .price-features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 28px;
-        }
-        .price-features li {
-            font-size: 14px;
-            color: var(--text-secondary);
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .price-features li::before {
-            content: '\2713';
-            color: var(--accent);
-            font-weight: 700;
-        }
-        .btn-price {
-            display: block;
-            padding: 12px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: transform 0.2s;
-        }
+        /* PRICING */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 800px; margin: 0 auto; }
+        .price-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px 24px; text-align: center; position: relative; }
+        .price-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(108,138,255,0.1); }
+        .price-card.featured::before { content: 'MOST POPULAR'; position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #6C8AFF, #A78BFA); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .08em; padding: 3px 14px; border-radius: 100px; }
+        .price-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+        .price-amount { font-size: 40px; font-weight: 800; margin: 12px 0 4px; }
+        .price-amount span { font-size: 16px; font-weight: 400; color: var(--text3); }
+        .price-note { font-size: 13px; color: var(--text3); margin-bottom: 20px; }
+        .price-features { list-style: none; text-align: left; margin-bottom: 24px; }
+        .price-features li { font-size: 14px; color: var(--text2); padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 8px; }
+        .price-features li::before { content: '\2713'; color: var(--accent); font-weight: 700; }
+        .btn-price { display: block; padding: 11px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 15px; transition: transform .2s; }
         .btn-price:hover { transform: translateY(-1px); }
-        .btn-price-primary {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            color: #fff;
-        }
-        .btn-price-secondary {
-            background: rgba(108, 138, 255, 0.1);
-            color: var(--accent-bright);
-            border: 1px solid var(--border);
-        }
+        .btn-price-primary { background: linear-gradient(135deg, #6C8AFF, #A78BFA); color: #fff; }
+        .btn-price-secondary { background: rgba(108,138,255,0.1); color: var(--accent-bright); border: 1px solid var(--border); }
 
-        /* ===== TECH ===== */
-        .tech-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 24px;
-        }
-        .tech-tag {
-            font-size: 13px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
+        /* TECH */
+        .tech-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .tech-tag { font-size: 13px; padding: 7px 14px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); color: var(--text2); font-weight: 500; }
 
-        /* ===== FOOTER ===== */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 40px 32px;
-            text-align: center;
-        }
-        footer p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        footer a:hover { text-decoration: underline; }
+        /* FOOTER */
+        footer { border-top: 1px solid var(--border); padding: 36px 32px; text-align: center; }
+        footer p { font-size: 13px; color: var(--text3); }
+        footer a { color: var(--accent); text-decoration: none; }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .preview-body { grid-template-columns: 1fr; }
-            .preview-pane:first-child { border-right: none; border-bottom: 1px solid var(--border); }
-            .hero { padding: 130px 24px 60px; }
-            section { padding: 60px 24px; }
+            .hero { padding: 120px 20px 40px; }
+            section { padding: 50px 20px; }
+            .showcase, .showcase.reverse { flex-direction: column; }
+            .showcase-text { flex: none; }
+            .gallery { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -518,15 +124,12 @@
 <!-- NAV -->
 <nav>
     <div class="nav-inner">
-        <a href="#" class="nav-brand">
-            <img src="icon.png" alt="Unifyl">
-            Unifyl
-        </a>
+        <a href="#" class="nav-brand"><img src="icon.png" alt="Unifyl"> Unifyl</a>
         <div class="nav-links">
             <a href="#features">Features</a>
-            <a href="#ai">AI</a>
+            <a href="#tools">Tools</a>
+            <a href="#developer">Developer</a>
             <a href="#pricing">Pricing</a>
-            <a href="#features">Features</a>
             <a href="https://github.com/goodbug89/Unifyl.app/releases" class="btn-nav">Download</a>
         </div>
     </div>
@@ -534,12 +137,9 @@
 
 <!-- HERO -->
 <div class="hero">
-    <div class="hero-badge">
-        <span class="dot"></span>
-        macOS native &middot; Apple Silicon optimized
-    </div>
+    <div class="hero-badge"><span class="dot"></span> macOS native &middot; Apple Silicon optimized</div>
     <h1>The file manager<br>macOS deserves.</h1>
-    <p>Dual-pane power of Total Commander. The polish of ForkLift. With AI intelligence built in. All running natively on your Mac.</p>
+    <p>Dual-pane power of Total Commander. The polish of ForkLift. AI intelligence built in. All running natively on your Mac.</p>
     <div class="hero-actions">
         <a href="https://github.com/goodbug89/Unifyl.app/releases" class="btn-primary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -548,192 +148,98 @@
     </div>
 </div>
 
-<!-- APP PREVIEW -->
-<div class="app-preview">
-    <div class="preview-window">
-        <div class="preview-titlebar">
-            <div class="traffic-light tl-red"></div>
-            <div class="traffic-light tl-yellow"></div>
-            <div class="traffic-light tl-green"></div>
-            <span style="margin-left: 12px; font-size: 13px; color: var(--text-muted);">Unifyl</span>
-        </div>
-        <div class="preview-body">
-            <div class="preview-pane">
-                <div class="preview-pathbar">
-                    <span>~</span> <span style="color:var(--text-muted)">/</span> <span class="current">Projects</span>
-                    <span style="margin-left:auto; color:#F59E0B;">&#9741; main</span>
-                </div>
-                <div class="preview-row selected">
-                    <span class="icon" style="color:#6C8AFF;">&#128193;</span>
-                    <span>src</span>
-                    <span class="size">&mdash;</span>
-                </div>
-                <div class="preview-row">
-                    <span class="icon" style="color:#6C8AFF;">&#128193;</span>
-                    <span>docs</span>
-                    <span class="size">&mdash;</span>
-                </div>
-                <div class="preview-row">
-                    <span class="icon" style="color:#F59E0B;">&#128196;</span>
-                    <span>Package.swift</span>
-                    <span class="size">2.4 KB</span>
-                </div>
-                <div class="preview-row">
-                    <span class="icon" style="color:#8B95B0;">&#128196;</span>
-                    <span>README.md</span>
-                    <span class="size">8.1 KB</span>
-                </div>
-                <div class="preview-row">
-                    <span class="icon" style="color:#8B95B0;">&#128196;</span>
-                    <span>.gitignore</span>
-                    <span class="size">420 B</span>
-                </div>
-            </div>
-            <div class="preview-pane">
-                <div class="preview-pathbar">
-                    <span>~</span> <span style="color:var(--text-muted)">/</span> <span class="current">Backup</span>
-                </div>
-                <div class="preview-row">
-                    <span class="icon" style="color:#6C8AFF;">&#128193;</span>
-                    <span>2026-04</span>
-                    <span class="size">&mdash;</span>
-                </div>
-                <div class="preview-row">
-                    <span class="icon" style="color:#A78BFA;">&#128230;</span>
-                    <span>archive.zip</span>
-                    <span class="size">156 MB</span>
-                </div>
-                <div class="preview-row">
-                    <span class="icon" style="color:#34D399;">&#128196;</span>
-                    <span>report.pdf</span>
-                    <span class="size">3.2 MB</span>
-                </div>
-                <div class="preview-row">
-                    <span class="icon" style="color:#F87171;">&#128248;</span>
-                    <span>photo_001.jpg</span>
-                    <span class="size">4.8 MB</span>
-                </div>
-                <div class="preview-row">
-                    <span class="icon" style="color:#8B95B0;">&#128196;</span>
-                    <span>notes.txt</span>
-                    <span class="size">12 KB</span>
-                </div>
-            </div>
-        </div>
-        <div class="preview-fkey-bar">
-            <span class="fkey">F3 View</span>
-            <span class="fkey">F4 Edit</span>
-            <span class="fkey">F5 Copy</span>
-            <span class="fkey">F6 Move</span>
-            <span class="fkey">F7 MkDir</span>
-            <span class="fkey">F8 Delete</span>
-        </div>
-    </div>
+<!-- HERO SCREENSHOT -->
+<div class="screenshot">
+    <img src="screenshots/hero-dual-pane.png" alt="Unifyl dual-pane file manager with color-coded files" loading="lazy">
+    <p class="screenshot-caption">Dual-pane view with color-coded file types, function key bar, and tab support</p>
 </div>
 
 <!-- FEATURES -->
 <section id="features">
     <span class="section-label">Features</span>
-    <h2 class="section-title">Everything you need.<br>Nothing you don't.</h2>
-    <p class="section-desc">Power features that rival Total Commander, wrapped in a native macOS experience that feels right at home.</p>
+    <h2 class="section-title">See it in action.</h2>
+    <p class="section-desc">Real screenshots. Real features. No mockups.</p>
 
-    <div class="feature-grid">
-        <div class="feature-card">
-            <div class="feature-icon">&#9881;</div>
-            <h3>Dual-Pane Power</h3>
-            <p>Side-by-side file browsing with tabs, workspaces, and keyboard-first navigation. Copy, move, and compare files across panes with function keys.</p>
+    <!-- Dual Pane + Preview -->
+    <div class="showcase">
+        <div class="showcase-img"><img src="screenshots/hero-preview.png" alt="File preview with dual pane" loading="lazy"></div>
+        <div class="showcase-text">
+            <h3>Dual-Pane + Live Preview</h3>
+            <p>Browse files side-by-side with instant image preview. Tabs, workspaces, and keyboard-first navigation. Function keys for copy, move, delete — just like Total Commander.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#128269;</div>
+    </div>
+
+    <!-- Advanced Search + Smart Folder -->
+    <div class="showcase reverse">
+        <div class="showcase-img"><img src="screenshots/advanced-search.png" alt="Advanced multi-criteria search" loading="lazy"></div>
+        <div class="showcase-text">
             <h3>Advanced Search</h3>
-            <p>Multi-criteria search with regex, size, date, content matching, and boolean logic. Results feed directly into Smart Folders for batch operations.</p>
+            <p>Multi-criteria with regex, tags, size, date, and content matching. Feed results directly into Smart Folders for batch copy, move, or delete.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#128230;</div>
-            <h3>Archive Virtual Folders</h3>
-            <p>Browse ZIP, 7z, TAR, GZ, RAR archives as regular folders. Copy, move, rename, and delete files inside archives seamlessly.</p>
+    </div>
+
+    <!-- Command Palette -->
+    <div class="showcase">
+        <div class="showcase-img"><img src="screenshots/command-palette.png" alt="Command palette" loading="lazy"></div>
+        <div class="showcase-text">
+            <h3>Command Palette</h3>
+            <p>Cmd+Shift+P opens instant access to every command. Search, launch tools, navigate — all without touching the mouse.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#128196;</div>
-            <h3>10 Built-in Viewers</h3>
-            <p>Text, hex, image, PDF, video, audio, web, Markdown, code with syntax highlighting, and media info. Each in its own resizable window.</p>
+    </div>
+
+    <!-- Theme Editor -->
+    <div class="showcase reverse">
+        <div class="showcase-img"><img src="screenshots/theme-editor.png" alt="Theme editor with live preview" loading="lazy"></div>
+        <div class="showcase-text">
+            <h3>Themes & Customization</h3>
+            <p>12 built-in themes plus a full custom editor. SVG icon packs. File color coding. Make it yours.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#127912;</div>
-            <h3>Themes & Icon Packs</h3>
-            <p>12 built-in themes with full customization. SVG icon packs with 200+ extension mappings. Make it yours.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#128274;</div>
+    </div>
+
+    <!-- Multi Rename -->
+    <div class="showcase">
+        <div class="showcase-img"><img src="screenshots/multi-rename.png" alt="Multi-rename tool" loading="lazy"></div>
+        <div class="showcase-text">
             <h3>Multi Rename</h3>
-            <p>Batch rename with regex, numbering, EXIF data, search-replace, and AI suggestions. Preview before applying, undo after.</p>
+            <p>Batch rename with find-replace, regex, numbering, EXIF data, and AI suggestions. Live preview of all changes before applying.</p>
         </div>
     </div>
 </section>
 
-<!-- MORE CAPABILITIES -->
-<section>
-    <span class="section-label">And more</span>
-    <h2 class="section-title">Built for power users.</h2>
-    <p class="section-desc">Every feature a professional file manager needs, natively on macOS.</p>
+<!-- TOOLS -->
+<section id="tools">
+    <span class="section-label">Pro Tools</span>
+    <h2 class="section-title">Built-in tools you'll actually use.</h2>
+    <p class="section-desc">Every tool opens in its own window. No plugins needed.</p>
 
-    <div class="highlight-grid">
-        <div class="highlight-item">
-            <span class="hi-icon">&#128194;</span>
-            <div>
-                <h4>Smart Folders</h4>
-                <p>Collect files from anywhere into a virtual folder for batch operations.</p>
-            </div>
-        </div>
-        <div class="highlight-item">
-            <span class="hi-icon">&#128260;</span>
-            <div>
-                <h4>File Compare</h4>
-                <p>Text diff, binary hex compare, image overlay, and directory sync.</p>
-            </div>
-        </div>
-        <div class="highlight-item">
-            <span class="hi-icon">&#9000;</span>
-            <div>
-                <h4>Inline Terminal</h4>
-                <p>Built-in terminal with $F, $D, $S variable insertion.</p>
-            </div>
-        </div>
-        <div class="highlight-item">
-            <span class="hi-icon">&#128268;</span>
-            <div>
-                <h4>Git Integration</h4>
-                <p>Status, stage, commit, push/pull, and inline diff viewer.</p>
-            </div>
-        </div>
-        <div class="highlight-item">
-            <span class="hi-icon">&#9729;</span>
-            <div>
-                <h4>Cloud & Remote</h4>
-                <p>FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive.</p>
-            </div>
-        </div>
-        <div class="highlight-item">
-            <span class="hi-icon">&#128736;</span>
-            <div>
-                <h4>Custom Shortcuts</h4>
-                <p>120+ remappable commands with conflict detection.</p>
-            </div>
-        </div>
-        <div class="highlight-item">
-            <span class="hi-icon">&#128218;</span>
-            <div>
-                <h4>Hex Editor</h4>
-                <p>Binary file inspection and editing with pattern search.</p>
-            </div>
-        </div>
-        <div class="highlight-item">
-            <span class="hi-icon">&#128247;</span>
-            <div>
-                <h4>EXIF Editor</h4>
-                <p>Batch edit photo metadata — date, GPS, copyright, and more.</p>
-            </div>
-        </div>
+    <div class="gallery">
+        <div class="gallery-item"><img src="screenshots/hex-editor.png" alt="Hex Editor" loading="lazy"><div class="label">Hex Editor</div></div>
+        <div class="gallery-item"><img src="screenshots/file-xray.png" alt="File X-Ray metadata" loading="lazy"><div class="label">File X-Ray</div></div>
+        <div class="gallery-item"><img src="screenshots/folder-heatmap.png" alt="Folder size heatmap" loading="lazy"><div class="label">Folder Size Heatmap</div></div>
+        <div class="gallery-item"><img src="screenshots/diff-heatmap.png" alt="Directory diff heatmap" loading="lazy"><div class="label">Diff Heatmap</div></div>
+        <div class="gallery-item"><img src="screenshots/folder-sync.png" alt="Folder synchronization" loading="lazy"><div class="label">Folder Sync</div></div>
+        <div class="gallery-item"><img src="screenshots/checksum.png" alt="Checksum verification" loading="lazy"><div class="label">Checksum Verification</div></div>
+        <div class="gallery-item"><img src="screenshots/pdf-tools.png" alt="PDF split and merge" loading="lazy"><div class="label">PDF Tools</div></div>
+        <div class="gallery-item"><img src="screenshots/exif-editor.png" alt="EXIF metadata editor" loading="lazy"><div class="label">EXIF Batch Editor</div></div>
+        <div class="gallery-item"><img src="screenshots/media-converter.png" alt="Media converter" loading="lazy"><div class="label">Media Converter</div></div>
+        <div class="gallery-item"><img src="screenshots/smart-folder.png" alt="Smart Folder" loading="lazy"><div class="label">Smart Folder</div></div>
+        <div class="gallery-item"><img src="screenshots/keyboard-shortcuts.png" alt="Keyboard shortcuts settings" loading="lazy"><div class="label">120+ Custom Shortcuts</div></div>
+        <div class="gallery-item"><img src="screenshots/app-uninstaller.png" alt="App uninstaller" loading="lazy"><div class="label">App Uninstaller</div></div>
+    </div>
+</section>
+
+<!-- DEVELOPER -->
+<section id="developer">
+    <span class="section-label">Developer Tools</span>
+    <h2 class="section-title">Built for developers.</h2>
+    <p class="section-desc">Git integration, process inspection, and system tools — right inside your file manager.</p>
+
+    <div class="gallery">
+        <div class="gallery-item"><img src="screenshots/git-panel.png" alt="Git panel with diff" loading="lazy"><div class="label">Git Panel</div></div>
+        <div class="gallery-item"><img src="screenshots/git-history.png" alt="Git commit history" loading="lazy"><div class="label">Git History</div></div>
+        <div class="gallery-item"><img src="screenshots/log-viewer.png" alt="Log viewer" loading="lazy"><div class="label">Log Viewer</div></div>
+        <div class="gallery-item"><img src="screenshots/port-viewer.png" alt="Port and socket viewer" loading="lazy"><div class="label">Port Viewer</div></div>
+        <div class="gallery-item"><img src="screenshots/process-map.png" alt="Process file map" loading="lazy"><div class="label">Process File Map</div></div>
     </div>
 </section>
 
@@ -741,29 +247,17 @@
 <section id="ai" style="text-align: center;">
     <span class="section-label">Intelligence</span>
     <h2 class="section-title">AI that runs on your Mac.</h2>
-    <p class="section-desc" style="margin-left: auto; margin-right: auto;">All AI processing happens locally on your Apple Neural Engine. Your files never leave your machine.</p>
+    <p class="section-desc" style="margin: 0 auto 40px;">All AI processing happens locally on your Apple Neural Engine. Your files never leave your machine.</p>
 
-    <div class="feature-grid" style="max-width: 700px; margin: 0 auto;">
-        <div class="feature-card">
-            <div class="feature-icon">&#129504;</div>
-            <h3>Semantic Search</h3>
-            <p>Find files by meaning, not just filename. Local embeddings with vector indexing for instant results.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#127991;</div>
-            <h3>Smart Tagging</h3>
-            <p>Auto-classify and tag files using NLP. Integrated with macOS native tags.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#9999;</div>
-            <h3>AI Rename</h3>
-            <p>Intelligent renaming based on image content (VLM) and document analysis.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#128272;</div>
-            <h3>Privacy First</h3>
-            <p>CoreML + Metal. No cloud API calls. No telemetry. Your files, your hardware, your privacy.</p>
-        </div>
+    <div class="screenshot" style="max-width: 600px; margin: 0 auto 40px; padding: 0;">
+        <img src="screenshots/ai-settings.png" alt="AI settings - all local CoreML models" loading="lazy">
+    </div>
+
+    <div class="mini-grid" style="max-width: 800px; margin: 0 auto;">
+        <div class="mini-card"><h4>Semantic Search</h4><p>Find files by meaning, not just filename. Local embeddings with vector indexing.</p></div>
+        <div class="mini-card"><h4>Smart Tagging</h4><p>Auto-classify files using NLP. Integrated with macOS native Finder tags.</p></div>
+        <div class="mini-card"><h4>AI Rename</h4><p>Intelligent renaming from image content (VLM) and document analysis.</p></div>
+        <div class="mini-card"><h4>Privacy First</h4><p>CoreML + Metal. No cloud calls. No telemetry. 100% on-device.</p></div>
     </div>
 </section>
 
@@ -771,8 +265,7 @@
 <section>
     <span class="section-label">Technology</span>
     <h2 class="section-title">Native to the core.</h2>
-    <p class="section-desc">Built with Apple's latest frameworks. No Electron. No web views. Pure performance.</p>
-
+    <p class="section-desc">Built with Apple's latest frameworks. No Electron. No web views.</p>
     <div class="tech-row">
         <span class="tech-tag">Swift 6</span>
         <span class="tech-tag">SwiftUI + AppKit</span>
@@ -790,8 +283,7 @@
 <section id="pricing" style="text-align: center;">
     <span class="section-label">Pricing</span>
     <h2 class="section-title">Simple, fair pricing.</h2>
-    <p class="section-desc" style="margin-left: auto; margin-right: auto;">Start free. Upgrade when you're ready. No subscriptions for individuals.</p>
-
+    <p class="section-desc" style="margin: 0 auto 40px;">Start free. Upgrade when you're ready. No subscriptions.</p>
     <div class="pricing-grid">
         <div class="price-card">
             <h3>Free</h3>
@@ -803,11 +295,9 @@
                 <li>Basic search & filter</li>
                 <li>FTP / SFTP</li>
                 <li>ZIP archive support</li>
-                <li>2 cloud connections</li>
             </ul>
             <a href="https://github.com/goodbug89/Unifyl.app/releases" class="btn-price btn-price-secondary">Download Free</a>
         </div>
-
         <div class="price-card featured">
             <h3>Pro</h3>
             <div class="price-amount">$39<span>.99</span></div>
@@ -826,7 +316,6 @@
     </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
     <p style="margin-bottom: 8px;">
         <a href="https://github.com/goodbug89/Unifyl.app/releases">Releases</a>
