@@ -56,6 +56,20 @@ Cmd+Shift+P — instant access to every command without touching the mouse.
 
 Batch rename with find-replace, regex, numbering, EXIF data, and AI suggestions. Live preview before applying.
 
+### Integrated Viewer — Press F3
+
+> **One key. Any file. Instant preview.** Press F3 on any file and the right viewer opens automatically — in its own resizable, independent window. No plugins. No configuration.
+
+| PDF Viewer | Code Viewer |
+|---|---|
+| <img src="screenshots/viewer-pdf.png" alt="PDF viewer" width="400"> | <img src="screenshots/viewer-code-js.png" alt="Code viewer" width="400"> |
+
+| Image Viewer | Swift Code |
+|---|---|
+| <img src="screenshots/viewer-image.png" alt="Image viewer" width="400"> | <img src="screenshots/viewer-code-swift.png" alt="Swift code" width="400"> |
+
+**10 built-in viewers:** Text, Code (50+ languages), Hex, Image, PDF, Video, Audio, Web, Markdown, Media Info — all auto-detected by file type.
+
 ### Themes & Icon Packs
 
 <img src="screenshots/theme-editor.png" alt="Theme editor" width="800">
