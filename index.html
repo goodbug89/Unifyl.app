@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unifyl — AI-Powered Dual-Pane File Manager for macOS</title>
-    <meta name="description" content="Unifyl is a next-generation dual-pane file manager for macOS. Total Commander's depth, ForkLift's polish, intelligence built in.">
+    <meta name="description" content="Unifyl is a next-generation AI-powered dual-pane file manager for macOS. Total Commander's depth, ForkLift's polish, intelligence built in. Free download.">
     <meta name="theme-color" content="#0A0E1A">
     <meta property="og:title" content="Unifyl — AI-Powered File Manager for macOS">
     <meta property="og:description" content="Total Commander's depth. ForkLift's polish. Intelligence built in.">
@@ -16,6 +16,23 @@
     <meta name="twitter:description" content="Total Commander's depth. ForkLift's polish. Intelligence built in.">
     <meta name="twitter:image" content="https://goodbug89.github.io/Unifyl.app/screenshots/hero-dual-pane.png">
     <link rel="canonical" href="https://goodbug89.github.io/Unifyl.app/">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Unifyl",
+        "operatingSystem": "macOS 14.0+",
+        "applicationCategory": "UtilitiesApplication",
+        "description": "AI-powered dual-pane file manager for macOS",
+        "offers": [
+            { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
+            { "@type": "Offer", "price": "39.99", "priceCurrency": "USD", "name": "Pro" }
+        ],
+        "downloadUrl": "https://github.com/goodbug89/Unifyl.app/releases",
+        "softwareVersion": "1.0.0",
+        "screenshot": "https://goodbug89.github.io/Unifyl.app/screenshots/hero-dual-pane.png"
+    }
+    </script>
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon-512.png">
     <style>
@@ -43,11 +60,6 @@
         .nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
         .nav-links a:hover { color: var(--text); }
         .btn-nav { background: var(--accent); color: #fff!important; padding: 7px 18px; border-radius: 8px; font-weight: 600; }
-        .lang-switch { font-size: 13px; color: var(--text3); }
-        .lang-switch a { color: var(--text3); text-decoration: none; transition: color .2s; }
-        .lang-switch a:hover { color: var(--text); }
-        .lang-switch .active { color: var(--accent-bright); font-weight: 600; }
-
         /* HERO */
         .hero { padding: 150px 32px 60px; text-align: center; position: relative; }
         .hero::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 900px; height: 500px; background: radial-gradient(ellipse, rgba(108,138,255,0.07) 0%, transparent 70%); pointer-events: none; }
@@ -119,8 +131,12 @@
         footer p { font-size: 13px; color: var(--text3); }
         footer a { color: var(--accent); text-decoration: none; }
 
+        /* Mobile hamburger */
+        .mobile-dl { display: none; }
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            .nav-links a:not(.btn-nav) { display: none; }
+            .nav-links .btn-nav { display: inline-flex; }
+            .mobile-dl { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: #fff; padding: 10px 24px; border-radius: 10px; font-size: 15px; font-weight: 600; text-decoration: none; margin-top: 12px; }
             .hero { padding: 120px 20px 40px; }
             section { padding: 50px 20px; }
             .showcase, .showcase.reverse { flex-direction: column; }
@@ -157,6 +173,7 @@
             Download for macOS
         </a>
     </div>
+    <p style="font-size: 13px; color: var(--text3); margin-top: 16px;">Open the DMG, drag Unifyl to Applications. Free to use, Pro $39.99 one-time. Up to 3 devices.</p>
 </div>
 
 <!-- HERO SCREENSHOT -->
@@ -340,7 +357,7 @@
         <div class="price-card featured">
             <h3>Pro</h3>
             <div class="price-amount">$39<span>.99</span></div>
-            <div class="price-note">One-time purchase. Lifetime updates.</div>
+            <div class="price-note">One-time purchase. Lifetime updates. Up to 3 devices. 30-day refund.</div>
             <ul class="price-features">
                 <li>Everything in Free</li>
                 <li>AI search, tagging & rename</li>
