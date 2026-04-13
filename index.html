@@ -316,14 +316,74 @@
     </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-    <p style="margin-bottom: 8px;">
-        <a href="https://github.com/goodbug89/Unifyl.app/releases">Releases</a>
-        &nbsp;&middot;&nbsp;
-        <a href="https://github.com/goodbug89/Unifyl.app/issues">Issues</a>
-    </p>
-    <p>&copy; 2026 Unifyl. Built with care for macOS.</p>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <img src="icon.png" alt="Unifyl" width="40" height="40" style="border-radius:10px">
+            <div>
+                <div style="font-size:18px; font-weight:700; color:var(--text);">Unifyl</div>
+                <div style="font-size:12px; color:var(--text3);">AI-Powered File Manager for macOS</div>
+            </div>
+        </div>
+        <div class="footer-cols">
+            <div class="footer-col">
+                <h5>Product</h5>
+                <a href="https://github.com/goodbug89/Unifyl.app/releases">Download</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="https://github.com/goodbug89/Unifyl.app/releases">Changelog</a>
+            </div>
+            <div class="footer-col">
+                <h5>Resources</h5>
+                <a href="https://github.com/goodbug89/Unifyl.app/wiki">Documentation</a>
+                <a href="https://github.com/goodbug89/Unifyl.app/wiki/Keyboard-Shortcuts">Keyboard Shortcuts</a>
+                <a href="https://github.com/goodbug89/Unifyl.app/wiki/FAQ">FAQ</a>
+                <a href="https://github.com/goodbug89/Unifyl.app/wiki/Getting-Started">Getting Started</a>
+            </div>
+            <div class="footer-col">
+                <h5>Community</h5>
+                <a href="https://github.com/goodbug89/Unifyl.app/discussions">Discussions</a>
+                <a href="https://github.com/goodbug89/Unifyl.app/issues">Report Bug</a>
+                <a href="https://github.com/goodbug89/Unifyl.app/discussions/categories/ideas">Feature Requests</a>
+            </div>
+            <div class="footer-col">
+                <h5>Legal</h5>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Unifyl. Crafted with care for macOS.</p>
+        <div class="footer-badges">
+            <span>Swift 6</span>
+            <span>SwiftUI</span>
+            <span>Apple Silicon</span>
+            <span>macOS 14+</span>
+        </div>
+    </div>
 </footer>
+
+<style>
+    footer { border-top: 1px solid var(--border); padding: 0; text-align: left; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 60px 32px 40px; display: flex; gap: 60px; flex-wrap: wrap; }
+    .footer-brand { display: flex; align-items: center; gap: 14px; flex: 0 0 220px; align-self: flex-start; }
+    .footer-cols { display: flex; gap: 48px; flex: 1; flex-wrap: wrap; }
+    .footer-col { min-width: 140px; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col h5 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .footer-col a { font-size: 13px; color: var(--text2); text-decoration: none; transition: color .15s; }
+    .footer-col a:hover { color: var(--accent-bright); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 20px 32px 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 12px; color: var(--text3); }
+    .footer-badges { display: flex; gap: 8px; }
+    .footer-badges span { font-size: 11px; padding: 3px 10px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border); color: var(--text3); }
+    @media (max-width: 768px) {
+        .footer-inner { flex-direction: column; gap: 32px; }
+        .footer-cols { gap: 24px; }
+        .footer-bottom { flex-direction: column; text-align: center; }
+    }
+</style>
 
 </body>
 </html>
