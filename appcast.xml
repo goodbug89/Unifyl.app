@@ -6,6 +6,26 @@
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>
+            <title>Version 1.0.2</title>
+            <description><![CDATA[
+                <h2>Unifyl 1.0.2</h2>
+                <h3>Fixed</h3>
+                <ul>
+                <li><b>Critical</b>: Sparkle auto-update failed with "An error occurred while launching the installer" because the release re-signing step stripped Sparkle's internal entitlements (Autoupdate's <code>com.apple.application-identifier</code>, XPC-services' empty-dict entitlements). The release script now passes <code>--preserve-metadata=entitlements,flags</code> when signing every nested Sparkle binary. <b>Users on 1.0.1 must download 1.0.2 manually</b> — their existing Sparkle install can't apply updates.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 16 Apr 2026 08:04:30 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.0.2/Unifyl-1.0.2.dmg"
+                sparkle:version="3"
+                sparkle:shortVersionString="1.0.2"
+                sparkle:edSignature="6ArWqlHhnwA+PonDHWwx724x6GN1cWWVJNaBUsDUINxG2M47tt7MRtLiBQHDcT2ArECPSyelYwKBb/PPzgwdAg=="
+                length="11664763"
+                type="application/octet-stream"
+            />
+        </item>
+        <item>
             <title>Version 1.0.1</title>
             <description><![CDATA[
                 <h2>Unifyl 1.0.1 — April 15, 2026</h2>
