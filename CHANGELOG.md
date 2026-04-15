@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+
+## [1.0.2] — 2026-04-16
+
+### Fixed
+- **Critical**: Sparkle auto-update failed with "An error occurred while launching the installer" because the release re-signing step stripped Sparkle's internal entitlements (Autoupdate's `com.apple.application-identifier`, XPC-services' empty-dict entitlements). The release script now passes `--preserve-metadata=entitlements,flags` when signing every nested Sparkle binary. **Users on 1.0.1 must download 1.0.2 manually** — their existing Sparkle install can't apply updates.
+
 ## [1.0.1] — 2026-04-15
 
 ### Added
@@ -88,6 +94,7 @@ Initial public release.
 - **Themes & customization**: 12 built-in themes, custom editor, SVG icon packs, 120+ keyboard shortcuts.
 - **Cloud & remote**: FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive.
 
-[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.0.2
 [1.0.1]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.0.1
 [1.0.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.0.0
