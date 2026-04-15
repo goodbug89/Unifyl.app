@@ -6,6 +6,57 @@
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>
+            <title>Version 1.0.1</title>
+            <description><![CDATA[
+                <h2>Unifyl 1.0.1 — April 15, 2026</h2>
+                <h3>⭐ Korean / Japanese archive support</h3>
+                <ul>
+                    <li><b>Fixed:</b> Extracting ZIPs with CP949/EUC-KR/Shift-JIS filenames now works. Previously the archive opened but every file failed with "caution: filename not matched".</li>
+                </ul>
+                <h3>Thumbnail grid now matches list view (⌃G)</h3>
+                <ul>
+                    <li>Shift/Cmd multi-select and rubber-band drag-select</li>
+                    <li>Drag multiple files to Finder or the other pane at once</li>
+                    <li>Option-to-copy on drop with drop-highlight overlay</li>
+                </ul>
+                <h3>Stability &amp; Performance</h3>
+                <ul>
+                    <li>File move falls back to copy+remove across volumes (EXDEV) — no more failures when copying to an external USB</li>
+                    <li>Spotlight searches no longer stall the UI on thousand-result hits</li>
+                    <li>Duplicate scan runs pair scoring in parallel (TaskGroup per size bucket)</li>
+                    <li>Canceling a media conversion now terminates ffmpeg and removes the partial output</li>
+                    <li>License and WebDAV calls have explicit timeouts</li>
+                </ul>
+                <h3>Security hardening</h3>
+                <ul>
+                    <li>SFTP / FTP / WebDAV refuse remote paths with C0 control characters — blocks shell/HTTP-header injection via crafted filenames</li>
+                    <li>Temp credential files (askpass, .netrc) use <code>O_CREAT|O_EXCL|O_NOFOLLOW</code> against symlink attacks</li>
+                    <li>Zip-slip boundary check tightened</li>
+                </ul>
+                <h3>Silent-failure fixes</h3>
+                <ul>
+                    <li>Natural-language commands, "Keep Best" duplicate removal, hardlink replacement, PDF Replace, LibreOffice conversion — every path that used <code>try?</code> now surfaces errors</li>
+                </ul>
+                <h3>Accessibility &amp; localization</h3>
+                <ul>
+                    <li>File permissions dialog uses status icons + color (not color-only)</li>
+                    <li>Regex-rename match highlight legible in dark mode</li>
+                    <li>File date column follows the user's system locale</li>
+                </ul>
+                <p><a href="https://github.com/goodbug89/Unifyl.app/blob/main/CHANGELOG.md">Full changelog</a></p>
+            ]]></description>
+            <pubDate>Wed, 15 Apr 2026 12:00:00 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.0.1/Unifyl-1.0.1.dmg"
+                sparkle:version="2"
+                sparkle:shortVersionString="1.0.1"
+                sparkle:edSignature="091JAdAxzdz9Y994UAVTglBGo9oY0bIzP5mjP/vsLQAxu/eapTU7Jdv3qXyJVosVbLgrTxhvSKJ+z90btmVFCQ=="
+                length="11666809"
+                type="application/octet-stream"
+            />
+        </item>
+        <item>
             <title>Version 1.0.0</title>
             <description><![CDATA[
                 <h2>Unifyl 1.0.0 — Initial Release</h2>
