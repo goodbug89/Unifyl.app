@@ -6,6 +6,69 @@
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>
+            <title>Version 1.0.3</title>
+            <description><![CDATA[
+                <h2>Unifyl 1.0.3</h2>
+                <p>Large-scale quality release. Focus areas: data integrity, Swift 6 concurrency safety, Korean/CJK filename correctness, Total Commander keyboard compatibility, and discoverable UI.</p>
+                <h3>Added</h3>
+                <ul>
+                <li><b>Total Commander key compatibility</b>: F2 = Rename, Shift+F5 = Duplicate in same folder, Alt+F5 = Pack, Shift+F9 = Pack (alt), Alt+F9 = Unpack, Shift+F4 = New text file + edit, Shift+F6 = Rename (alt), Ctrl+U = Swap left/right panels, Ctrl+← / Ctrl+→ = Copy path to opposite panel, Alt+Shift+Enter = Compute all folder sizes, Ctrl+\ = Go to volume root, Ctrl+B = Branch view (flatten subdirectories), Ctrl+M = Multi-rename alias, Insert = Toggle select + advance cursor.</li>
+                <li><b>Volume / drive picker</b> in the toolbar — click the external drive icon to switch the active panel between any mounted volume (boot disk, USB, Thunderbolt, network). Auto-refreshes on mount/unmount/rename. Shows per-volume free space and removable/ejectable flags.</li>
+                <li><b>Bottom terminal toggle button</b> in the function-key bar (teal pill, right side) so users discover Cmd+Opt+T without memorising the shortcut.</li>
+                <li><b>Toolbar status center</b>: replaces the static "Unifyl" label with product name + version badge + Free/Pro tier capsule + active-panel selection/free-space summary. No more wasted toolbar space.</li>
+                <li>HWP / HWPX (Korean Hangul Word Processor) to PDF conversion via LibreOffice's built-in HWP import filter.</li>
+                </ul>
+                <h3>Changed</h3>
+                <ul>
+                <li><b>Pro price</b>: $49.99 → <b>$39.99</b>. Landing page, in-app upgrade sheet, and localized strings updated.</li>
+                <li>Incremental backup: failed files are now tracked individually with reason, shown in a "View failed…" sheet with copy-to-clipboard and Retry Failed button. Previously only a count was surfaced.</li>
+                <li><code>SecurityBookmarkManager.saveBookmark</code> is now <code>@discardableResult Bool</code>; load/save path logs real failures via <code>OSLog</code> instead of silently returning <code>nil</code>.</li>
+                <li>Git panel: shell errors capture stderr and log via <code>UnifylLogger.git</code> so an empty Git panel can be distinguished from a corrupt repo or missing <code>git</code> binary.</li>
+                <li>OAuth token storage: decode failures (e.g. after a schema change) delete the corrupt entry so the user gets a clean re-sign-in prompt rather than an infinite retry loop.</li>
+                <li>PDF conversion error message now names the likely cause for HWP failures (LibreOffice branch, missing filter) and points users at Console.app for the underlying LibreOffice stderr.</li>
+                <li>Sparkle auto-update failures now show a targeted alert explaining how to enable "App Management" in System Settings, with a one-click "Open Settings" button.</li>
+                <li>First launch: one-time prompt guides users to enable "App Management" for auto-updates. Dismissed permanently after first interaction.</li>
+                </ul>
+                <h3>Fixed</h3>
+                <ul>
+                <li><b>Critical — data integrity</b>: Checksum verification treated compute errors as a literal <code>"Error"</code> hash string, so typing <code>"error"</code> into the verify field falsely matched. Errors now live in a separate dictionary and verify no longer compares against failure strings.</li>
+                <li><b>Critical — mass delete risk</b>: <code>DirectorySyncEngine</code> and <code>DiffEngine</code> silently swallowed <code>contentsOfDirectory</code> errors via <code>try? … ?? []</code>, meaning a permission-denied folder looked empty and generated a mass-delete plan under one-way sync. Both engines now throw on unreadable directories.</li>
+                <li><b>Critical — silent move failures</b>: AI Organization "Apply recommendation" used <code>try? fm.moveItem(…)</code>, so failed moves vanished while the user saw "organized". Failures are now collected per-recommendation, surfaced in the UI, and the recommendation is kept for retry.</li>
+                <li><b>Critical — duplicate false positives</b>: Vision FeaturePrint failure in the Duplicate Detector was being treated as <code>distance = 0</code>, causing unrelated images to be flagged identical. Errors now return <code>nil</code> and the pair is skipped.</li>
+                <li><b>Critical — FSEvents use-after-free</b>: <code>PluginFSEventsWatcher</code> passed <code>passUnretained(self)</code> to the C callback; a callback firing after <code>deinit</code> dereferenced freed memory. Switched to <code>passRetained</code> + explicit <code>release()</code> in <code>stop()</code>.</li>
+                <li><b>Critical — NSFileCoordinator race</b>: <code>FileOperationManager</code> called <code>coordinator.cancel()</code> concurrently from three tasks. Serialized through a new <code>CoordinatorBox</code> with NSLock; watchdog and timeout merged into one task.</li>
+                <li><b>Critical — Enterprise audit log compliance</b>: <code>AuditLogger</code> silently swallowed persistence failures (a SOX/GDPR incident). Now emits <code>Logger.fault</code> and the load path distinguishes "first run" from "decode failed".</li>
+                <li><b>Korean filename corruption on cloud</b>: APFS stores CJK filenames in NFD (decomposed) but S3, Dropbox, OneDrive, WebDAV, SMB, SFTP, FTP, and Google Drive all store NFC. Added <code>String.asRemoteFilename</code> normalization to every remote adapter — Korean/Japanese/Chinese filenames now round-trip correctly.</li>
+                <li><b>Legacy CJK text preview</b>: Text viewer and AI content extractor only tried UTF-8 and isoLatin1, turning EUC-KR/CP949/Shift-JIS/GB18030/Big5 files into mojibake. Added <code>TextEncodingDetection</code> with BOM sniffing + NSString statistical guess + CJK fallback chain.</li>
+                <li>LogViewer DispatchSource race: event handler could read a just-closed FileHandle (previously band-aided with a 50 ms sleep). Replaced with <code>setCancelHandler</code> for deterministic close-after-cancel.</li>
+                <li>Cross-volume move rollback: if removing the source AND cleaning up the partial copy both failed, the original error was rethrown and the user never heard about the duplicate file. Now throws <code>CrossVolumeMoveRollbackFailed</code> with both paths.</li>
+                <li>S3 <code>deleteDirectory</code>: <code>try? deleteObject(markerKey)</code> silently hid real errors. Marker-not-found is now expected and benign; other errors propagate. Added <code>ObjectStorageError.invalidURL</code> case.</li>
+                <li><code>VectorIndex</code> batch upsert: silent <code>try? ROLLBACK</code> on failure left the DB with an open transaction that locked all subsequent writes. Now logs <code>Logger.fault</code> so the caller can reset the connection.</li>
+                <li><code>AppViewModel</code> auto-dismiss and cloud-download tasks are now stored as <code>Task</code> properties and cancelled before replacement, preventing stale timers from clearing newer notifications.</li>
+                <li><code>AudioMetadataView</code>: leftover <code>.bak.<ext></code> file after successful metadata save is now logged (was silently ignored, leaving ghost files in the user's folder).</li>
+                <li><code>DateFormatter</code> instances in 9 UI call sites now set <code>.locale = .autoupdatingCurrent</code>; filename/CSV export formatters explicitly pin <code>en_US_POSIX</code> for stability.</li>
+                <li><code>NSAlert</code> hardcoded button titles ("OK", "Cancel", "Replace", "Go", "Open Download Page") now localized via <code>NSLocalizedString</code>.</li>
+                <li><code>URL(string: …)!</code> force-unwraps (11 sites) replaced with <code>StaticURL.make(…)</code> that crashes loudly at file/line on malformed input.</li>
+                <li><code>SyntaxHighlighter</code> <code>try!</code> regex compilation now goes through a <code>makeRegex</code> helper with precise error reporting.</li>
+                <li>Workspace layouts, keybindings, macros, automations, and OAuth tokens: persistence failures are logged via appropriate <code>UnifylLogger</code> category (was previously silent — settings/macros would vanish between launches with no explanation).</li>
+                </ul>
+                <h3>Developer</h3>
+                <ul>
+                <li>DEBUG builds bypass the real login keychain and use <code>~/Library/Application Support/<bundle-id>/debug-keychain.json</code> instead. This eliminates the "Unifyl wants to access key 'Unifyl'" password prompt that appeared on every rebuild because ad-hoc code signatures change between builds. Release builds are unchanged.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 17 Apr 2026 06:03:39 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.0.3/Unifyl-1.0.3.dmg"
+                sparkle:version="2"
+                sparkle:shortVersionString="1.0.3"
+                sparkle:edSignature="2iL3lOdCXYCueLcgIvrlyXcYiP9CebYPL6HWa/1Z7bo9qrCnpm0lhAuNTJg/Ik2w92b8eNvumvFIiJ6NRMHqDA=="
+                length="11954865"
+                type="application/octet-stream"
+            />
+        </item>
+        <item>
             <title>Version 1.0.2</title>
             <description><![CDATA[
                 <h2>Unifyl 1.0.2</h2>
