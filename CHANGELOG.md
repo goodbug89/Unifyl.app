@@ -54,6 +54,13 @@ Large-scale quality release. Focus areas: data integrity, Swift 6 concurrency sa
 ### Developer
 - DEBUG builds bypass the real login keychain and use `~/Library/Application Support/<bundle-id>/debug-keychain.json` instead. This eliminates the "Unifyl wants to access key 'Unifyl'" password prompt that appeared on every rebuild because ad-hoc code signatures change between builds. Release builds are unchanged.
 
+### Added (respin)
+- **Terminal pin / follow mode**: every terminal session defaults to 🔒 pinned (stays in its original directory — safer for in-flight commands). Click the lock icon in the prompt bar to switch to ⇆ follow mode, where the terminal's current directory tracks the active panel (subfolder navigation, "..", Back/Forward, Tab panel switch, direct panel click). Per-tab state so you can mix pinned and follow sessions.
+
+### Fixed (respin)
+- Bottom terminal output lag: `pwd`, `ls`, etc. used to appear only after the NEXT command was typed — `Process.terminationHandler` blocked on `readDataToEndOfFile()` until something else unblocked the OS pipe. Replaced with incremental `readabilityHandler` draining + non-blocking `availableData` on termination. Output now appears instantly.
+- Panel click regression introduced by the initial terminal-sync observer: `.onChange(of: activePanel)` attached directly to `MainWindowView` made the whole view tree depend on both panels' paths, causing the bridged `NSTableView` inside `FileTableView` to be invalidated mid-click and dropping the click. Observers relocated to a zero-size helper view (`TerminalSyncObservers`) so they no longer pollute the main dependency graph.
+
 
 ## [1.0.2] — 2026-04-16
 
