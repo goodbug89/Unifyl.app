@@ -8,6 +8,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 
+## [1.0.3] — 2026-04-17
+
+Large-scale quality release. Focus areas: data integrity, Swift 6 concurrency safety, Korean/CJK filename correctness, Total Commander keyboard compatibility, and discoverable UI.
+
+### Added
+- **Total Commander key compatibility**: F2 = Rename, Shift+F5 = Duplicate in same folder, Alt+F5 = Pack, Shift+F9 = Pack (alt), Alt+F9 = Unpack, Shift+F4 = New text file + edit, Shift+F6 = Rename (alt), Ctrl+U = Swap left/right panels, Ctrl+← / Ctrl+→ = Copy path to opposite panel, Alt+Shift+Enter = Compute all folder sizes, Ctrl+\ = Go to volume root, Ctrl+B = Branch view (flatten subdirectories), Ctrl+M = Multi-rename alias, Insert = Toggle select + advance cursor.
+- **Volume / drive picker** in the toolbar — click the external drive icon to switch the active panel between any mounted volume (boot disk, USB, Thunderbolt, network). Auto-refreshes on mount/unmount/rename. Shows per-volume free space and removable/ejectable flags.
+- **Bottom terminal toggle button** in the function-key bar (teal pill, right side) so users discover Cmd+Opt+T without memorising the shortcut.
+- **Toolbar status center**: replaces the static "Unifyl" label with product name + version badge + Free/Pro tier capsule + active-panel selection/free-space summary. No more wasted toolbar space.
+- HWP / HWPX (Korean Hangul Word Processor) to PDF conversion via LibreOffice's built-in HWP import filter.
+
+### Changed
+- **Pro price**: $49.99 → **$39.99**. Landing page, in-app upgrade sheet, and localized strings updated.
+- Incremental backup: failed files are now tracked individually with reason, shown in a "View failed…" sheet with copy-to-clipboard and Retry Failed button. Previously only a count was surfaced.
+- `SecurityBookmarkManager.saveBookmark` is now `@discardableResult Bool`; load/save path logs real failures via `OSLog` instead of silently returning `nil`.
+- Git panel: shell errors capture stderr and log via `UnifylLogger.git` so an empty Git panel can be distinguished from a corrupt repo or missing `git` binary.
+- OAuth token storage: decode failures (e.g. after a schema change) delete the corrupt entry so the user gets a clean re-sign-in prompt rather than an infinite retry loop.
+- PDF conversion error message now names the likely cause for HWP failures (LibreOffice branch, missing filter) and points users at Console.app for the underlying LibreOffice stderr.
+- Sparkle auto-update failures now show a targeted alert explaining how to enable "App Management" in System Settings, with a one-click "Open Settings" button.
+- First launch: one-time prompt guides users to enable "App Management" for auto-updates. Dismissed permanently after first interaction.
+
+### Fixed
+- **Critical — data integrity**: Checksum verification treated compute errors as a literal `"Error"` hash string, so typing `"error"` into the verify field falsely matched. Errors now live in a separate dictionary and verify no longer compares against failure strings.
+- **Critical — mass delete risk**: `DirectorySyncEngine` and `DiffEngine` silently swallowed `contentsOfDirectory` errors via `try? … ?? []`, meaning a permission-denied folder looked empty and generated a mass-delete plan under one-way sync. Both engines now throw on unreadable directories.
+- **Critical — silent move failures**: AI Organization "Apply recommendation" used `try? fm.moveItem(…)`, so failed moves vanished while the user saw "organized". Failures are now collected per-recommendation, surfaced in the UI, and the recommendation is kept for retry.
+- **Critical — duplicate false positives**: Vision FeaturePrint failure in the Duplicate Detector was being treated as `distance = 0`, causing unrelated images to be flagged identical. Errors now return `nil` and the pair is skipped.
+- **Critical — FSEvents use-after-free**: `PluginFSEventsWatcher` passed `passUnretained(self)` to the C callback; a callback firing after `deinit` dereferenced freed memory. Switched to `passRetained` + explicit `release()` in `stop()`.
+- **Critical — NSFileCoordinator race**: `FileOperationManager` called `coordinator.cancel()` concurrently from three tasks. Serialized through a new `CoordinatorBox` with NSLock; watchdog and timeout merged into one task.
+- **Critical — Enterprise audit log compliance**: `AuditLogger` silently swallowed persistence failures (a SOX/GDPR incident). Now emits `Logger.fault` and the load path distinguishes "first run" from "decode failed".
+- **Korean filename corruption on cloud**: APFS stores CJK filenames in NFD (decomposed) but S3, Dropbox, OneDrive, WebDAV, SMB, SFTP, FTP, and Google Drive all store NFC. Added `String.asRemoteFilename` normalization to every remote adapter — Korean/Japanese/Chinese filenames now round-trip correctly.
+- **Legacy CJK text preview**: Text viewer and AI content extractor only tried UTF-8 and isoLatin1, turning EUC-KR/CP949/Shift-JIS/GB18030/Big5 files into mojibake. Added `TextEncodingDetection` with BOM sniffing + NSString statistical guess + CJK fallback chain.
+- LogViewer DispatchSource race: event handler could read a just-closed FileHandle (previously band-aided with a 50 ms sleep). Replaced with `setCancelHandler` for deterministic close-after-cancel.
+- Cross-volume move rollback: if removing the source AND cleaning up the partial copy both failed, the original error was rethrown and the user never heard about the duplicate file. Now throws `CrossVolumeMoveRollbackFailed` with both paths.
+- S3 `deleteDirectory`: `try? deleteObject(markerKey)` silently hid real errors. Marker-not-found is now expected and benign; other errors propagate. Added `ObjectStorageError.invalidURL` case.
+- `VectorIndex` batch upsert: silent `try? ROLLBACK` on failure left the DB with an open transaction that locked all subsequent writes. Now logs `Logger.fault` so the caller can reset the connection.
+- `AppViewModel` auto-dismiss and cloud-download tasks are now stored as `Task` properties and cancelled before replacement, preventing stale timers from clearing newer notifications.
+- `AudioMetadataView`: leftover `.bak.<ext>` file after successful metadata save is now logged (was silently ignored, leaving ghost files in the user's folder).
+- `DateFormatter` instances in 9 UI call sites now set `.locale = .autoupdatingCurrent`; filename/CSV export formatters explicitly pin `en_US_POSIX` for stability.
+- `NSAlert` hardcoded button titles ("OK", "Cancel", "Replace", "Go", "Open Download Page") now localized via `NSLocalizedString`.
+- `URL(string: …)!` force-unwraps (11 sites) replaced with `StaticURL.make(…)` that crashes loudly at file/line on malformed input.
+- `SyntaxHighlighter` `try!` regex compilation now goes through a `makeRegex` helper with precise error reporting.
+- Workspace layouts, keybindings, macros, automations, and OAuth tokens: persistence failures are logged via appropriate `UnifylLogger` category (was previously silent — settings/macros would vanish between launches with no explanation).
+
+### Developer
+- DEBUG builds bypass the real login keychain and use `~/Library/Application Support/<bundle-id>/debug-keychain.json` instead. This eliminates the "Unifyl wants to access key 'Unifyl'" password prompt that appeared on every rebuild because ad-hoc code signatures change between builds. Release builds are unchanged.
+
+
 ## [1.0.2] — 2026-04-16
 
 ### Fixed
@@ -94,7 +141,8 @@ Initial public release.
 - **Themes & customization**: 12 built-in themes, custom editor, SVG icon packs, 120+ keyboard shortcuts.
 - **Cloud & remote**: FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive.
 
-[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v1.0.3...HEAD
+[1.0.3]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.0.3
 [1.0.2]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.0.2
 [1.0.1]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.0.1
 [1.0.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.0.0
