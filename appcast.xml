@@ -65,15 +65,20 @@
                 <li>Bottom terminal output lag: <code>pwd</code>, <code>ls</code>, etc. used to appear only after the NEXT command was typed — <code>Process.terminationHandler</code> blocked on <code>readDataToEndOfFile()</code> until something else unblocked the OS pipe. Replaced with incremental <code>readabilityHandler</code> draining + non-blocking <code>availableData</code> on termination. Output now appears instantly.</li>
                 <li>Panel click regression introduced by the initial terminal-sync observer: <code>.onChange(of: activePanel)</code> attached directly to <code>MainWindowView</code> made the whole view tree depend on both panels' paths, causing the bridged <code>NSTableView</code> inside <code>FileTableView</code> to be invalidated mid-click and dropping the click. Observers relocated to a zero-size helper view (<code>TerminalSyncObservers</code>) so they no longer pollute the main dependency graph.</li>
                 </ul>
+                <h3>Fixed (respin build 4)</h3>
+                <ul>
+                <li><b>Critical — auto-update configuration lost</b>: the initial 1.0.3 build (build 3) shipped without <code>SUFeedURL</code> and <code>SUPublicEDKey</code> in its <code>Info.plist</code> because <code>project.yml</code> contained a duplicate orphaned <code>info:</code> block that clobbered the Sparkle settings during <code>xcodegen generate</code>. Users who installed build 3 would never have received any future auto-updates. <b>If you are on build 3, please reinstall from the replaced DMG to regain auto-update capability.</b></li>
+                <li>Release pipeline now stapler-staples the <code>.app</code> bundle itself (in addition to the DMG) so first-launch Gatekeeper validation works offline.</li>
+                </ul>
             ]]></description>
-            <pubDate>Fri, 17 Apr 2026 07:05:57 +0900</pubDate>
+            <pubDate>Fri, 17 Apr 2026 10:38:44 +0900</pubDate>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <enclosure
                 url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.0.3/Unifyl-1.0.3.dmg"
-                sparkle:version="3"
+                sparkle:version="4"
                 sparkle:shortVersionString="1.0.3"
-                sparkle:edSignature="wEF3PiqoNIKWk/+D0WDHbBcKpsSBq06OFnCppvdVtj6BD7QRI09yk7xHVVSOUAmNrG2tLPZuf6KRps2BuCZJCQ=="
-                length="11964670"
+                sparkle:edSignature="tljDUDZzyATUvfU7CJvF04QnXGsFXeAOHM+DsUPsQ9Q99iy/nKdSBM83aNNtloG+/TxEOP9y0TW3+OQqJlSNAQ=="
+                length="11806639"
                 type="application/octet-stream"
             />
         </item>
