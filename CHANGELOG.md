@@ -61,6 +61,10 @@ Large-scale quality release. Focus areas: data integrity, Swift 6 concurrency sa
 - Bottom terminal output lag: `pwd`, `ls`, etc. used to appear only after the NEXT command was typed — `Process.terminationHandler` blocked on `readDataToEndOfFile()` until something else unblocked the OS pipe. Replaced with incremental `readabilityHandler` draining + non-blocking `availableData` on termination. Output now appears instantly.
 - Panel click regression introduced by the initial terminal-sync observer: `.onChange(of: activePanel)` attached directly to `MainWindowView` made the whole view tree depend on both panels' paths, causing the bridged `NSTableView` inside `FileTableView` to be invalidated mid-click and dropping the click. Observers relocated to a zero-size helper view (`TerminalSyncObservers`) so they no longer pollute the main dependency graph.
 
+### Fixed (respin build 4)
+- **Critical — auto-update configuration lost**: the previous 1.0.3 build (CFBundleVersion 3) shipped without `SUFeedURL` and `SUPublicEDKey` in `Info.plist` because `project.yml` contained a duplicate orphaned `info:` block that clobbered the Sparkle settings during `xcodegen generate`. Users who installed the earlier 1.0.3 would not have received any future auto-updates. `project.yml` has been corrected (single `info:` block with feed URL restored and EdDSA public key uncommented). Users on the earlier 1.0.3 must reinstall from the replaced DMG to regain auto-update capability.
+- Release pipeline now stapler-staples the `.app` bundle itself (in addition to the DMG) so first-launch Gatekeeper validation works offline.
+
 
 ## [1.0.2] — 2026-04-16
 
