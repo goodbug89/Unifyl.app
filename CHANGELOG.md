@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [1.0.4] — 2026-04-18
 
+### Fixed (respin build 7)
+- **Crash when navigating to the top-level folder**: `GitStatusProvider.runGitCommand` passed the panel's `currentPath` directly into `Process.currentDirectoryURL`, which raises `NSInvalidArgumentException` (→ `SIGABRT`) if the URL isn't a file URL. On certain navigation paths (top-level / volume root / Smart Folder edge cases) `currentPath` could land on a scheme-less URL that bypassed the upstream `!isRemote` guard, killing the app the moment the git status pass started. Now guards on both `isFileURL` AND directory existence before touching `Process`.
+
+### Fixed (respin build 6)
+- **"Check for Updates…" menu item stuck disabled**: the previous build wired the menu item's `.disabled` modifier through a KVO-mirrored `@Observable` view model, and the initial `false` value sometimes stayed stuck — users couldn't click "Check for Updates" at all and had to reinstall manually. The KVO/view-model layer is removed; the button is always clickable now (Sparkle's own session guard prevents double-check). Users on 1.0.4 build 5 MUST redownload build 6 manually — the broken button blocks Sparkle from reaching this fix.
+
 ### Fixed
 - **Mirror Active Panel on Other Side** (Volume picker menu) and the "copy path to opposite panel" shortcut silently did nothing when the destination panel was inside a Smart Folder or inside an archive (zip/7z/…). `PanelViewModel.navigate` bails early in those modes, so the mirror looked broken. New `navigateForce(to:)` exits the special mode first, then navigates.
 - **Back / Forward arrows** in Smart Folder and inside an archive used to do nothing silently. They now leave the special mode (Smart Folder → real directory listing, archive → parent folder) so the click is never ignored.
