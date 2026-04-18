@@ -6,6 +6,36 @@
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>
+            <title>Version 1.0.5</title>
+            <description><![CDATA[
+<h2>Unifyl 1.0.5</h2>
+<h3>Fixed</h3>
+<ul>
+<li><b>Live LemonSqueezy checkout</b>: builds up through 1.0.4 shipped with LemonSqueezy Test-store credentials, so the checkout page showed "Test mode is currently enabled" and real cards could not complete a purchase. This release is wired to the Live store — purchases now process normally. Users who attempted to buy on 1.0.4 saw no charge; retry on 1.0.5 and the order will go through.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li><b>Tab bar / path bar chrome unified</b>: both rows now share a single background and 28 px height, removing the visible seam between them and keeping the archive path bar + status bar in the same palette.</li>
+<li><b>Theme tokens applied to chrome</b>: panel background, folder-tree background, active-panel edge indicator, toolbar status badge, command-line output pane, and the onboarding CTA now follow the selected theme (accent / background / surface) instead of raw AppKit semantic colors.</li>
+</ul>
+<h3>Added</h3>
+<ul>
+<li><b>EmptyStateView component</b>: one reusable empty-state presentation (icon + title + optional message + optional CTA) now used by empty folders, the Smart Folder picker before a preset is chosen, the advanced search with no matches, and three Git-panel states (not a repo, working tree clean, no diff selected).</li>
+</ul>
+<p><a href="https://github.com/goodbug89/Unifyl.app/blob/main/CHANGELOG.md">Full changelog</a></p>
+]]></description>
+            <pubDate>Sat, 18 Apr 2026 19:15:00 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.0.5/Unifyl-1.0.5.dmg"
+                sparkle:version="9"
+                sparkle:shortVersionString="1.0.5"
+                sparkle:edSignature="NWBKu4QO/64XFtLkxLuy969jkfXIR/FqahIlbJBHh+Sf2B7YGJ0bp+sva+0HCR7Z2ODOJqPNuNM0coGyREACCw=="
+                length="11901919"
+                type="application/octet-stream"
+            />
+        </item>
+        <item>
             <title>Version 1.0.4</title>
             <description><![CDATA[
 <h2>Unifyl 1.0.4</h2>
