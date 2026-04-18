@@ -119,10 +119,10 @@
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <enclosure
                 url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.0.4/Unifyl-1.0.4.dmg"
-                sparkle:version="5"
+                sparkle:version="7"
                 sparkle:shortVersionString="1.0.4"
-                sparkle:edSignature="o2eJm2D5boX3UdB3eJiWxlc+bymTqsB7oAyr+IwisKrArkawx8ybDNtEuL0P/xr4mtmj8L9z7FNootv3QIg7DA=="
-                length="11896721"
+                sparkle:edSignature="1LUpZF7IoE2Uyool8R2pVrikHzkFOQgYUfBQOWaJ0RUixXf0dJ9qZ3GEgMfYZW0FL0u7WVrb6GQ1T54vXglCBw=="
+                length="11891851"
                 type="application/octet-stream"
             />
         </item>
