@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [1.0.4] — 2026-04-18
 
+### Fixed (respin build 8)
+- **Crash hunt, round 2 — `file:///..` from `goUp` at root**: build 7's `isFileURL` + existence guards still let `Process.currentDirectoryURL` reject with `NSInvalidArgumentException` because `deletingLastPathComponent()` on `/` returns `/..` (not `/`), and `/..` passes both guards — Foundation then rejects the setter with "must provide a directory path". Fix is two-sided: (1) `GitStatusProvider` now calls `.standardizedFileURL` before assignment (collapses `..` segments to absolute path); (2) `PanelViewModel.goUp` bails when already at `/` so we never produce the bogus URL in the first place.
+
 ### Fixed (respin build 7)
 - **Crash when navigating to the top-level folder**: `GitStatusProvider.runGitCommand` passed the panel's `currentPath` directly into `Process.currentDirectoryURL`, which raises `NSInvalidArgumentException` (→ `SIGABRT`) if the URL isn't a file URL. On certain navigation paths (top-level / volume root / Smart Folder edge cases) `currentPath` could land on a scheme-less URL that bypassed the upstream `!isRemote` guard, killing the app the moment the git status pass started. Now guards on both `isFileURL` AND directory existence before touching `Process`.
 
