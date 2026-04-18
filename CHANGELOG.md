@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 
+## [1.0.5] — 2026-04-18
+
+### Fixed
+- **Live LemonSqueezy checkout**: builds up through 1.0.4 shipped with LemonSqueezy **Test-store** credentials (variant `1522057`, checkout UUID `6266de7a-...`, Test JWT). The checkout page showed an orange "Test mode is currently enabled" banner and real cards could not complete a purchase, so no existing user could actually buy Pro. Now wired to the Live store: variant `1544858`, checkout `40f09b3c-9638-4e7c-871e-51f0e391f67c`, Live JWT. Users who attempted to purchase on 1.0.4 saw no charge on their card — retrying after updating to 1.0.5 will go through normally.
+
+### Changed
+- **Tab bar / path bar chrome unified**: the top strip above each panel now shares a single background (`bgElevated`) and height (28 px per row) instead of stepping from 30 px elevated → 26 px surface. Removes the visible seam the eye kept catching between the two rows and keeps the archive path bar + status bar in the same palette.
+- **Theme tokens applied to chrome**: panel background, folder-tree background, active-panel edge indicator, toolbar status badge, command-line output pane, and the onboarding CTA now follow the selected theme (accent / background / surface) instead of raw AppKit semantic colors. Non-"System Default" presets now visibly tint every piece of chrome, not just the accent.
+
+### Added
+- **`EmptyStateView` component** — single reusable empty-state presentation (icon + title + optional message + optional CTA) now used by empty folders, the Smart Folder picker before a preset is chosen, the advanced search with no matches, and three Git-panel states (not a repo, working tree clean, no diff selected). Replaces ~6 ad-hoc "Spacer / bare Text" placements that each had a different rhythm.
+
 ## [1.0.4] — 2026-04-18
 
 ### Fixed (respin build 8)
