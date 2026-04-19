@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 
+## [1.0.7] — 2026-04-19 (respin build 12)
+
+### Changed (respin build 12)
+- **Pro trial period extended 3 days → 14 days** (`FeatureGateManager.trialDuration`). The previous 3-day window wasn't long enough for a new user to meaningfully explore the AI search, multi-rename, 3-way merge, or archive workflows before the paywall landed. Wiki `Pro-and-Licensing` and `FAQ` pages had already been documenting "14 days", so the code was lagging the intent — now they agree. Existing trials that haven't yet expired automatically get the wider window applied retroactively (`isWithinTrialPeriod` compares elapsed against the new constant). The keychain-backed expiration ratchet is unchanged, so already-expired trials stay expired.
+
 ## [1.0.7] — 2026-04-19
 
 ### Added
