@@ -8,6 +8,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 
+## [1.0.6] — 2026-04-19
+
+### Added
+- **Theme Editor opens as an independent, resizable NSPanel** via `ViewerWindowManager` (same pattern used by the Log Viewer / Git Panel / Hex Editor). Previously it was a modal sheet locked to the main window with no way to size it against a real file list.
+- **Theme Editor `Apply as Active Theme` button + `Live Apply` toggle**. `Apply` persists the edited custom theme and makes it the active app theme in one step (previously `Save Theme` only wrote to disk — the theme never actually painted the chrome because `ThemeManager` didn't know how to look up custom-theme IDs). `Live Apply` streams every ColorPicker / hex-field edit into the running app for real-time tuning against actual panels.
+- **Cursor-color theme token** (`cursorHex`), separate from `selectionHex`, shipped with every built-in preset. File-table rows now distinguish the keyboard-focus cursor (single row, bright, drawn with a 3-px left-edge stripe on top of the row fill) from mark-selection (multi-row, dimmer). Matches Total Commander's behaviour and the Theme Editor's preview.
+- **Total Commander-style right-drag selection** in the file table. Hold the right mouse button and drag — the drag range is mark-selected (additive onto any existing marks, never replacing) and the cursor indicator tracks the pointer row so you can see where the drag will land. A right-drag that starts on an already-marked file subtracts its range from the selection instead.
+- **Live keyboard-shortcut sync**. 42 menu items in `UnifylApp.swift` now carry a `.keyBinding("command.id")` modifier that reads the current mapping from `KeyBindingManager.shared` every render. Remapping a shortcut in Settings updates the indicator next to the menu item in the macOS menu bar immediately — no quit-and-relaunch. Clearing a binding removes the indicator. Infrastructure in `Unifyl/Services/KeyBindingShortcutParser.swift` parses the human-readable stored strings (`⌘T`, `⇧⌘N`, `⌘⌫`, `⌥←`, `F5`) into SwiftUI `KeyboardShortcut` values, including F1..F19 via the NSFunctionKey unicode range.
+
+### Changed
+- **Theme Editor UI restructured** into "General" / "Chrome Colors" (8 tokens) / "File Category Colors" sections. Chrome colours match the `AppTheme` schema exactly; file-category colours are pushed to `FileColorSettings` on Apply.
+- **CustomTheme schema harmonised** with `AppTheme`'s 7-field chrome token set + cursor. Backward-compatible decoder keeps legacy `.ultratheme` exports readable: `textHex` / `selectionHighlightHex` are mapped to the new key names, and missing `surface` / `altRow` / `cursor` / `textSecondary` tokens are synthesised from accent / background so imported pre-1.0.6 themes don't come through half-black.
+- **Theme menu in the toolbar** splits into "Built-in" and "Custom" sections; the currently active theme displays an `ACTIVE` badge in the Theme Editor's sidebar.
+- **`edit.undoFileOp` default shortcut** corrected from `⌘Z` → `⌥⌘Z` in `KeyBindingManager`. `⌘Z` conflicts with macOS's system text-field undo, which is why the menu already used `⌥⌘Z` — the two were silently out of sync.
+
+### Fixed
+- **Theme Editor `Apply` silently did nothing** when the custom theme's ID wasn't one of the 13 built-in presets. `ThemeManager.currentTheme` now falls back to the custom-theme store for unknown IDs, and the `themeRevision` counter is bumped on every activation so `NSViewRepresentable` wrappers (file table / grid) don't short-circuit their update pass when colour tokens happen to end up byte-identical.
+- **Theme Editor fatal error** on open inside the independent window: `ViewerWindowManager`'s fresh `NSHostingView` does not inherit the main window's SwiftUI environment, so `@Environment(ThemeManager.self)` tripped a "No Observable object" crash on first render. Environment values (`appVM`, `themeManager`) are now re-injected at the panel's entry point.
+- **Right-drag selection wiped earlier marks**. Every new `dragSelectRows` call used to replace `selectedIds` with just the current range, so multi-gesture selection was impossible — each new drag silently lost everything the user had already marked. The gesture now snapshots the mark set at `rightMouseDown` and unions/subtracts subsequent ranges against that baseline, so sequential drags accumulate like Shift-clicking in Finder.
+- **Right-drag cursor didn't track the pointer**. Previously `tableView.selectRowIndexes(range, byExtendingSelection: false)` selected the whole drag range in NSTableView's model, making the cursor span the range and losing the "where will this drag end" signal. Cursor is now updated to just the row under the pointer; the range is visible via the marked-item text colour + the cursor-row stripe.
+
 ## [1.0.5] — 2026-04-18
 
 ### Fixed
