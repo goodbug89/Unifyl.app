@@ -6,6 +6,46 @@
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>
+            <title>Version 1.0.7</title>
+            <description><![CDATA[
+<h2>Unifyl 1.0.7</h2>
+<h3>Added</h3>
+<ul>
+<li><b>Total Commander-style right-drag selection</b>: hold right mouse button and drag to mark files. Cursor tracks the pointer, sequential drags <b>accumulate</b> onto existing marks instead of replacing. Drags starting on an already-marked file subtract its range from the baseline.</li>
+<li><b>Shift / Cmd / Ctrl + click</b> file-list selection modifiers. Shift-click range-marks from the cursor to the clicked row; Cmd-click or Ctrl-click toggles just the clicked row without disturbing existing marks.</li>
+<li><b>Bundled 7zz binary</b> (universal Mach-O, LGPL-2.1). Password-protected / WinZip AES / LZMA / PKZIP 5.1+ archives open out of the box — no <code>brew install p7zip</code> required.</li>
+<li><b>Password-protected archive extraction</b>: new SecureField prompt for encrypted zip / 7z / RAR, with automatic retry on wrong password. Works for whole-archive F8 and inside-archive F5 / F6 on selected entries.</li>
+<li><b>Wrapper-folder unwrap</b> after archive extraction. Zips that package a file inside a same-named folder (HWP / Numbers / Keynote / Pages / Sparkle .xcframework) now extract as a single file at the destination. macOS bookkeeping siblings (<code>__MACOSX</code>, <code>.DS_Store</code>, <code>._*</code>) are discarded silently; real user siblings prevent unwrap.</li>
+<li><b>HWPX → PDF Hancom / Polaris passthrough</b>: when LibreOffice's conversion fails, Unifyl shows an <b>Open in &lt;app name&gt;</b> button if Hancom Office, Hancom Viewer, or Polaris Office v9+ is installed. Button opens the HWPX file directly; otherwise routes to hancom.com download.</li>
+<li><b>Drop external files onto an archive row</b> to add them into the archive at its root. The archive row highlights during the drag; ZIP / 7z / TAR families are accepted targets.</li>
+<li><b>Recent Folders</b> menu under <code>Go</code>: frecency-ranked list (visit count × 7-day half-life) of your last 40 directories. Dead paths (ejected volume / deleted folder) filtered before display.</li>
+<li><b>AI Semantic Search onboarding</b>: first-time users who invoke AI search while the index is empty see a focused pitch card with <b>Index Home Folder</b> + <b>Choose Folder…</b> + <b>Skip for now</b>. Dismissal remembered in UserDefaults.</li>
+<li><b>Live keyboard-shortcut sync</b>: remapping any of the 120+ shortcuts in Settings updates the macOS menu-bar indicator immediately — no quit-and-relaunch.</li>
+<li><b>Theme Editor</b> is now an independent, resizable window (via ViewerWindowManager, not a modal sheet). New <b>Apply as Active Theme</b> button + <b>Live Apply</b> toggle for real-time preview against actual file panels.</li>
+<li><b>Cursor color</b> is now a distinct theme token. Single-row focus is drawn with a 3-px left-edge stripe matching Total Commander.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li><b>Inside-archive F5 / F6 routing</b>: used to silently fail because synthetic archive URLs were handed to the regular file-copy path. Now routes through ArchiveEngine extraction.</li>
+<li><b>Destination path duplication</b>: single-item archive extraction used to produce <code>destination/X.hwp/X.hwp</code> wrapper folders.</li>
+<li><b>unwrapWrapperFolder safety</b>: no longer destroys real user siblings; only collapses when the only children are macOS bookkeeping.</li>
+<li><b>Move-from-archive</b> now enumerates the full entry list instead of using unsupported glob patterns that silently left children inside the archive.</li>
+<li><b>Theme Editor Apply</b> now actually activates the edited theme (previously silent no-op because <code>ThemeManager</code> only knew the built-in presets).</li>
+</ul>
+<p><a href="https://github.com/goodbug89/Unifyl.app/blob/main/CHANGELOG.md">Full changelog</a></p>
+]]></description>
+            <pubDate>Sun, 19 Apr 2026 20:15:00 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.0.7/Unifyl-1.0.7.dmg"
+                sparkle:version="11"
+                sparkle:shortVersionString="1.0.7"
+                sparkle:edSignature="dY7hPyDFrNADTHaabUWD4panSB/oohnGosC6sNhKn7A+H2eReyvP4XCB0/XmJnRT4/gxyvy1J/dfRaEUwm64Dg=="
+                length="14591673"
+                type="application/octet-stream"
+            />
+        </item>
+        <item>
             <title>Version 1.0.6</title>
             <description><![CDATA[
 <h2>Unifyl 1.0.6</h2>
