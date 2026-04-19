@@ -6,6 +6,36 @@
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>
+            <title>Version 1.0.6</title>
+            <description><![CDATA[
+<h2>Unifyl 1.0.6</h2>
+<h3>Added</h3>
+<ul>
+<li><b>Theme Editor is now an independent, resizable window</b>: movable via the macOS title bar instead of a modal sheet. New <b>Apply as Active Theme</b> button and <b>Live Apply</b> toggle for real-time preview against actual file panels.</li>
+<li><b>Cursor color</b> is now a distinct theme token. Single-row focus is drawn with a 3-px left-edge stripe matching Total Commander. Customize in Theme Editor → Chrome Colors → Cursor.</li>
+<li><b>Right-drag selection</b> (Total Commander style): hold the right mouse button and drag to mark-select. The cursor tracks the pointer, and sequential drags <b>accumulate</b> onto existing marks instead of replacing them. Drag starting on an already-marked file subtracts its range instead.</li>
+<li><b>Live keyboard-shortcut sync</b>: remapping any of the 120+ shortcuts in Settings updates the macOS menu-bar indicator immediately — no quit-and-relaunch required.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li><b>Theme Editor Apply did nothing</b>: <code>ThemeManager</code> didn't know how to look up custom-theme IDs, so activating an edited custom theme silently fell through to the default. Fixed — Apply now actually paints the chrome.</li>
+<li><b>Theme Editor crash</b> on opening as independent window: environment objects are re-injected at the panel's entry point so <code>@Environment(ThemeManager.self)</code> resolves.</li>
+<li><b>Pre-1.0.6 <code>.ultratheme</code> imports</b> decode cleanly via a backward-compatible parser for the legacy 4-field schema.</li>
+</ul>
+<p><a href="https://github.com/goodbug89/Unifyl.app/blob/main/CHANGELOG.md">Full changelog</a></p>
+]]></description>
+            <pubDate>Sun, 19 Apr 2026 13:46:00 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.0.6/Unifyl-1.0.6.dmg"
+                sparkle:version="10"
+                sparkle:shortVersionString="1.0.6"
+                sparkle:edSignature="Fnqy0gINXKsik7FyobeDZF19pv1NzBTjGytSeG72bPFXpQqGSXyQ5DxaJw5S9QoZDtcm4ZaP0iw2pFMW5hBQDw=="
+                length="11961068"
+                type="application/octet-stream"
+            />
+        </item>
+        <item>
             <title>Version 1.0.5</title>
             <description><![CDATA[
 <h2>Unifyl 1.0.5</h2>
