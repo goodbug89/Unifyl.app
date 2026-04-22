@@ -10,8 +10,30 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/goodbug89/Unifyl.app/releases">Download</a> · 
-  <a href="https://github.com/goodbug89/Unifyl.app/issues">Report Bug</a>
+  <a href="https://github.com/goodbug89/Unifyl.app/releases/latest">
+    <img alt="Download for macOS" src="https://img.shields.io/github/v/release/goodbug89/Unifyl.app?label=Download+for+macOS&style=for-the-badge&logo=apple&logoColor=white&color=0A84FF">
+  </a>
+  &nbsp;
+  <a href="https://goodbug89.github.io/Unifyl.app/">
+    <img alt="Website" src="https://img.shields.io/badge/Website-unifyl.app-6366F1?style=for-the-badge&logo=safari&logoColor=white">
+  </a>
+</p>
+
+<p align="center">
+  <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14.0%2B-000000?style=flat-square&logo=apple&logoColor=white">
+  <img alt="Apple Silicon + Intel" src="https://img.shields.io/badge/Apple%20Silicon-+%20Intel-000000?style=flat-square">
+  <img alt="Free + Pro $39.99" src="https://img.shields.io/badge/Free%20%C2%B7%20Pro%20%2439.99-green?style=flat-square">
+  <img alt="Downloads" src="https://img.shields.io/github/downloads/goodbug89/Unifyl.app/total?style=flat-square&label=downloads&color=34C759">
+  <a href="https://github.com/goodbug89/Unifyl.app/blob/main/CHANGELOG.md">
+    <img alt="Changelog" src="https://img.shields.io/badge/changelog-keep%20a%20changelog-blue?style=flat-square">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/goodbug89/Unifyl.app/releases/latest">Latest release</a> ·
+  <a href="https://github.com/goodbug89/Unifyl.app/blob/main/CHANGELOG.md">Changelog</a> ·
+  <a href="https://github.com/goodbug89/Unifyl.app/issues/new/choose">Report bug</a> ·
+  <a href="https://github.com/goodbug89/Unifyl.app/discussions">Discussions</a>
 </p>
 
 ---
