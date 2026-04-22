@@ -6,6 +6,71 @@
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>
+            <title>Version 1.0.9</title>
+            <description><![CDATA[
+<h2>Unifyl 1.0.9</h2>
+<blockquote><p><b>1.0.8 was cut internally but never published.</b> This release consolidates the 1.0.8 design audit + 10 power-user features + 20+ Settings tunables with the subsequent Log Viewer overhaul, Settings resize fix, Theme Editor preset sidebar, and Compress dialog rework. Users upgrade 1.0.7 → 1.0.9 directly.</p></blockquote>
+<h3>Added — Power-user features</h3>
+<ul>
+<li><b>Type-ahead select</b>: type any sequence to jump to the first matching file. Korean input is choseong-normalised so "민수.txt" matches "ㅁ".</li>
+<li><b>Spring-loaded folders</b>: drag a file over a directory row for 1 s to auto-navigate into it. Works on <code>..</code> for parent navigation.</li>
+<li><b>Tab right-click context menu</b>: Rename / Pin / Duplicate / Move to Other Panel / Close Others / Close Tabs to the Right / Reveal in Finder.</li>
+<li><b>Breadcrumb click-to-edit</b>: double-click the path bar for a raw-text URL editor.</li>
+<li><b>Dock icon context menu</b>: Reveal Active Folder + Recent Folders (top 5 by frecency).</li>
+<li><b>"Send to Unifyl" macOS Service</b>: right-click files in Finder / Mail / Safari → Services → "Send to Unifyl".</li>
+<li><b>Copy Path As…</b> submenu under Edit — POSIX / <code>file://</code> URI / shell-quoted / unix-shell / relative / filename only.</li>
+<li><b>Reveal cursor file in opposite panel</b> (⌃⌥O) — prep before compare / sync / diff.</li>
+<li><b>Cmd+1..9 tab jump</b> — physical keyCode mapping, works under any IME.</li>
+<li><b>F7 New Folder sheet</b> with pre-selected placeholder text — typing immediately replaces "New Folder" without needing ⌘A.</li>
+<li><b>Log Viewer grep/find toggle</b>: grep hides non-matching rows, find highlights in place. Plus <b>Load All</b> button for the rare 100k+ line case.</li>
+<li><b>Theme Editor Built-in Presets sidebar</b>: browse all 12 presets, right-click → <b>Duplicate as Custom Theme</b>.</li>
+<li><b>Active-panel focus desaturation</b>: inactive panel at 50 % saturation + accent stripe atop the active PathBar.</li>
+</ul>
+<h3>Changed — Design (senior macOS designer audit)</h3>
+<ul>
+<li><b>Theme presets now theme the full app chrome</b> (PathBar / TabBar / StatusBar / OperationQueueBar / FunctionKeyBar). Previously frozen to Unifyl Dark Pro regardless of active preset.</li>
+<li><b>Per-row file-type colour flood removed</b> — filename + icon still tint by category, Size / Date / Kind columns now use the theme's secondary label.</li>
+<li><b>F-key bar off by default.</b> Re-enable via View ▸ Show Function Key Bar.</li>
+<li><b>PathBar hierarchy restored</b>; Toolbar status simplified; toasts moved into the panel status bar.</li>
+<li><b>AppTheme schema expanded</b> with 10 new chrome + semantic tokens (<code>elevatedHex</code>, <code>overlayHex</code>, <code>borderSubtleHex</code>, <code>borderDefaultHex</code>, <code>textMutedHex</code>, <code>errorHex</code>, <code>warningHex</code>, <code>successHex</code>, <code>dropTargetHex</code>, <code>focusRingHex</code>).</li>
+<li><b>Preset curation</b>: 13 → 12, contrast fixes on High Contrast (was invisible white-on-white selection), Solarized Light, One Dark, Dracula.</li>
+</ul>
+<h3>Added — Settings (General pane)</h3>
+<ul>
+<li>Size / Date / Double-click action pickers.</li>
+<li>Row font size + Spring-loaded folder delay + Type-ahead reset + Toast dismiss sliders.</li>
+<li>Show/hide toggles for every chrome element and confirmation toggles for Copy / Move / Delete / Permanent Delete / Overwrite.</li>
+<li>Every new setting reflects immediately — no restart required.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li><b>"Compress to ZIP…" → "Compress…"</b>: dialog-based (destination + filename + format), replaces the previous silent-write.</li>
+<li><b>Log Viewer performance overhaul</b>: UUID → Int line-number ids, level classification at ingest, debounced filter, 5 000-line tail cap.</li>
+<li><b>Settings window is resizable</b> (was pinned at 550 × 480 despite 20+ new tunables).</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li><b>F2 rename Cmd+A/C/V/X/Z under Korean / Japanese / Chinese IME</b> — all dispatch now uses <code>event.keyCode</code>.</li>
+<li><b>Rename-onto-existing-file</b> now asks Overwrite? (was hard-failing with "already exists").</li>
+<li><b>Theme Editor</b> no longer opens multiple windows; no longer duplicates presets in the sidebar.</li>
+<li><b>Mouse wheel scroll</b> no longer reverts to cursor position after a brief delay.</li>
+<li><b>Toast auto-dismiss audit</b> — "Copied N paths", undo, Smart Folder add, PDF convert failure now all self-clear.</li>
+<li><b>Esc in Log Viewer no longer terminates the app</b>.</li>
+</ul>
+<p><a href="https://github.com/goodbug89/Unifyl.app/blob/main/CHANGELOG.md">Full changelog</a></p>
+]]></description>
+            <pubDate>Wed, 22 Apr 2026 18:56:49 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.0.9/Unifyl-1.0.9.dmg"
+                sparkle:version="1"
+                sparkle:shortVersionString="1.0.9"
+                sparkle:edSignature="a/NOiDuymVQB6iher/bmEUY8SiUDRL+8Qu8Rw1J3vG0qM5gns972vNmZhLYS0oM5N8ZNLWTC4BMBfI6+BcYoDQ=="
+                length="14782591"
+                type="application/octet-stream"
+            />
+        </item>
+        <item>
             <title>Version 1.0.7</title>
             <description><![CDATA[
 <h2>Unifyl 1.0.7</h2>
