@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="icon-512.png" width="128" height="128" alt="Unifyl">
+  <img src="docs/icon-512.png" width="128" height="128" alt="Unifyl">
 </p>
 
 <h1 align="center">Unifyl</h1>
@@ -39,7 +39,7 @@
 ---
 
 <p align="center">
-  <img src="screenshots/hero-dual-pane.png" alt="Unifyl dual-pane file manager" width="900">
+  <img src="docs/screenshots/hero-dual-pane.png" alt="Unifyl dual-pane file manager" width="900">
 </p>
 
 ## What is Unifyl?
@@ -50,7 +50,7 @@ Unifyl is a **native macOS file manager** built from the ground up with Swift 6,
 
 ### Dual-Pane File Management
 
-<img src="screenshots/hero-preview.png" alt="Dual pane with image preview" width="800">
+<img src="docs/screenshots/hero-preview.png" alt="Dual pane with image preview" width="800">
 
 - Side-by-side panels with tabs and workspaces
 - Function key operations (F5 Copy, F6 Move, F7 MkDir, F8 Delete)
@@ -59,22 +59,22 @@ Unifyl is a **native macOS file manager** built from the ground up with Swift 6,
 
 ### Advanced Search + Smart Folders
 
-<img src="screenshots/advanced-search.png" alt="Advanced multi-criteria search" width="800">
+<img src="docs/screenshots/advanced-search.png" alt="Advanced multi-criteria search" width="800">
 
 - Multi-criteria with regex, tags, size, date, and content matching
 - Feed results directly into Smart Folders for batch operations
 
-<img src="screenshots/smart-folder.png" alt="Smart Folder panel" width="800">
+<img src="docs/screenshots/smart-folder.png" alt="Smart Folder panel" width="800">
 
 ### Command Palette
 
-<img src="screenshots/command-palette.png" alt="Command Palette" width="800">
+<img src="docs/screenshots/command-palette.png" alt="Command Palette" width="800">
 
 Cmd+Shift+P — instant access to every command without touching the mouse.
 
 ### Multi Rename
 
-<img src="screenshots/multi-rename.png" alt="Multi-rename tool" width="800">
+<img src="docs/screenshots/multi-rename.png" alt="Multi-rename tool" width="800">
 
 Batch rename with find-replace, regex, numbering, EXIF data, and AI suggestions. Live preview before applying.
 
@@ -84,23 +84,23 @@ Batch rename with find-replace, regex, numbering, EXIF data, and AI suggestions.
 
 | PDF Viewer | Code Viewer |
 |---|---|
-| <img src="screenshots/viewer-pdf.png" alt="PDF viewer" width="400"> | <img src="screenshots/viewer-code-js.png" alt="Code viewer" width="400"> |
+| <img src="docs/screenshots/viewer-pdf.png" alt="PDF viewer" width="400"> | <img src="docs/screenshots/viewer-code-js.png" alt="Code viewer" width="400"> |
 
 | Image Viewer | Swift Code |
 |---|---|
-| <img src="screenshots/viewer-image.png" alt="Image viewer" width="400"> | <img src="screenshots/viewer-code-swift.png" alt="Swift code" width="400"> |
+| <img src="docs/screenshots/viewer-image.png" alt="Image viewer" width="400"> | <img src="docs/screenshots/viewer-code-swift.png" alt="Swift code" width="400"> |
 
 **10 built-in viewers:** Text, Code (50+ languages), Hex, Image, PDF, Video, Audio, Web, Markdown, Media Info — all auto-detected by file type.
 
 ### Themes & Icon Packs
 
-<img src="screenshots/theme-editor.png" alt="Theme editor" width="800">
+<img src="docs/screenshots/theme-editor.png" alt="Theme editor" width="800">
 
 12 built-in themes + full custom editor. SVG icon packs with 200+ extension mappings.
 
 ### AI Intelligence (Local & Private)
 
-<img src="screenshots/ai-settings.png" alt="AI settings - all CoreML" width="500">
+<img src="docs/screenshots/ai-settings.png" alt="AI settings - all CoreML" width="500">
 
 - **Semantic Search** — find files by meaning using local embeddings + vector DB
 - **Smart Tagging** — auto-classify with NLP, integrated with macOS tags
@@ -111,31 +111,31 @@ Batch rename with find-replace, regex, numbering, EXIF data, and AI suggestions.
 
 | Git Panel | Git History |
 |---|---|
-| <img src="screenshots/git-panel.png" alt="Git panel" width="400"> | <img src="screenshots/git-history.png" alt="Git history" width="400"> |
+| <img src="docs/screenshots/git-panel.png" alt="Git panel" width="400"> | <img src="docs/screenshots/git-history.png" alt="Git history" width="400"> |
 
 | Log Viewer | Port Viewer |
 |---|---|
-| <img src="screenshots/log-viewer.png" alt="Log viewer" width="400"> | <img src="screenshots/port-viewer.png" alt="Port viewer" width="400"> |
+| <img src="docs/screenshots/log-viewer.png" alt="Log viewer" width="400"> | <img src="docs/screenshots/port-viewer.png" alt="Port viewer" width="400"> |
 
 ### Pro Tools
 
 | Hex Editor | File X-Ray | Folder Heatmap |
 |---|---|---|
-| <img src="screenshots/hex-editor.png" alt="Hex editor" width="280"> | <img src="screenshots/file-xray.png" alt="File X-Ray" width="280"> | <img src="screenshots/folder-heatmap.png" alt="Folder heatmap" width="280"> |
+| <img src="docs/screenshots/hex-editor.png" alt="Hex editor" width="280"> | <img src="docs/screenshots/file-xray.png" alt="File X-Ray" width="280"> | <img src="docs/screenshots/folder-heatmap.png" alt="Folder heatmap" width="280"> |
 
 | Diff Heatmap | Folder Sync | PDF Tools |
 |---|---|---|
-| <img src="screenshots/diff-heatmap.png" alt="Diff heatmap" width="280"> | <img src="screenshots/folder-sync.png" alt="Folder sync" width="280"> | <img src="screenshots/pdf-tools.png" alt="PDF tools" width="280"> |
+| <img src="docs/screenshots/diff-heatmap.png" alt="Diff heatmap" width="280"> | <img src="docs/screenshots/folder-sync.png" alt="Folder sync" width="280"> | <img src="docs/screenshots/pdf-tools.png" alt="PDF tools" width="280"> |
 
 | EXIF Editor | Media Converter | App Uninstaller |
 |---|---|---|
-| <img src="screenshots/exif-editor.png" alt="EXIF editor" width="280"> | <img src="screenshots/media-converter.png" alt="Media converter" width="280"> | <img src="screenshots/app-uninstaller.png" alt="App uninstaller" width="280"> |
+| <img src="docs/screenshots/exif-editor.png" alt="EXIF editor" width="280"> | <img src="docs/screenshots/media-converter.png" alt="Media converter" width="280"> | <img src="docs/screenshots/app-uninstaller.png" alt="App uninstaller" width="280"> |
 
 ### Settings
 
 | Keyboard Shortcuts | Icon Themes |
 |---|---|
-| <img src="screenshots/keyboard-shortcuts.png" alt="Keyboard shortcuts" width="400"> | <img src="screenshots/icon-themes.png" alt="Icon themes" width="400"> |
+| <img src="docs/screenshots/keyboard-shortcuts.png" alt="Keyboard shortcuts" width="400"> | <img src="docs/screenshots/icon-themes.png" alt="Icon themes" width="400"> |
 
 ### And more...
 - Archive virtual folders (ZIP, 7z, TAR, GZ, RAR, ZSTD)
