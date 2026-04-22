@@ -5,9 +5,6 @@ All notable changes to Unifyl will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
-
-
 ## [1.0.9] — 2026-04-22
 
 > **Note**: 1.0.8 was never publicly released. This entry consolidates the 1.0.8 design audit + power-user features + Settings tunables with the 1.0.9 Log Viewer overhaul, Settings resize fix, Theme Editor preset sidebar, and Compress dialog routing. Users upgrade 1.0.7 → 1.0.9 in one hop.
