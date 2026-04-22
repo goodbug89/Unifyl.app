@@ -8,6 +8,78 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 
+## [1.0.9] — 2026-04-22
+
+> **Note**: 1.0.8 was never publicly released. This entry consolidates the 1.0.8 design audit + power-user features + Settings tunables with the 1.0.9 Log Viewer overhaul, Settings resize fix, Theme Editor preset sidebar, and Compress dialog routing. Users upgrade 1.0.7 → 1.0.9 in one hop.
+
+### Added
+- **Type-ahead select** in the file list. Typing any sequence of characters jumps the cursor to the first matching file, with a 750 ms idle reset between bursts. Korean input is choseong-normalised so "민수.txt" matches "ㅁ" — both the filename's first syllable and the partial-jamo input collapse to the same compatibility-jamo initial consonant.
+- **Spring-loaded folders**: dragging a file over a directory row for 1 s auto-navigates into it. An accent-tinted progress fill sweeps across the row during the dwell so the feature is discoverable. Works on `..` for parent navigation. Cancels cleanly on drop, drag-exit, or hover-row change.
+- **Tab right-click context menu**: Rename / Reset Name / Pin / Duplicate / Move to Other Panel / Close / Close Others / Close Tabs to the Right / Reveal in Finder / Copy Folder Path. Pinned tabs show a pin glyph, hide the ✕, and survive "Close Others" / "Close Tabs to the Right". Custom tab titles are rendered in preference to the path's last component.
+- **Breadcrumb click-to-edit**: double-click the path bar or click the trailing hover-only pencil to switch to a raw-text URL-bar style editor. Enter navigates, Esc cancels, invalid paths beep.
+- **Dock icon context menu** (NSApplicationDelegate.applicationDockMenu): Reveal Active Folder in Finder + Recent Folders (top 5 by frecency, identical source to the Go ▸ Recent Folders submenu).
+- **"Send to Unifyl" macOS Service**: right-click files in Finder / Mail / Safari → Services → "Send to Unifyl". The app navigates the active panel to the dropped items' parent folder and mark-selects them. NSServices entry in Info.plist; provider selector explicitly bound via `@objc(sendToUnifyl:userData:error:)` so pbs can resolve it.
+- **Copy Path As…** submenu under Edit: POSIX path / `file://` URI / shell-quoted / unix-shell form (`~/` + escaped spaces) / relative to current folder / filename only.
+- **Reveal cursor file in opposite panel** (⌃⌥O, also under Go ▸ Reveal in Opposite Panel): navigates the inactive panel to the cursor item's parent folder (or into the folder if the cursor is on a directory). Prep work before compare / sync / diff.
+- **Cmd+1..9 tab jump**: switches the active panel to the Nth tab. Physical keyCode mapping so it fires under any keyboard layout / IME.
+- **F7 "New Folder" sheet** with pre-selected placeholder text. The NSTextField is wrapped in an NSViewRepresentable that calls `selectText(nil)` once the window accepts it as first responder — typing immediately replaces "New Folder" without needing ⌘A first.
+- **Log Viewer grep/find toggle.** The filter field now has a "Grep" checkbox. Grep mode (default) hides non-matching lines as before; turning it off switches to find-in-place behaviour where every row stays visible and matches are highlighted. Placeholder text and tooltip update to match the active mode.
+- **Log Viewer "Load All" escape hatch.** Cold-opening a 100 k+ line log via `LazyVStack` + `.textSelection(.enabled)` can't meaningfully virtualise — intrinsic-size measurement dominates. Initial load now tails the last 5 000 lines and a header banner reports `Showing last 5,000 of N lines` with a Load All button for the rare case historical lines are needed.
+- **Theme Editor: Built-in Presets sidebar section.** The 12 presets are now browseable in the editor sidebar alongside custom themes. Selecting a preset copies its tokens into the edit panel as a starting point (the preset itself is never mutated); right-click → "Duplicate as Custom Theme" creates a fresh editable copy tagged `Preset Name (Copy)`.
+- **Active-panel focus desaturation.** The inactive panel's content is now rendered at 50 % saturation (plus the existing 92 % opacity), matching the Mail / Messages / Finder pattern of using colour intensity — not chrome lines — to signal which pane has focus. An accent-coloured 2 pt stripe along the top of the active panel's PathBar reinforces the read.
+
+### Changed — Design (senior macOS designer audit)
+- **Theme presets now theme the full app chrome.** Before this release, PathBar / TabBar / StatusBar / OperationQueueBar / FunctionKeyBar read frozen values from `DesignTokens.Colors`; picking Nord or Solarized Light left the file list correctly tinted but the chrome stuck on the Unifyl Dark Pro palette. All chrome tokens promoted to `ThemeManager.effective*` with system-colour fallbacks so `macOS (Automatic)` keeps stock appearance.
+- **Per-row file-type colour flood removed.** Filename + icon still tint by category, but Size / Date / Kind columns now use the theme's secondary-label token. Previous behaviour painted every column saturated per-row and was the single biggest reason the file list read as "TC-90s terminal".
+- **F-key bar off by default.** Re-enable via View ▸ Show Function Key Bar (persists via `unifyl.showFunctionKeyBar`). When shown, redesigned: 18 pt thin bar with SF Symbols + action word + 9 pt F-key hint, all theme-driven. The jarring teal Terminal pill is gone.
+- **PathBar hierarchy restored.** Current folder is 13 pt semibold primary text with no background chip; ancestors are 12 pt regular secondary. Previous muted-chip on the current folder visually outweighed tab-active affordance, and the textMuted ancestor colour failed WCAG AA at 2.1:1.
+- **ToolbarStatusCenter simplified.** Brand lockup + current folder name in the principal slot; FREE badge only shown when unlicensed. Selection summary removed — it duplicated `PanelStatusBar`.
+- **Toasts moved out of the file list** into the active panel's status bar (11 pt, SF Symbol, 0.5 pt themed border, legacy emoji prefixes auto-stripped). Previous floating toast covered the bottom rows of the file list.
+- **Active panel indicator strengthened.** Active panel's PathBar gets a faint `accent.opacity(0.06)` tint; inactive panel content dims to 92 % opacity.
+- **Typography reconciled.** Size and Date columns use `NSFont.monospacedDigitSystemFont` so digits line up during scroll; Tab labels stepped down to 12 pt medium so filenames remain the heaviest type on screen.
+- **Radius tokens unified.** `DesignTokens.Radius.chip` (4 pt) / `.card` (6 pt) / `.sheet` (8 pt), all `.continuous`.
+- **AppTheme schema expanded.** Ten new tokens (`elevatedHex`, `overlayHex`, `borderSubtleHex`, `borderDefaultHex`, `textMutedHex`, `errorHex`, `warningHex`, `successHex`, `dropTargetHex`, `focusRingHex`) with system-colour fallbacks.
+- **Preset curation fixes.** 13 presets → 12 (Classic Navy removed, near-duplicate of Midnight). Contrast fixes on High Contrast (invisible white-on-white selection), Solarized Light (washed-out selection), One Dark (wrong primary color), Dracula (non-canonical selection).
+
+### Changed
+- **"Compress to ZIP…" → "Compress…"** everywhere (File menu, command palette, right-click). The label now matches the new behaviour: picking Compress opens `CompressDialogView` with destination / filename / format pre-filled, rather than silently writing a zip into the active panel's current folder. `addSelectedToArchive()` remains as a scripting-only silent-write entry point.
+- **Compress dialog Smart Folder fallback.** When the source panel is in Smart Folder mode (`currentPath` is the pre-cart directory and the panel won't refresh anyway), the compress destination falls through to the inactive panel's real path, then to `~/Downloads`. A post-archive toast reports the final location.
+- **Log Viewer performance overhaul.** `LogLine.id` switched from `UUID` to the line number `Int` (UUID allocation was ~3–5 µs each, compounding to seconds on cold open of a 100 k-line file). Log level is now classified once at ingest via `range(of:options:.caseInsensitive)` instead of uppercasing the whole string on every SwiftUI body evaluation. Filter input is debounced so the per-keystroke `NSAttributedString` rebuild no longer stalls typing on large buffers.
+- **Log Viewer colour rendering.** Level colours now come from direct `NSColor` constants rather than a `Color → NSColor` round-trip, which occasionally collapsed every level to a single hue ("every line shows red").
+- **Settings window is resizable.** The SwiftUI `Settings` scene defaulted to `.contentSize` resizability on macOS 13+ and silently stripped `.resizable` from the styleMask on every relayout, which made the new 20+-tunable General pane overflow the fixed 550 × 480 floor. Fixed at three layers: `.windowResizability(.contentMinSize)` on the scene, an `NSViewRepresentable` that unions `.resizable` into the hosting window's styleMask on mount (with 6 retries over the first second while the window is still being parented), and a 0.25 s repeating timer in `UnifylAppDelegate` that re-inserts the flag while a Settings window exists. The timer trampolines through `DispatchQueue.main.async` to avoid `_dispatch_assert_queue_fail` under Swift 6 strict concurrency.
+
+### Added — Settings (General pane)
+- **Size format** picker — Abbreviated (`4.2 MB`) / Bytes (`4,404,019`, locale grouping, no unit suffix since the column header carries it) / Both (`4,404,019 (4.2 MB)`).
+- **Date format** picker — Short / Medium (default) / Long / Relative (`2 hours ago`) / ISO 8601 (`2026-04-21 14:14`).
+- **Double-click action** picker — Open / Open with default app / Toggle selection. Directories and `..` always navigate regardless of the setting.
+- **Row font size slider** (9–24 pt) synced with Cmd+/- / Cmd+= via a `UserDefaults.didChangeNotification` observer in `AppViewModel`.
+- **Spring-loaded folder delay** slider (0.4–2.5 s).
+- **Type-ahead buffer reset** slider (0.3–2.0 s).
+- **Toast auto-dismiss** slider (0.5–6.0 s).
+- **Toggles**: Show background size gauge / Show git status dots / Show hidden files by default / Show function key bar / Show operation queue bar / Show path bar.
+- **Confirmation toggles**: Confirm before Copy / Move / Delete / Permanent Delete / Overwrite on rename-copy. When false, the corresponding sheet is short-circuited.
+- Every new setting reflects in the UI immediately — no restart required.
+
+### Fixed
+- **F2 rename mode Cmd+A/C/V/X/Z broken under Korean/Japanese IME.** The NSEvent monitor was firing correctly; the switch-on-characters arm just couldn't match "ㅁ" (IME output on `m` key) to `"a"`. All shortcut dispatch in the field-editor path now uses `event.keyCode`.
+- **Intentional rename-onto-existing-file now asks Overwrite?** The single-file rename-copy path was calling `FileManager.copyItem` directly and hard-failing with `"Copy failed: already exists"`. Routed through the shared `ConflictResolution` dialog (Overwrite / Skip / Keep Both).
+- **Theme Editor no longer opens multiple windows.** `ViewerWindowManager.open(singleInstance: true, ...)` brings an existing panel to the front instead of cloning.
+- **Custom themes no longer duplicate by name** across app launches. `CustomThemeStore.add` dedups by id AND by case-insensitive trimmed name; `mergeDuplicatesByName()` runs on store load to collapse any pre-existing duplicates.
+- **Toast auto-dismiss audit**. "Copied N paths", undo-file-op, Smart Folder add, PDF-convert-failure, and command-palette undo were all setting `ui.tagNotification` without scheduling a timer to clear it. Refactored and wired all sites.
+- **Mouse wheel scroll no longer reverts to cursor position** after a brief delay. The scroll snapshot was mutating @Observable state on every frame, triggering SwiftUI rebuilds that called `ensureCursor` → `scrollRowToVisible`. Snapshot wiring disabled.
+- **Bytes size format clipping and misalignment fixed** by dropping the per-row "B" suffix. The Size column header carries the unit.
+- **NSServices registration** — removed deprecated `NSFilenamesPboardType` (pbs on macOS 14+ drops Services entries that mix legacy pboard types with UTI types). Added `@objc(sendToUnifyl:userData:error:)` explicit selector binding.
+- **Closing the Log Viewer no longer terminates the app.** Pressing Esc in the Log Viewer panel used to quit Unifyl entirely because SwiftUI treated it as the last remaining window. `applicationShouldTerminateAfterLastWindowClosed` now explicitly returns `false`, keeping the main scene alive regardless of auxiliary-window lifecycle.
+- **Theme Editor preset-id collision.** A legacy bug let the editor save a preset-seeded draft back into the custom-theme store under the preset's own id, so the sidebar showed the same theme twice. `persistAsCustomTheme` now detects the collision, reassigns a fresh UUID, and appends "(Copy)" to the name. `CustomThemeStore.removePresetDuplicates` runs on store load to purge any pre-existing collisions from earlier app versions.
+- **`PanelView.fileColorVersion` arithmetic overflow trap.** Combining randomised Swift `.hashValue` results with `+` regularly tripped "Swift runtime failure: arithmetic overflow" during QA. Switched to overflow-wrapping `&+` — the value is only ever compared for inequality, so wraparound is semantically fine.
+
+### Developer
+- `UnifylSettings.swift` shared helper for non-SwiftUI callsites to read user preferences.
+- `UnifylAppDelegate.swift` hosts `applicationDockMenu` + NSServices provider.
+- `AppViewModel.shared` static weak handle published for AppKit-layer consumers.
+- The removed "single main window enforcer" (a `NotificationCenter` observer in `UnifylAppDelegate` that closed duplicate main windows) caused `_dispatch_assert_queue_fail` crashes on Thread 3 because `w.close()` was invoked outside the main actor even with `queue: .main`. It's gone; multi-window `WindowGroup` behaviour is annoying but no longer crash-level. A proper `Window` scene migration is tracked separately.
+
+
 ## [1.0.7] — 2026-04-19 (respin build 12)
 
 ### Changed (respin build 12)
