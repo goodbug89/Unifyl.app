@@ -59,14 +59,14 @@
 </ul>
 <p><a href="https://github.com/goodbug89/Unifyl.app/blob/main/CHANGELOG.md">Full changelog</a></p>
 ]]></description>
-            <pubDate>Wed, 22 Apr 2026 18:56:49 +0900</pubDate>
+            <pubDate>Sun, 26 Apr 2026 08:00:00 +0900</pubDate>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <enclosure
                 url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.0.9/Unifyl-1.0.9.dmg"
-                sparkle:version="1"
+                sparkle:version="13"
                 sparkle:shortVersionString="1.0.9"
-                sparkle:edSignature="a/NOiDuymVQB6iher/bmEUY8SiUDRL+8Qu8Rw1J3vG0qM5gns972vNmZhLYS0oM5N8ZNLWTC4BMBfI6+BcYoDQ=="
-                length="14782591"
+                sparkle:edSignature="/ePAnxbvtECgXuYHfCFJljeHsHFZhsRTWWVWIDQwj8qhUNrIJFCsmq0Ku2A/hFMHsj8NbpuoDUzgk+psAa7XDQ=="
+                length="14782711"
                 type="application/octet-stream"
             />
         </item>
