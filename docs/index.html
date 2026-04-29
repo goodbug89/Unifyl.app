@@ -29,7 +29,7 @@
             { "@type": "Offer", "price": "39.99", "priceCurrency": "USD", "name": "Pro" }
         ],
         "downloadUrl": "https://github.com/goodbug89/Unifyl.app/releases",
-        "softwareVersion": "1.0.0",
+        "softwareVersion": "1.1.0",
         "screenshot": "https://goodbug89.github.io/Unifyl.app/screenshots/hero-dual-pane.png"
     }
     </script>
@@ -146,17 +146,10 @@
     </style>
 </head>
 <body>
-<!-- 1.0.1 → 1.0.2 upgrade notice (auto-hides once dismissed via localStorage) -->
-<div id="upgrade-notice" style="display:none; background:linear-gradient(90deg,#F59E0B,#EF4444); color:#fff; padding:10px 32px; text-align:center; font-size:13px; font-weight:500; position:fixed; top:0; left:0; right:0; z-index:200;">
-    ⚠️ <b>1.0.1 users:</b> please download <a href="https://github.com/goodbug89/Unifyl.app/releases/tag/v1.0.2" style="color:#fff; text-decoration:underline; font-weight:700;">1.0.2 manually</a> — auto-update is broken in 1.0.1. Future updates work normally once you're on 1.0.2.
-    <button onclick="document.getElementById('upgrade-notice').style.display='none'; localStorage.setItem('unifyl-notice-102','1');" style="margin-left:16px; background:transparent; border:1px solid rgba(255,255,255,0.5); color:#fff; padding:3px 10px; border-radius:4px; cursor:pointer; font-size:12px;">Dismiss</button>
-</div>
-<script>
-    if (!localStorage.getItem('unifyl-notice-102')) {
-        var n = document.getElementById('upgrade-notice');
-        if (n) { n.style.display = 'block'; document.querySelector('nav').style.top = '38px'; document.querySelector('.hero').style.paddingTop = '188px'; }
-    }
-</script>
+<!-- The 1.0.1 → 1.0.2 upgrade banner that lived here was retired with
+     the 1.1.0 release. The auto-update path has been stable since 1.0.2,
+     so dragging that warning forward over a year of normal updates only
+     confused users who never had 1.0.1 installed. -->
 
 
 <!-- NAV -->
