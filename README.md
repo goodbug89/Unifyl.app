@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/icon-512.png" width="128" height="128" alt="Unifyl">
+  <img src="docs/screenshots/icon.png" alt="Unifyl" width="128" height="128">
 </p>
 
 <h1 align="center">Unifyl</h1>
@@ -10,177 +10,251 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/goodbug89/Unifyl.app/releases/latest">
-    <img alt="Download for macOS" src="https://img.shields.io/github/v/release/goodbug89/Unifyl.app?label=Download+for+macOS&style=for-the-badge&logo=apple&logoColor=white&color=0A84FF">
-  </a>
-  &nbsp;
-  <a href="https://goodbug89.github.io/Unifyl.app/">
-    <img alt="Website" src="https://img.shields.io/badge/Website-unifyl.app-6366F1?style=for-the-badge&logo=safari&logoColor=white">
-  </a>
+  <img src="https://img.shields.io/badge/macOS-14%2B-000?logo=apple&logoColor=white" alt="macOS 14+">
+  <img src="https://img.shields.io/badge/Swift-6.0-F05138?logo=swift&logoColor=white" alt="Swift 6">
+  <img src="https://img.shields.io/badge/Apple%20Silicon-Optimized-8E8E93" alt="Apple Silicon">
+  <img src="https://img.shields.io/badge/License-Proprietary-blue" alt="License">
 </p>
 
 <p align="center">
-  <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14.0%2B-000000?style=flat-square&logo=apple&logoColor=white">
-  <img alt="Apple Silicon + Intel" src="https://img.shields.io/badge/Apple%20Silicon-+%20Intel-000000?style=flat-square">
-  <img alt="Free + Pro $39.99" src="https://img.shields.io/badge/Free%20%C2%B7%20Pro%20%2439.99-green?style=flat-square">
-  <img alt="Downloads" src="https://img.shields.io/github/downloads/goodbug89/Unifyl.app/total?style=flat-square&label=downloads&color=34C759">
-  <a href="https://github.com/goodbug89/Unifyl.app/blob/main/CHANGELOG.md">
-    <img alt="Changelog" src="https://img.shields.io/badge/changelog-keep%20a%20changelog-blue?style=flat-square">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/goodbug89/Unifyl.app/releases/latest">Latest release</a> ·
-  <a href="https://github.com/goodbug89/Unifyl.app/blob/main/CHANGELOG.md">Changelog</a> ·
-  <a href="https://github.com/goodbug89/Unifyl.app/issues/new/choose">Report bug</a> ·
-  <a href="https://github.com/goodbug89/Unifyl.app/discussions">Discussions</a>
+  <a href="https://unifyl.app">Website</a> &middot;
+  <a href="https://unifyl.app/docs">Documentation</a> &middot;
+  <a href="https://unifyl.app/download">Download</a>
 </p>
 
 ---
 
-<p align="center">
-  <img src="docs/screenshots/hero-dual-pane.png" alt="Unifyl dual-pane file manager" width="900">
-</p>
+![Unifyl Screenshot](docs/screenshots/main.png)
 
-## What is Unifyl?
+## Features
 
-Unifyl is a **native macOS file manager** built from the ground up with Swift 6, SwiftUI, and AppKit. It brings the powerful dual-pane workflow beloved by Total Commander users to macOS — with modern design, AI features, and Apple Silicon optimization.
+### :file_folder: Dual-Pane File Management
 
-## Key Features
+- Single, dual, triple, and free-split pane layouts
+- Tabbed browsing with tab groups and persistent workspaces
+- Drag-and-drop with spring-loaded folders
+- Queue manager with pause, resume, and speed throttling
+- Inline terminal per pane
 
-### Dual-Pane File Management
+### :mag: Search & Filter
 
-<img src="docs/screenshots/hero-preview.png" alt="Dual pane with image preview" width="800">
+- Real-time filtering as you type
+- Regex and wildcard pattern matching
+- Spotlight integration for instant system-wide search
+- Content search across file bodies
+- Advanced filters by size, date, kind, and tags
 
-- Side-by-side panels with tabs and workspaces
-- Function key operations (F5 Copy, F6 Move, F7 MkDir, F8 Delete)
-- Keyboard-first navigation with 120+ customizable shortcuts
-- Live file preview and thumbnail grid view
+### :robot: AI-Powered Tools
 
-### Advanced Search + Smart Folders
+- **Semantic search** -- find files by meaning, not just name (local embeddings + vector DB)
+- **AI rename** -- suggest filenames from image recognition or document content
+- **Smart tagging** -- auto-classify files using on-device NLP
+- **Duplicate intelligence** -- perceptual hashing to surface near-duplicates
+- **Natural language commands** -- tell the command palette what you want in plain English
+- All AI processing runs locally on Apple Neural Engine. Your files never leave your Mac.
 
-<img src="docs/screenshots/advanced-search.png" alt="Advanced multi-criteria search" width="800">
+### :globe_with_meridians: Remote & Cloud
 
-- Multi-criteria with regex, tags, size, date, and content matching
-- Feed results directly into Smart Folders for batch operations
+- FTP, FTPS, SFTP (PPK, FIDO2, 2FA), WebDAV, SMB, AFP, NFS
+- Amazon S3, Backblaze B2, Google Cloud Storage, Azure Blob
+- Google Drive, Dropbox, OneDrive, iCloud Drive
+- Docker container and Kubernetes pod browsing
+- iOS/Android device connectivity
 
-<img src="docs/screenshots/smart-folder.png" alt="Smart Folder panel" width="800">
+### :wrench: 75+ Professional Tools
 
-### Command Palette
+- File → PDF conversion (images, text, Office docs via LibreOffice; HWP / HWPX with Hancom-app fallback when LibreOffice's filter rejects the file)
+- Multi-rename with regex, numbering, EXIF data, AI suggestions, and undo
+- Text diff, binary hex compare, image overlay, recursive directory diff
+- 3-way file merge with per-conflict Accept Left/Right/Both
+- Bidirectional directory sync (local and remote)
+- Archives as virtual folders: browse, copy, move, delete inside ZIP, 7z, TAR, GZ, BZ2, XZ, ZSTD, RAR
+- Encrypted archives: ZIP and 7z password support
+- Smart filename decoding for legacy CJK ZIPs — Chinese (CP936/GBK), Japanese (Shift-JIS), Korean (CP949) detected by Hangul/Kana/Hanja distribution, not by guess
+- Overwrite confirmation dialogue when extracting or copying out of archives (Skip / Rename / Overwrite, with "Apply to all")
+- Entry mtimes preserved on extract — no more "extracted file is 9 hours off" on KST machines
+- Inline hex editor with pattern search and edit/save
+- EXIF/metadata bulk editor: batch edit date, GPS, author, copyright
+- Incremental backup with delta analysis (new, modified, unchanged)
+- Real-time log viewer with keyword highlighting and filter
+- File operation undo/redo (copy, move, delete reversible)
+- Macro recorder: record file operations, save, replay with variables
+- Multi-panel workspace layouts: save and restore tab arrangements
+- File operation scheduler with cron-based automation
+- Checksums: CRC32, MD5, SHA-1/256/512, SHA-3, BLAKE3
+- App uninstaller with leftover cleanup
+- Automation engine: Shell, AppleScript, JavaScript (JXA)
 
-<img src="docs/screenshots/command-palette.png" alt="Command Palette" width="800">
+### :computer: Developer Tools
 
-Cmd+Shift+P — instant access to every command without touching the mouse.
+- Git integration panel: status, stage/unstage, commit, push/pull, inline diff
+- SSH tunnel manager: save port forwarding profiles, start/stop tunnels
+- Docker container file editing with auto-sync
+- Process map, port viewer, environment manager, REST API explorer
 
-### Multi Rename
+### :art: Customizable Themes
 
-<img src="docs/screenshots/multi-rename.png" alt="Multi-rename tool" width="800">
+- Light and dark mode with system auto-switching
+- 12 built-in presets: Classic Navy, Midnight, Nord, Solarized, and more
+- Full theme editor with 20+ color tokens
+- Export and share `.ultratheme` files
+- Per-filetype color coding
 
-Batch rename with find-replace, regex, numbering, EXIF data, and AI suggestions. Live preview before applying.
+### :keyboard: Keyboard-First Design
 
-### Integrated Viewer — Press F3
+Every action is reachable from the keyboard. Command palette (`Cmd+Shift+P`), Vim-style navigation, and full shortcut customization. Remap any of 120+ commands across 12 categories in Settings > Keyboard Shortcuts, with conflict detection and one-click reassignment.
 
-> **One key. Any file. Instant preview.** Press F3 on any file and the right viewer opens automatically — in its own resizable, independent window. No plugins. No configuration.
+### :earth_americas: 15 Languages
 
-| PDF Viewer | Code Viewer |
-|---|---|
-| <img src="docs/screenshots/viewer-pdf.png" alt="PDF viewer" width="400"> | <img src="docs/screenshots/viewer-code-js.png" alt="Code viewer" width="400"> |
+English, Korean, Japanese, Chinese (Simplified & Traditional), German, French, Spanish, Portuguese, Italian, Russian, Turkish, Arabic, Thai, Vietnamese.
 
-| Image Viewer | Swift Code |
-|---|---|
-| <img src="docs/screenshots/viewer-image.png" alt="Image viewer" width="400"> | <img src="docs/screenshots/viewer-code-swift.png" alt="Swift code" width="400"> |
+---
 
-**10 built-in viewers:** Text, Code (50+ languages), Hex, Image, PDF, Video, Audio, Web, Markdown, Media Info — all auto-detected by file type.
+## Installation
 
-### Themes & Icon Packs
+### Download
 
-<img src="docs/screenshots/theme-editor.png" alt="Theme editor" width="800">
+Get the latest release from [unifyl.app/download](https://unifyl.app/download).
 
-12 built-in themes + full custom editor. SVG icon packs with 200+ extension mappings.
+1. Open the `.dmg` file
+2. Drag Unifyl to your Applications folder
+3. Launch and grant file access when prompted
 
-### AI Intelligence (Local & Private)
+### Homebrew (planned)
 
-<img src="docs/screenshots/ai-settings.png" alt="AI settings - all CoreML" width="500">
+```bash
+brew install --cask unifyl
+```
 
-- **Semantic Search** — find files by meaning using local embeddings + vector DB
-- **Smart Tagging** — auto-classify with NLP, integrated with macOS tags
-- **AI Rename** — intelligent naming from image content and document analysis
-- **Privacy First** — all AI runs on Apple Neural Engine / CoreML. Nothing leaves your Mac.
-
-### Developer Tools
-
-| Git Panel | Git History |
-|---|---|
-| <img src="docs/screenshots/git-panel.png" alt="Git panel" width="400"> | <img src="docs/screenshots/git-history.png" alt="Git history" width="400"> |
-
-| Log Viewer | Port Viewer |
-|---|---|
-| <img src="docs/screenshots/log-viewer.png" alt="Log viewer" width="400"> | <img src="docs/screenshots/port-viewer.png" alt="Port viewer" width="400"> |
-
-### Pro Tools
-
-| Hex Editor | File X-Ray | Folder Heatmap |
-|---|---|---|
-| <img src="docs/screenshots/hex-editor.png" alt="Hex editor" width="280"> | <img src="docs/screenshots/file-xray.png" alt="File X-Ray" width="280"> | <img src="docs/screenshots/folder-heatmap.png" alt="Folder heatmap" width="280"> |
-
-| Diff Heatmap | Folder Sync | PDF Tools |
-|---|---|---|
-| <img src="docs/screenshots/diff-heatmap.png" alt="Diff heatmap" width="280"> | <img src="docs/screenshots/folder-sync.png" alt="Folder sync" width="280"> | <img src="docs/screenshots/pdf-tools.png" alt="PDF tools" width="280"> |
-
-| EXIF Editor | Media Converter | App Uninstaller |
-|---|---|---|
-| <img src="docs/screenshots/exif-editor.png" alt="EXIF editor" width="280"> | <img src="docs/screenshots/media-converter.png" alt="Media converter" width="280"> | <img src="docs/screenshots/app-uninstaller.png" alt="App uninstaller" width="280"> |
-
-### Settings
-
-| Keyboard Shortcuts | Icon Themes |
-|---|---|
-| <img src="docs/screenshots/keyboard-shortcuts.png" alt="Keyboard shortcuts" width="400"> | <img src="docs/screenshots/icon-themes.png" alt="Icon themes" width="400"> |
-
-### And more...
-- Archive virtual folders (ZIP, 7z, TAR, GZ, RAR, ZSTD)
-- File compare (text diff, binary hex, image overlay, directory sync)
-- 3-way merge with conflict resolution
-- Checksum verification (MD5, SHA-256, Blake3)
-- Remote connections (FTP, SFTP, WebDAV, S3, SMB)
-- macOS tags with color-coded display
-- Undo/redo for file operations
-- VoiceOver accessibility support
-- Localization-ready (Korean, English)
-
-## System Requirements
-
-| | Minimum |
-|---|---|
-| **macOS** | 14.0 Sonoma or later |
-| **Architecture** | Apple Silicon (optimized) + Intel supported |
-| **Memory** | 4 GB RAM |
-| **Disk** | 100 MB |
-
-## Tech Stack
-
-| Area | Technology |
-|---|---|
-| Language | Swift 6.0 (Strict Concurrency) |
-| UI | SwiftUI + AppKit hybrid |
-| Concurrency | async/await, Actor isolation |
-| AI | CoreML + Metal Performance Shaders |
-| Updates | Sparkle |
-| Build | Xcode + Swift Package Manager |
+---
 
 ## Pricing
 
-| Tier | Price | Includes |
+| | **Free** | **Pro -- $39.99** |
 |---|---|---|
-| **Free** | $0 | Dual-pane, tabs, basic search, FTP/SFTP, ZIP |
-| **Pro** | $39.99 (one-time) | Everything: AI, all archives, all protocols, multi rename, compare/sync, developer tools, themes |
+| Pane layouts | Single & Dual | Single, Dual, Triple, Free-split |
+| Tabs & workspaces | 5 tabs | Unlimited |
+| Search | Basic + Spotlight | Full regex + content search |
+| AI tools | -- | All AI features |
+| Remote connections | FTP, SFTP | All protocols + cloud storage |
+| Archives | ZIP | ZIP, 7z, TAR, GZ, BZ2, XZ, ZSTD, RAR |
+| Multi-rename | Basic | Full (regex, EXIF, AI, presets) |
+| Compare & sync | -- | Text, binary, image, directory |
+| Themes | Light & Dark | 12 presets + custom editor |
+| Plugins | -- | All 6 plugin types |
+
+One-time purchase. No subscription. Free updates for life via built-in Sparkle auto-updater.
+
+---
+
+## Keyboard Shortcuts
+
+| Shortcut | Action |
+|---|---|
+| `Cmd + Shift + P` | Command palette |
+| `Tab` | Switch active pane |
+| `Return` | Open file / Enter folder (cursor item only) |
+| `Shift + Return` | Rename selected file |
+| `Space` | Quick Look preview |
+| `Cmd + Delete` | Move to Trash |
+| `Cmd + Z` | Undo last file operation |
+| `Cmd + Shift + N` | New folder |
+| `Cmd + F` | Find / filter |
+| `Cmd + Shift + F` | Advanced search |
+| `Cmd + Opt + F` | Content search |
+| `Cmd + Opt + S` | AI Semantic search |
+| `Ctrl + F7` | Advanced search panel |
+| `Insert` | Toggle select + move down |
+| `Shift + ↓/↑` | Toggle select range |
+| `Ctrl + S` | Add to Smart Folder |
+| `Cmd + T` | New tab |
+| `Cmd + W` | Close tab |
+| `Cmd + 1` | Single pane layout |
+| `Cmd + 2` | Dual pane layout |
+| `Cmd + K` | Open terminal |
+| `Cmd + Opt + C` | Compare files |
+| `Cmd + Opt + G` | Git panel |
+| `Cmd + I` | Get Info |
+
+All shortcuts are customizable in Settings > Keyboard Shortcuts.
+
+---
+
+## Building from Source
+
+### Requirements
+
+- macOS 14 Sonoma or later
+- Xcode 16.0+
+- Swift 6.0+
+
+### Steps
+
+```bash
+git clone https://github.com/niceguy61/unifyl.git
+cd unifyl
+
+# Verify your toolchain (xcodegen / swift / dmgbuild / 7zz / notarytool …)
+make doctor
+
+# Generate Xcode project
+make gen
+
+# Build all packages — sequentially with clean log per package
+make build
+
+# Or in parallel (8.0s → 0.5s no-op rebuild, ~3s cold)
+make build-fast
+
+# Run tests
+make test
+
+# Lint + check that user docs / in-app help / KeyBindingManager don't drift
+make lint
+```
+
+See the [Makefile](Makefile) for all available targets.
+
+---
+
+## Plugin Development
+
+Extend Unifyl with `.unifylplugin` bundles. Six plugin types are supported: Viewer, Packer, Content, FileSystem, Action, and AI.
+
+```swift
+import UnifylPluginSDK
+
+public class MyViewerPlugin: ViewerPlugin {
+    public var manifest: PluginManifest { ... }
+    public func canView(_ url: URL) -> Bool { ... }
+    public func makeView(for url: URL) -> AnyView { ... }
+}
+```
+
+Install plugins to `~/Library/Application Support/Unifyl/Plugins/`. SDK documentation coming soon.
+
+---
+
+## Contributing
+
+Unifyl is proprietary software. We welcome:
+
+- **Bug reports** -- open an issue with reproduction steps
+- **Feature requests** -- describe your workflow and what you need
+- **Translations** -- help us reach more languages
+- **Plugins** -- build on the plugin SDK
+
+---
 
 ## License
 
-Copyright 2026 Unifyl. All rights reserved.
+Proprietary. Copyright 2024-2026 Unifyl. All rights reserved. See [LICENSE](LICENSE) for details.
 
-## Links
+---
 
-- [Website](https://goodbug89.github.io/Unifyl.app)
-- [Releases](https://github.com/goodbug89/Unifyl.app/releases)
-- [Issues](https://github.com/goodbug89/Unifyl.app/issues)
+<p align="center">
+  <a href="https://unifyl.app">Website</a> &middot;
+  <a href="https://unifyl.app/docs">Docs</a> &middot;
+  <a href="https://twitter.com/unifylapp">Twitter</a> &middot;
+  <a href="https://discord.gg/unifyl">Discord</a>
+</p>
