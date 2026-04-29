@@ -5,7 +5,7 @@ All notable changes to Unifyl will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [1.1.0] — 2026-04-30
 
 ### Added
 - **File List Columns are now configurable.** Six additional optional columns join the existing Size / Date Modified / Kind: **Date Created**, **Extension**, **Permissions** (`rwxr-xr-x`), **Tags**, **Path**, and **Cloud status**. Toggle each in Settings ▸ General ▸ File List Columns. The Name column is always shown; Smart Folder mode still force-shows Path regardless of the toggle. Visibility flips immediately on toggle (no relaunch) via a `UserDefaults.didChangeNotification` observer in `FileTableView`.
@@ -480,7 +480,8 @@ Initial public release.
 - **Themes & customization**: 12 built-in themes, custom editor, SVG icon packs, 120+ keyboard shortcuts.
 - **Cloud & remote**: FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive.
 
-[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v1.0.4...HEAD
+[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.1.0
 [1.0.4]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.0.4
 [1.0.3]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.0.3
 [1.0.2]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.0.2
