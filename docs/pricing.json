@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "proPriceDisplay": "$24.99",
+  "expiresAt": "2027-02-28T00:00:00Z",
+  "approxLocalPrices": {
+    "KRW": "₩36,000",
+    "JPY": "¥4,000",
+    "CNY": "¥170",
+    "INR": "₹2,410",
+    "BRL": "R$125",
+    "EUR": "€22",
+    "GBP": "£19"
+  }
+}

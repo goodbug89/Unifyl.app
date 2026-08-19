@@ -1,0 +1,10 @@
+# This repo is a distribution + landing-page host, not a source repo.
+# The actual Swift 6 / SwiftUI codebase lives in a private repo.
+# Mark all web assets as vendored so the GitHub Languages sidebar
+# reflects reality (no source code here) rather than "HTML 100 %".
+
+*.html     linguist-vendored
+*.css      linguist-vendored
+*.js       linguist-vendored
+*.xml      linguist-vendored
+screenshots/** linguist-vendored

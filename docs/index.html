@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="fOjlz-xQGeYoo_3tF1ygqGH1We-s0sS6xFU5EikEKO8" />
+<title>Unifyl — AI-Powered Dual-Pane File Manager for macOS</title>
+<meta name="description" content="A keyboard-first dual-pane file manager for macOS. Total Commander's depth, ForkLift's polish, and AI search that runs entirely on your own Mac — no cloud, no account, no telemetry. Free download, one-time Pro unlock.">
+<meta property="og:title" content="Unifyl — AI-Powered Dual-Pane File Manager for macOS">
+<meta property="og:description" content="A keyboard-first dual-pane file manager for macOS. Total Commander's depth, ForkLift's polish, and AI search that runs entirely on your own Mac — no cloud, no account, no telemetry. Free download, one-time Pro unlock.">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://unifyl.app/">
+<meta property="og:image" content="https://unifyl.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Unifyl — two panes, on-device AI, zero cloud">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://unifyl.app/og-image.jpg">
+<link rel="canonical" href="https://unifyl.app/">
+<link rel="alternate" hreflang="en" href="https://unifyl.app/">
+<link rel="alternate" hreflang="ko" href="https://unifyl.app/ko/">
+<link rel="alternate" hreflang="ja" href="https://unifyl.app/ja/">
+<link rel="alternate" hreflang="zh-Hans" href="https://unifyl.app/zh-Hans/">
+<link rel="alternate" hreflang="zh-Hant" href="https://unifyl.app/zh-Hant/">
+<link rel="alternate" hreflang="de" href="https://unifyl.app/de/">
+<link rel="alternate" hreflang="es" href="https://unifyl.app/es/">
+<link rel="alternate" hreflang="fr" href="https://unifyl.app/fr/">
+<link rel="alternate" hreflang="it" href="https://unifyl.app/it/">
+<link rel="alternate" hreflang="pt-BR" href="https://unifyl.app/pt-BR/">
+<link rel="alternate" hreflang="ru" href="https://unifyl.app/ru/">
+<link rel="alternate" hreflang="ar" href="https://unifyl.app/ar/">
+<link rel="alternate" hreflang="tr" href="https://unifyl.app/tr/">
+<link rel="alternate" hreflang="th" href="https://unifyl.app/th/">
+<link rel="alternate" hreflang="vi" href="https://unifyl.app/vi/">
+<link rel="alternate" hreflang="x-default" href="https://unifyl.app/">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+    --text: #e6edf3; --text2: #8b949e; --border: #30363d;
+    --accent: #4da6ff; --accent2: #1a7fdb;
+    --orange: #f0883e; --orange2: #d97218;
+    --green: #3fb950; --radius: 12px;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK TC", "Noto Sans CJK JP", "Noto Sans CJK KR", "Noto Sans Arabic", "Noto Sans Thai", "Noto Sans Devanagari", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  [dir="rtl"] body { text-align: right; }
+
+  /* Layout */
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 80px 0; }
+
+  /* Nav */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13,17,23,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  nav .container { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  nav .logo { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+  nav .links { display: flex; gap: 28px; font-size: 14px; color: var(--text2); align-items: center; }
+  nav .links a { color: var(--text2); }
+  nav .links a:hover { color: var(--text); text-decoration: none; }
+  .lang-switcher { position: relative; }
+  .lang-switcher summary { list-style: none; cursor: pointer; color: var(--text2); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); user-select: none; }
+  .lang-switcher summary::-webkit-details-marker { display: none; }
+  .lang-switcher summary:hover { color: var(--text); border-color: var(--text2); }
+  .lang-switcher[open] .lang-menu { display: grid; }
+  .lang-menu { display: none; position: absolute; top: calc(100% + 8px); right: 0; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 8px; min-width: 200px; grid-template-columns: 1fr; gap: 2px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  [dir="rtl"] .lang-menu { right: auto; left: 0; }
+  .lang-menu a { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 6px; color: var(--text); font-size: 13px; }
+  .lang-menu a:hover { background: var(--bg3); text-decoration: none; }
+  .lang-menu a.active { background: var(--bg3); color: var(--accent); }
+
+  /* Hero */
+  .hero { padding: 160px 0 100px; text-align: center; }
+  /* The real app icon, not a letter in a box. The placeholder was a blue
+     gradient square with a "U" — nothing like the shipped icon, which is two
+     documents on blue (the dual-pane metaphor). */
+  .hero-icon { width: 96px; height: 96px; margin: 0 auto 32px; display: block; border-radius: 22px; }
+  .hero h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px; }
+  .hero h1 span { background: linear-gradient(135deg, var(--accent), #80caff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: 20px; color: var(--text2); max-width: 560px; margin: 0 auto 40px; }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 10px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
+  .btn:hover { transform: translateY(-1px); text-decoration: none; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #5fb3ff; box-shadow: 0 4px 24px rgba(77,166,255,0.3); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--text2); }
+  .badge-row { margin-top: 32px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .badge { font-size: 12px; padding: 4px 12px; border-radius: 20px; background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
+
+  /* Gallery */
+  .gallery { background: var(--bg); }
+  .gallery-hero { max-width: 1100px; margin: 0 auto 32px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 12px 48px rgba(0,0,0,0.4); }
+  .gallery-hero img { display: block; width: 100%; height: auto; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  .gallery-grid figure { margin: 0; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform 0.15s, border-color 0.2s; }
+  .gallery-grid figure:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .gallery-grid img { display: block; width: 100%; height: 160px; object-fit: cover; object-position: top; }
+  .gallery-grid figcaption { padding: 10px 14px 14px; color: var(--text2); font-size: 13px; line-height: 1.5; }
+
+  /* Features */
+  .features { background: var(--bg2); }
+  .section-title { text-align: center; font-size: 32px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+  .section-sub { text-align: center; color: var(--text2); font-size: 17px; margin-bottom: 56px; }
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .feature-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; transition: border-color 0.2s; }
+  .feature-card:hover { border-color: var(--accent); }
+  .feature-card .icon { font-size: 28px; margin-bottom: 14px; }
+  .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .feature-card p { color: var(--text2); font-size: 14px; line-height: 1.7; }
+
+  /* Pricing */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 760px; margin: 0 auto; }
+  .price-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px 32px; position: relative; }
+  .price-card.featured { border-color: var(--orange); }
+  .price-card.featured::before { content: "MOST POPULAR"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--orange); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 20px; letter-spacing: 0.5px; }
+  .price-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .price-card .price { font-size: 40px; font-weight: 800; margin: 16px 0; }
+  .price-card .price small { font-size: 16px; font-weight: 400; color: var(--text2); }
+  .price-card ul { list-style: none; margin: 24px 0; }
+  .price-card li { padding: 7px 0; font-size: 14px; color: var(--text2); }
+  .price-card li::before { content: "\2713"; color: var(--green); margin-inline-end: 10px; font-weight: 700; }
+  .price-card li.disabled { opacity: 0.35; }
+  .price-card li.disabled::before { content: "\2014"; color: var(--text2); }
+  .btn-orange { background: var(--orange); color: #fff; width: 100%; justify-content: center; }
+  .btn-orange:hover { background: var(--orange2); box-shadow: 0 4px 24px rgba(240,136,62,0.3); }
+  .btn-free { background: var(--bg3); color: var(--text); width: 100%; justify-content: center; border: 1px solid var(--border); }
+
+  /* Shortcuts */
+  .shortcuts { background: var(--bg2); }
+  .shortcut-table { max-width: 640px; margin: 0 auto; }
+  .shortcut-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .shortcut-row:last-child { border-bottom: none; }
+  kbd { background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 3px 10px; font-family: "SF Mono", monospace; font-size: 13px; color: var(--text); }
+  .shortcut-label { color: var(--text2); }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; }
+  footer .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; font-size: 14px; }
+  footer .footer-links a { color: var(--text2); }
+  footer .copyright { color: var(--text2); font-size: 13px; }
+
+  @media (max-width: 640px) {
+    section { padding: 56px 0; }
+    .hero { padding: 120px 0 64px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    nav .links { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">Unifyl</div>
+    <div class="links">
+      <a href="#gallery">Gallery</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#shortcuts">Shortcuts</a>
+      <a href="https://github.com/goodbug89/Unifyl.app/wiki">Docs</a>
+      <details class="lang-switcher">
+        <summary>🇬🇧 English</summary>
+        <div class="lang-menu">
+          <a href="https://unifyl.app/" class="active">🇬🇧 English</a>
+          <a href="https://unifyl.app/ko/">🇰🇷 한국어</a>
+          <a href="https://unifyl.app/ja/">🇯🇵 日本語</a>
+          <a href="https://unifyl.app/zh-Hans/">🇨🇳 简体中文</a>
+          <a href="https://unifyl.app/zh-Hant/">🇹🇼 繁體中文</a>
+          <a href="https://unifyl.app/de/">🇩🇪 Deutsch</a>
+          <a href="https://unifyl.app/es/">🇪🇸 Español</a>
+          <a href="https://unifyl.app/fr/">🇫🇷 Français</a>
+          <a href="https://unifyl.app/it/">🇮🇹 Italiano</a>
+          <a href="https://unifyl.app/pt-BR/">🇧🇷 Português (Brasil)</a>
+          <a href="https://unifyl.app/ru/">🇷🇺 Русский</a>
+          <a href="https://unifyl.app/ar/">🇸🇦 العربية</a>
+          <a href="https://unifyl.app/tr/">🇹🇷 Türkçe</a>
+          <a href="https://unifyl.app/th/">🇹🇭 ไทย</a>
+          <a href="https://unifyl.app/vi/">🇻🇳 Tiếng Việt</a>
+        </div>
+      </details>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <img class="hero-icon" src="icon-512.png" alt="Unifyl" width="96" height="96">
+    <h1>File management,<br><span>reimagined with AI.</span></h1>
+    <p>The dual-pane file manager for macOS that combines professional power tools with local AI intelligence. Your files never leave your Mac.</p>
+    <div class="hero-buttons">
+      <a href="https://github.com/goodbug89/Unifyl.app/releases/latest" class="btn btn-primary">Download for Mac</a>
+      <a href="https://apps.apple.com/app/unifyl/id6773977314?mt=12" class="btn btn-outline">Mac App Store</a>
+      <a href="https://github.com/goodbug89/Unifyl.app" class="btn btn-outline">View on GitHub</a>
+    </div>
+    <div class="badge-row">
+      <span class="badge">macOS 14+</span>
+      <span class="badge">Swift 6</span>
+      <span class="badge">Apple Silicon Optimized</span>
+      <span class="badge">15 Languages</span>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="video">
+  <div class="container">
+    <h2 class="section-title">Sixty seconds</h2>
+    <p class="section-sub">No narration — just the app.</p>
+    <div class="gallery-hero">
+      <video src="unifyl-promo-60s-en.mp4" poster="promo-poster.jpg"
+             autoplay muted loop playsinline preload="metadata" controls
+             style="width:100%;border-radius:12px;display:block"></video>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="container">
+    <h2 class="section-title">See it in action</h2>
+    <p class="section-sub">Click any screenshot to enlarge.</p>
+    <div class="gallery-hero">
+      <a href="screenshots/01-dualpane.png" target="_blank" rel="noopener">
+        <img src="screenshots/01-dualpane.png" alt="Unifyl dual-pane main window with two file panels side by side">
+      </a>
+    </div>
+    <div class="gallery-grid">
+      <figure>
+        <a href="screenshots/02-quicklook-preview.png" target="_blank" rel="noopener"><img src="screenshots/02-quicklook-preview.png" alt="Quick Look preview embedded in the right panel"></a>
+        <figcaption>Quick Look in panel — Space on any file.</figcaption>
+      </figure>
+      <figure>
+        <a href="screenshots/03-thumbnail-grid.png" target="_blank" rel="noopener"><img src="screenshots/03-thumbnail-grid.png" alt="Thumbnail grid view of an image folder"></a>
+        <figcaption>Thumbnail grid — toggle with ⌃G.</figcaption>
+      </figure>
+      <figure>
+        <a href="screenshots/04-folder-tree.png" target="_blank" rel="noopener"><img src="screenshots/04-folder-tree.png" alt="Folder tree sidebar"></a>
+        <figcaption>Folder tree (⌃T).</figcaption>
+      </figure>
+      <figure>
+        <a href="screenshots/05-command-palette.png" target="_blank" rel="noopener"><img src="screenshots/05-command-palette.png" alt="Command palette overlay"></a>
+        <figcaption>Command palette — ⌘⇧P.</figcaption>
+      </figure>
+      <figure>
+        <a href="screenshots/12-multi-rename.png" target="_blank" rel="noopener"><img src="screenshots/12-multi-rename.png" alt="Multi-Rename dialog with live preview"></a>
+        <figcaption>Multi-Rename with live preview.</figcaption>
+      </figure>
+      <figure>
+        <a href="screenshots/16-exif-editor.png" target="_blank" rel="noopener"><img src="screenshots/16-exif-editor.png" alt="EXIF metadata editor across multiple images"></a>
+        <figcaption>EXIF / metadata batch editor.</figcaption>
+      </figure>
+      <figure>
+        <a href="screenshots/13-folder-heatmap-demo.png" target="_blank" rel="noopener"><img src="screenshots/13-folder-heatmap-demo.png" alt="Folder size heatmap colored by file type"></a>
+        <figcaption>Folder size heatmap.</figcaption>
+      </figure>
+      <figure>
+        <a href="screenshots/14-process-map.png" target="_blank" rel="noopener"><img src="screenshots/14-process-map.png" alt="Process file map showing open files per process"></a>
+        <figcaption>Process file map.</figcaption>
+      </figure>
+      <figure>
+        <a href="screenshots/15-port-viewer.png" target="_blank" rel="noopener"><img src="screenshots/15-port-viewer.png" alt="Port viewer listing TCP listening ports"></a>
+        <figcaption>Port / socket viewer.</figcaption>
+      </figure>
+      <figure>
+        <a href="screenshots/17-theme-editor.png" target="_blank" rel="noopener"><img src="screenshots/17-theme-editor.png" alt="Theme editor with live preview and 12 built-in presets"></a>
+        <figcaption>Theme editor — 12 presets, live preview.</figcaption>
+      </figure>
+      <figure>
+        <a href="screenshots/08-settings-icon-themes.png" target="_blank" rel="noopener"><img src="screenshots/08-settings-icon-themes.png" alt="Icon theme picker — VSCode, Material, Seti, One Dark, etc."></a>
+        <figcaption>Icon themes — built-in + import.</figcaption>
+      </figure>
+      <figure>
+        <a href="screenshots/09-settings-shortcuts.png" target="_blank" rel="noopener"><img src="screenshots/09-settings-shortcuts.png" alt="Keyboard shortcuts settings — 133 rebindable commands"></a>
+        <figcaption>133 rebindable shortcuts.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="container">
+    <h2 class="section-title">Everything you need. Nothing in your way.</h2>
+    <p class="section-sub">Compare, sync, batch-rename, mount a remote — and no subscription.</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon">&#128193;</div>
+        <h3>Dual-Pane Power</h3>
+        <p>Single, dual, triple, and free-split layouts with tabs, workspaces, drag-and-drop, and an inline terminal in every pane.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#129302;</div>
+        <h3>AI-Powered Intelligence</h3>
+        <p>Semantic search, AI rename, smart tagging, and duplicate detection — all running locally on Apple Neural Engine. Private by design.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#127760;</div>
+        <h3>Remote & Cloud</h3>
+        <p>Connect to FTP, SFTP, WebDAV, SMB, S3, Google Drive, Dropbox, OneDrive, and more. Browse Docker containers and Kubernetes pods.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#128269;</div>
+        <h3>Search & Filter</h3>
+        <p>Real-time filtering, regex patterns, content search, and Spotlight integration. Find any file in milliseconds.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#127912;</div>
+        <h3>Themes & Design</h3>
+        <p>12 built-in presets, full theme editor, and community sharing via .ultratheme files. macOS native look and feel throughout.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#9000;</div>
+        <h3>Keyboard-First</h3>
+        <p>Command palette, Vim-style navigation, and customizable shortcuts. Every action accessible without touching the mouse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <h2 class="section-title">Simple, honest pricing.</h2>
+    <p class="section-sub">Pay once. Own it forever. Free updates for life.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Free</h3>
+        <div class="price">$0</div>
+        <ul>
+          <li>All pane layouts (dual/triple/free-split)</li>
+          <li>Basic search + Spotlight</li>
+          <li>FTP & SFTP connections</li>
+          <li>ZIP archive support</li>
+          <li>All 12 built-in themes</li>
+          <li class="disabled">AI-powered tools</li>
+          <li class="disabled">All cloud & remote protocols</li>
+          <li class="disabled">Multi-rename (full)</li>
+          <li class="disabled">File compare & sync</li>
+          <li class="disabled">Plugin support</li>
+        </ul>
+        <a href="https://github.com/goodbug89/Unifyl.app/releases/latest" class="btn btn-free">Download Free</a>
+        <a href="https://apps.apple.com/app/unifyl/id6773977314?mt=12" class="btn btn-free">Mac App Store</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Pro</h3>
+        <div class="price">$24.99 <small>one-time</small></div>
+        <ul>
+          <li>All pane layouts + workspaces</li>
+          <li>Full regex + content search</li>
+          <li>All remote & cloud protocols</li>
+          <li>All archive formats</li>
+          <li>12 theme presets + editor</li>
+          <li>AI semantic search & rename</li>
+          <li>Smart tagging & duplicates</li>
+          <li>Multi-rename (regex, EXIF, AI)</li>
+          <li>Text, binary & image compare</li>
+          <li>All 6 plugin types</li>
+        </ul>
+        <a href="https://unifyl.lemonsqueezy.com/checkout/buy/40f09b3c-9638-4e7c-871e-51f0e391f67c" class="btn btn-orange">Buy Pro</a>
+      </div>
+    </div>
+    <p class="section-sub" style="margin-top: 28px; font-size: 14px;">Free to download on the Mac App Store (Pro via In-App Purchase) or direct (Pro via LemonSqueezy). 14-day Pro trial on first launch.</p>
+  </div>
+</section>
+
+<section class="shortcuts" id="shortcuts">
+  <div class="container">
+    <h2 class="section-title">Built for your keyboard.</h2>
+    <p class="section-sub">macOS-native shortcuts you already know, plus power-user extras.</p>
+    <div class="shortcut-table">
+      <div class="shortcut-row"><span class="shortcut-label">Command Palette</span><kbd>Cmd Shift P</kbd></div>
+      <div class="shortcut-row"><span class="shortcut-label">Switch Pane</span><kbd>Tab</kbd></div>
+      <div class="shortcut-row"><span class="shortcut-label">Rename</span><kbd>Return</kbd></div>
+      <div class="shortcut-row"><span class="shortcut-label">Quick Look</span><kbd>Space</kbd></div>
+      <div class="shortcut-row"><span class="shortcut-label">Move to Trash</span><kbd>Cmd Delete</kbd></div>
+      <div class="shortcut-row"><span class="shortcut-label">New Folder</span><kbd>Cmd Shift N</kbd></div>
+      <div class="shortcut-row"><span class="shortcut-label">Find / Filter</span><kbd>Cmd F</kbd></div>
+      <div class="shortcut-row"><span class="shortcut-label">New Tab</span><kbd>Cmd T</kbd></div>
+      <div class="shortcut-row"><span class="shortcut-label">Dual Pane</span><kbd>Cmd 2</kbd></div>
+      <div class="shortcut-row"><span class="shortcut-label">Open Terminal</span><kbd>Cmd K</kbd></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="https://unifyl.app">Website</a>
+      <a href="https://github.com/goodbug89/Unifyl.app/wiki">Documentation</a>
+      <a href="https://github.com/goodbug89/Unifyl.app">GitHub</a>
+    </div>
+    <p class="copyright">Copyright 2024–2026 Unifyl. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
