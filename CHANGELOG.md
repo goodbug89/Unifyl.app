@@ -5,6 +5,184 @@ All notable changes to Unifyl will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.7.2] — 2026-08-23
+
+### Added
+
+- **Every language is complete again.** The 620 strings that were in no
+  catalogue at all are now translated into all 13 secondary locales — German,
+  French, Spanish, Italian, Portuguese (Brazil), Russian, Turkish, Arabic, Thai,
+  Vietnamese, Japanese, Simplified and Traditional Chinese — 8,060 entries,
+  each checked to carry the same format specifiers as its English source. Every
+  locale holds the same 2,072 keys.
+- **596 more strings now speak Korean.** They were in no catalogue at all — not
+  missing a translation, absent as keys — so every locale rendered them in
+  English while a locale-parity check reported all 15 languages in step. Settings
+  ▸ General was the clearest case: the row that chooses the app's language was
+  itself labelled "App Language". Also the connection sheet, Automations,
+  Multi-Rename, Directory Diff, Folder Sync, the theme editor, Advanced Search,
+  backups, the converters, the viewers, tab and header menus, and the panel's own
+  status line. The other 13 languages fall back to English until they are
+  translated, as they already do for the rest of the catalogue.
+- **The app answers in Korean where it used to answer in English.** Go to Path,
+  the PDF overwrite and replace-failed dialogs, the "LibreOffice required"
+  prompt, the duplicate-cleanup and natural-language partial-failure reports,
+  File ▸ New Window, Unifyl ▸ Check for Updates…, and the overwrite dialog's
+  message and "apply to all" checkbox. Thirteen of these were plain Swift
+  strings that no translation could ever have reached, including the entire
+  HWP/HWPX conversion failure path — a Korean-market feature that explained
+  itself only in English.
+
+- **Column widths are now per panel, with a choice.** They were a single shared
+  set, which is right when you want both panes to match and wrong when you are
+  comparing a wide listing against a narrow one. Settings ▸ General ▸ **Link
+  column widths across panels** decides; it is on by default, so nothing changes
+  unless you turn it off. A workspace saved by an earlier build gives both panes
+  the widths you already had rather than resetting them.
+
+### Fixed
+
+- **Holding an arrow key stuttered.** AppKit asks every menu in the menu bar
+  to update itself on every key press, while it searches for a key equivalent
+  — not only when a menu opens. The PRO-badge delegate answered each of those
+  requests by re-decorating the *entire* main menu, nine menus deep, with a
+  localisation table rebuilt from scratch each time. Sampled at 16% of the main
+  thread while an arrow key was held down, on top of the panel's own work.
+  A menu now decorates only itself, the table is built once per language, and
+  the delegate no longer hops through a task to do it.
+- **Finder's "Open With", a folder dropped on the Dock icon, and `open -a Unifyl
+  <folder>` all ignored the folder.** The app declared no document types, so it
+  never appeared in Open With at all, and had no handler, so a path passed on
+  the command line was discarded and a window opened wherever the last session
+  left off. For a file manager that is the most ordinary way in. A folder is now
+  entered; a file opens its folder with the file selected, the same as the
+  long-standing "Send to Unifyl" Service — which now shares the code rather than
+  keeping its own copy. Unifyl offers itself for folders but never takes the
+  default away from Finder.
+- **Right-clicking a column header did nothing.** The standard place to add or
+  remove a column, or to put the widths back, was empty — the only route was
+  Settings. The header now has that menu, including **Reset Column Widths** for
+  undoing a drag that pushed the other columns off the edge.
+- **Listing a large folder kept a core busy longer than it needed to.** The
+  guard that keeps the unrequested size walk out of media libraries rebuilt its
+  answer — three URLs and a set — for every single file it looked at. Sampling
+  the app while it listed a home folder put that function at the top of the
+  profile. It cannot change while the app runs, so it is computed once.
+- **Opening your home folder asked for your Photos library.** The size column
+  measures every folder row in the background, and measuring `~/Library` reached
+  `~/Library/Photos` — a plain directory, not a `.photoslibrary` bundle and not
+  under `~/Pictures`, so neither rule the guard had could see it, and macOS gates
+  it behind the Photos service all the same (it holds the "Shared with You"
+  library). Every earlier fix assumed the walk never got past `~/Pictures`, and
+  every test agreed, because none of them knew this directory existed. Found by
+  attaching a debugger while the dialog was up: four walker threads were all
+  blocked in `open("~/Library/Photos")`. It is skipped now, like `~/Pictures`.
+  Two smaller holes closed on the way: ⌥⇧Return sized every row with no filter
+  at all (one filter now, shared with the automatic pass), and the walk no longer
+  asks the enumerator to pre-read each entry's attributes, a read that happened
+  before the guard could rule on it.
+
+- **The pointer never showed a column could be resized.** The dividers dragged,
+  but the cursor stayed an arrow the whole way across the header, so the only way
+  to find out was to try. `NSTableHeaderView` installs those cursor rects itself
+  normally; inside the SwiftUI hosting view it does not. The header now adds them
+  and refreshes them whenever a column moves.
+- **Only the file-name column could be resized.** Every other divider ignored
+  the mouse and the cursor never changed over it. The table used
+  `.firstColumnOnlyAutoresizingStyle`, which keeps the table's width tied to the
+  pane by flexing the first column — so a drag on any other divider had nowhere
+  to put the width and AppKit refused it. Column autoresizing is off now, so
+  every divider works.
+- **Column widths could not be set.** Dragging a column wider re-proportioned
+  every column on the next layout pass, so a column pulled to 900pt came back at
+  its 60pt minimum — "it returns to its optimal width". The app no longer adjusts
+  column widths at all: a drag is left exactly as made, and the other columns are
+  not touched. Pane resizing still flexes the first column only. Columns can now
+  sum wider than the pane, which clips the trailing one; narrow a column or
+  reorder to bring it back.
+- **Widening a column made it narrower.** Column widths are shared by both panes,
+  and the panel broadcast every width change it heard from AppKit — which posts
+  the same notification whether the user dragged a divider, the app applied a
+  saved width, or `sizeToFit()` squeezed the columns into a narrow pane. Only the
+  first of those is a preference. So dragging Size wider in one pane pushed the
+  new width to the other, whose narrower pane made `sizeToFit()` shrink it, and
+  that shrunken value came back and overwrote the drag. Now only changes the app
+  did not initiate are reported. Note the remaining ceiling is deliberate: there
+  is no horizontal scroller, so a column can grow until the others reach their
+  minimum widths — hide columns you don't need to give one more room.
+
+- **Text painted in a colour that cannot be read.** `textMuted` tops out at
+  2.36:1 against the lightest background token in the system and `textTertiary`
+  at 3.97:1 — neither can reach the 4.5:1 a body label needs, on any background.
+  They are decorative colours, and three pieces of real content were using one:
+  the empty-state message under "nothing to show here", the palette's "no
+  commands found", and the shortcut badges (⌘D and friends) that are the whole
+  point of a palette row for a keyboard user. All three now use `textSecondary`
+  — 4.74:1 to 5.72:1 where they sit. Audit F63 fails on either colour unless the
+  call site marks itself `// decorative:`.
+
+- **Command palette group headers were unreadable, and untranslated.** The
+  headers used `textMuted`, which sits at 1.86:1 against the palette's surface —
+  and lightening that surface in the fix above made it *worse*, not better
+  (2.25:1 before). A 10pt label needs 4.5:1, so they now use `textSecondary` at
+  4.74:1. They were also bare English literals, so a Korean or Japanese user read
+  "FILE" over a list of translated commands; all nine category names are
+  localised across the 15 shipping locales.
+
+- **Arrow keys in the command palette jumped around instead of stepping.** ↓ walked
+  `registry.search(query)` while the rows on screen were that list grouped by
+  category. Those are two different orders, so the next item in search order sat
+  somewhere else on screen — far below, then back above — and the auto-scroll
+  chased it. Selection now indexes the same flattened order the rows are drawn in.
+- **The palette's selected row was invisible.** It used `bgOverlay`, which had
+  just become the palette's own surface — ΔL\* +0.0, the identical colour. It now
+  uses `bgSelectedActive`, +6.9 above the surface, which is also the token that
+  means "this has keyboard focus".
+
+- **The command palette had no visible edge on dark themes.** It drew on
+  `bgSurface` behind a 35% black scrim — but a black scrim cannot darken a
+  backdrop that is already near-black, which every dark theme is. Measured in
+  CIE L\*, the palette sat between ΔL\* +6.9 and **−6.3**: on Nord it was
+  *darker* than the pane it covered, so it read as a dent rather than a panel,
+  and its border managed 1.2:1 against its own surface. The palette now uses
+  `bgOverlay` with a dedicated modal scrim and a brighter edge token, putting it
+  at ΔL\* +7.5 to +15.2 across the built-in themes — lighter than its backdrop
+  everywhere — with the border at 2.9:1.
+
+- **The Edit menu showed the wrong command names, all badged PRO.** Undo read
+  "Save Layout… PRO", Copy read "Text Tools… PRO", and basic operations —
+  Cut, Copy, Paste, Select All — appeared locked. The shortcuts were right and in
+  the right places because SwiftUI owns those; only the titles rotted.
+  `ProBadgeMap` remembered each item's undecorated title in a static dictionary
+  keyed by `ObjectIdentifier`, which is the object's address. SwiftUI destroys
+  and rebuilds the `NSMenuItem`s behind `CommandGroup`/`CommandMenu`, a new item
+  gets allocated on a dead one's address, and the stale entry then answered for
+  it — so a recycled address made an ungated command render as whichever gated
+  command used to live there. The badge is now stripped back off the item's own
+  title instead of being remembered anywhere. Audit F60 rejects a long-lived
+  static keyed by an object's address.
+
+- **Holding an arrow key crawled instead of scrolling.** Moving the cursor made
+  the app read the keychain, once per keystroke. `tableViewSelectionDidChange`
+  assigned `appVM.activePanel` unconditionally, and `@Observable`'s setter
+  notifies even when the value is unchanged — so an arrow key inside one pane
+  invalidated every observer of `activePanel`, which `MainWindowView` reads in 42
+  places. Its body reads `isTrialActive`, which read two uncached computed
+  properties, each of which called `KeychainService.loadString`. A 15-second
+  profile of a real held key had the main thread 68.1% busy, with
+  `isTrialExpiredPermanently` alone accounting for about a second of it and the
+  rest going to AttributeGraph updates and repeated full-window Auto Layout
+  passes. Debug builds fared worse still: the file-backed dev keychain re-read
+  and re-decoded its JSON store and called `createDirectory` once per service
+  name on every get, putting `open()` at 4.4% of the profile and `mkdir` on the
+  list at all. The panel now compares before assigning, the trial state is cached
+  and invalidated where it is written, and the dev keychain resolves its path
+  once and keeps the decoded store in memory. Re-measured on the same folder
+  after the fix: the keychain is absent from the profile entirely. Audit F59
+  rejects a keychain or filesystem read in an uncached getter that a view body
+  can reach.
+
+
 ## [1.7.1] — 2026-08-19
 
 ### Security
@@ -1231,7 +1409,8 @@ Initial public release.
 - **Themes & customization**: 12 built-in themes, custom editor, SVG icon packs, 120+ keyboard shortcuts.
 - **Cloud & remote**: FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive.
 
-[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v1.7.1...HEAD
+[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v1.7.2...HEAD
+[1.7.2]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.7.2
 [1.7.1]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.7.1
 [1.7.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.7.0
 [1.6.7]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.6.7
