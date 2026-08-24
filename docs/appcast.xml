@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.net/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Unifyl Updates</title>
-        <link>https://goodbug89.github.io/Unifyl.app/appcast.xml</link>
+        <link>https://unifyl.app/appcast.xml</link>
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>

@@ -2,95 +2,95 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/0.9">
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/</loc>
+    <loc>https://unifyl.app/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://goodbug89.github.io/Unifyl.app/screenshots/01-dualpane.png</image:loc>
+      <image:loc>https://unifyl.app/screenshots/01-dualpane.png</image:loc>
       <image:title>Unifyl dual-pane file manager for macOS</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/ar/</loc>
+    <loc>https://unifyl.app/ar/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/de/</loc>
+    <loc>https://unifyl.app/de/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/es/</loc>
+    <loc>https://unifyl.app/es/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/fr/</loc>
+    <loc>https://unifyl.app/fr/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/it/</loc>
+    <loc>https://unifyl.app/it/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/ja/</loc>
+    <loc>https://unifyl.app/ja/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/ko/</loc>
+    <loc>https://unifyl.app/ko/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/pt-BR/</loc>
+    <loc>https://unifyl.app/pt-BR/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/ru/</loc>
+    <loc>https://unifyl.app/ru/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/th/</loc>
+    <loc>https://unifyl.app/th/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/tr/</loc>
+    <loc>https://unifyl.app/tr/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/vi/</loc>
+    <loc>https://unifyl.app/vi/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/zh-Hans/</loc>
+    <loc>https://unifyl.app/zh-Hans/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodbug89.github.io/Unifyl.app/zh-Hant/</loc>
+    <loc>https://unifyl.app/zh-Hant/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
