@@ -45,6 +45,20 @@
 <p class="sub">Write-ups from building Unifyl. Debugging stories and macOS internals — no
 release-note filler.</p>
 
+<a class="post" href="/blog/620-strings-missing-in-all-15-locales.html">
+  <h2>All 15 of our translations were missing the same 620 strings — and every check was green</h2>
+  <div class="date">August 2026</div>
+  <p>The parity audit compared catalogues to each other. A key missing from every file at once
+  is in perfect parity. When everything is wrong the same way, nothing looks wrong.</p>
+</a>
+
+<a class="post" href="/blog/appkit-menubar-every-keypress.html">
+  <h2>AppKit asks every menu to update on every keypress. My app said yes.</h2>
+  <div class="date">August 2026</div>
+  <p>Holding an arrow key stuttered, so I profiled the table view — and found the menu bar
+  redecorating all nine menus per keystroke. Main thread 61% → 2%.</p>
+</a>
+
 <a class="post" href="/blog/macos-photos-permission-lldb.html">
   <h2>Why does macOS think my file manager wants Photos access? Finding the guilty path with lldb</h2>
   <div class="date">August 2026</div>

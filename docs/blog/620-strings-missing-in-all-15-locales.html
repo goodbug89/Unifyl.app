@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All 15 of our translations were missing the same 620 strings — and every check was green</title>
+<meta name="description" content="Our locale-parity automation compared translation catalogues to each other and always passed. It couldn't see the 620 keys missing from every catalogue at once. When everything is wrong the same way, nothing looks wrong.">
+<link rel="canonical" href="https://unifyl.app/blog/620-strings-missing-in-all-15-locales.html">
+<link rel="icon" href="/icon.png">
+<meta property="og:title" content="All 15 translations were missing the same 620 strings — and every check was green">
+<meta property="og:description" content="A parity check can't see a key missing everywhere. Compare against the source, not against the other files.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://unifyl.app/blog/620-strings-missing-in-all-15-locales.html">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1117; --bg2:#161b22; --bg3:#21262d; --text:#e6edf3; --text2:#9da7b3;
+          --border:#30363d; --accent:#4da6ff; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.7; }
+  a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
+  header.site { display: flex; align-items: center; gap: 10px; margin-bottom: 56px; }
+  header.site img { width: 28px; height: 28px; border-radius: 6px; }
+  header.site a { color: var(--text2); font-size: 14px; }
+  h1 { font-size: 30px; line-height: 1.28; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .meta { color: var(--text2); font-size: 14px; margin-bottom: 40px; }
+  h2 { font-size: 22px; margin: 44px 0 14px; letter-spacing: -0.01em; }
+  p { margin: 0 0 18px; } ul { margin: 0 0 18px 24px; } li { margin-bottom: 6px; }
+  pre { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+        padding: 16px; overflow-x: auto; margin: 0 0 18px; font-size: 13px; line-height: 1.55; }
+  code { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 0.92em;
+         background: var(--bg3); padding: 1px 5px; border-radius: 4px; }
+  pre code { background: none; padding: 0; }
+  .box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+         padding: 18px 20px; margin: 0 0 18px; }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
+           color: var(--text2); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="site">
+  <img src="/icon.png" alt="">
+  <a href="/">Unifyl — a dual-pane file manager for macOS</a>
+  <span style="color:var(--text2)">·</span>
+  <a href="/blog/">Blog</a>
+</header>
+
+<h1>All 15 of our translations were missing the same 620 strings — and every check was green</h1>
+<p class="meta">August 2026 · by the developer of <a href="/">Unifyl</a></p>
+
+<p>My app ships in 15 languages, and I was proud of the machinery behind that: an automated
+audit that keeps every localization catalogue in lockstep — same keys, same counts, same
+placeholder specifiers, every locale, every commit. It had caught real regressions before.
+It was green.</p>
+
+<p>Then I used the app in Korean for ten minutes, like a user instead of a developer, and found
+this in Settings: an item labeled <strong>"App Language"</strong>. In English. The control whose
+entire job is choosing your language introduced itself in the one language the user had just
+chosen not to use.</p>
+
+<h2>How a green check hides 620 failures</h2>
+
+<p>The investigation found 620 user-facing strings that existed <strong>in no catalogue at
+all</strong> — not untranslated, but absent. SwiftUI makes this failure mode comfortable:
+<code>Text("App Language")</code> compiles, runs, and renders that literal on every locale.
+Nothing errors. Nothing even warns.</p>
+
+<p>And the parity audit? It compared the catalogues <em>to each other</em>. A key missing from
+all 15 files at once is in perfect parity:</p>
+
+<div class="box">
+<p style="margin-bottom:0">A consistency check can only catch members of the set disagreeing
+with each other. When every member is wrong <strong>the same way</strong>, consistency is
+exactly what you have. If the whole class copies the same wrong answer, the grading sheet
+shows a perfect score.</p>
+</div>
+
+<p>This is the localization variant of a general trap: the test guarded the list it knew about.
+The 620 strings were never on any list, so no list-based check could miss them — or find
+them.</p>
+
+<h2>The fix: compare against the source of truth, not the peers</h2>
+
+<p>The audit needed a second axis. Alongside "do the catalogues agree with each other," it now
+extracts every user-facing string <em>from the source code</em> — bare SwiftUI literals,
+interpolated keys (normalized so <code>\(count)</code> matches its <code>%lld</code> catalogue
+twin), enum <code>rawValue</code>s that reach the UI, alert strings — and asks: does each one
+exist in the catalogues? The budget for misses is zero, and the check runs in CI so the number
+can't quietly grow back.</p>
+
+<p>Then came the unglamorous part: writing 620 strings × 15 languages of actual translations.
+No shortcuts there; it's the tax on the earlier comfort.</p>
+
+<h2>What I'd tell past me</h2>
+
+<ul>
+  <li><strong>Every consistency check needs one edge anchored to ground truth.</strong> Files
+      agreeing with files proves agreement, not correctness. Source code is the ground truth for
+      "what strings exist."</li>
+  <li><strong>Green tests measure the absence of known failures</strong>, not the presence of
+      correctness. The gap between those two is exactly where this bug lived for months.</li>
+  <li><strong>Use your app in your second language for ten minutes per release.</strong> The
+      audit that finally caught everything was built <em>because</em> of what ten minutes of
+      dogfooding found first. The machine now guards it; a human had to find it.</li>
+  <li>SwiftUI's implicit <code>LocalizedStringKey</code> conversion cuts both ways: it makes
+      localization effortless <em>and</em> makes missing localization invisible. If you ship
+      multiple locales, you need tooling that enumerates what the compiler silently accepted.</li>
+</ul>
+
+<footer>
+<p>From building <a href="/">Unifyl</a>, a dual-pane file manager for macOS that ships in 15
+languages — all 15 of which now know how to say "App Language". Previously:
+<a href="/blog/macos-photos-permission-lldb.html">tracing a phantom Photos permission prompt
+with lldb</a> and <a href="/blog/appkit-menubar-every-keypress.html">the menu bar that
+redecorated itself on every keypress</a>.</p>
+</footer>
+</div>
+</body>
+</html>

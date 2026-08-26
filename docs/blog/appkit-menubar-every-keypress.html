@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AppKit asks every menu to update on every keypress. My app said yes.</title>
+<meta name="description" content="Holding an arrow key stuttered. The profiler blamed the menu bar: AppKit's key-equivalent resolution calls menuNeedsUpdate for every menu on every keyDown, and our delegate redecorated all of them each time. Main thread 61% → 2%.">
+<link rel="canonical" href="https://unifyl.app/blog/appkit-menubar-every-keypress.html">
+<link rel="icon" href="/icon.png">
+<meta property="og:title" content="AppKit asks every menu to update on every keypress. My app said yes.">
+<meta property="og:description" content="Why holding an arrow key stuttered, and why the fix lived in the menu bar. Main thread 61% → 2%.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://unifyl.app/blog/appkit-menubar-every-keypress.html">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1117; --bg2:#161b22; --bg3:#21262d; --text:#e6edf3; --text2:#9da7b3;
+          --border:#30363d; --accent:#4da6ff; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.7; }
+  a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
+  header.site { display: flex; align-items: center; gap: 10px; margin-bottom: 56px; }
+  header.site img { width: 28px; height: 28px; border-radius: 6px; }
+  header.site a { color: var(--text2); font-size: 14px; }
+  h1 { font-size: 32px; line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .meta { color: var(--text2); font-size: 14px; margin-bottom: 40px; }
+  h2 { font-size: 22px; margin: 44px 0 14px; letter-spacing: -0.01em; }
+  p { margin: 0 0 18px; } ul { margin: 0 0 18px 24px; } li { margin-bottom: 6px; }
+  pre { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+        padding: 16px; overflow-x: auto; margin: 0 0 18px; font-size: 13px; line-height: 1.55; }
+  code { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 0.92em;
+         background: var(--bg3); padding: 1px 5px; border-radius: 4px; }
+  pre code { background: none; padding: 0; }
+  .box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+         padding: 18px 20px; margin: 0 0 18px; }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
+           color: var(--text2); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="site">
+  <img src="/icon.png" alt="">
+  <a href="/">Unifyl — a dual-pane file manager for macOS</a>
+  <span style="color:var(--text2)">·</span>
+  <a href="/blog/">Blog</a>
+</header>
+
+<h1>AppKit asks every menu to update on every keypress. My app said yes.</h1>
+<p class="meta">August 2026 · by the developer of <a href="/">Unifyl</a></p>
+
+<p>The bug report, as filed by my own hands: hold the down arrow in a file list and the cursor
+stutters its way down instead of gliding. A file manager that can't scroll smoothly is a car
+that can't idle, so this jumped the queue.</p>
+
+<p>I assumed the table view. It's the obvious suspect — thousands of rows, custom drawing,
+selection updates on every step. So I profiled a key-repeat session, opened the heaviest
+main-thread stack, and found… menu code. With everything included, the main thread was
+<strong>61% busy during key repeat</strong>, and the hot stacks weren't under the table view at
+all. They were under the <strong>menu bar</strong>.</p>
+
+<p>Nobody was looking at the menu bar. No menu was open. Why is the menu bar doing work at all
+while I hold an arrow key?</p>
+
+<h2>Key equivalents are resolved eagerly</h2>
+
+<p>Here's the mechanism. Every <code>keyDown</code> that reaches a window also has to answer the
+question "is this a menu shortcut?" AppKit answers it by walking the menu tree — and before it
+checks a menu's key equivalents, it gives that menu's delegate a chance to bring the items up to
+date. Which means:</p>
+
+<div class="box">
+<p style="margin-bottom:0"><code>menuNeedsUpdate(_:)</code> is not "the user opened a menu".
+It also fires for <strong>every menu in the bar, on every key press</strong>, during key-equivalent
+resolution. Hold a key at ~30 repeats per second with nine top-level menus, and your delegate
+runs a few hundred times per second — while the user believes the menu bar is idle.</p>
+</div>
+
+<p>My delegate was a decorator: it walks menu items and annotates the ones that need a Pro badge,
+using localized titles to match items. The implementation was written with "the user just opened
+a menu" in mind, so being called meant: re-decorate <em>all nine menus</em>, and rebuild the
+localized title tables it matches against — from scratch, every call. Per keypress. The work was
+correct; the assumption about how often it runs was fiction.</p>
+
+<h2>The fix is boring, which is the point</h2>
+
+<ul>
+  <li><strong>Update only the menu that asked.</strong> The delegate callback hands you one
+      <code>NSMenu</code>; touching the other eight is volunteering.</li>
+  <li><strong>Cache the localized tables, keyed by language.</strong> They only change when the
+      app language changes, not per call.</li>
+</ul>
+
+<p>Result: main-thread occupancy during key repeat went from <strong>61% to 2%</strong>, and the
+cursor glides. No table-view changes at all — the obvious suspect was innocent the whole time.</p>
+
+<h2>Notes for the next person</h2>
+
+<ul>
+  <li>If your app stutters <em>during typing or key repeat</em> and you have an
+      <code>NSMenuDelegate</code>, profile before you blame your views. Search your stacks for
+      <code>menuNeedsUpdate</code> and key-equivalent resolution.</li>
+  <li>Treat <code>menuNeedsUpdate</code> as a hot path with a per-call budget of roughly nothing.
+      Do per-menu work only, cache everything derivable.</li>
+  <li>If you need Swift-6 strict concurrency: the delegate can be
+      <code>@MainActor</code> with a <code>@preconcurrency NSMenuDelegate</code> conformance, and
+      then it can touch <code>NSMenu</code> synchronously — no hopping, which matters at this call
+      frequency.</li>
+  <li>The profiler beat the code review here. Reading the delegate, the code looked fine —
+      because the bug wasn't in what it did, it was in how often the framework calls it.</li>
+</ul>
+
+<footer>
+<p>From building <a href="/">Unifyl</a>, a keyboard-first dual-pane file manager for macOS —
+which is why key-repeat smoothness gets treated as a release blocker. Previously:
+<a href="/blog/macos-photos-permission-lldb.html">finding a phantom Photos permission prompt
+with lldb</a>.</p>
+</footer>
+</div>
+</body>
+</html>
