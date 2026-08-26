@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why does macOS think my file manager wants Photos access? Finding the path with lldb</title>
+<meta name="description" content="macOS showed a Photos permission prompt for an app with zero photo code. TCC logs name the service but never the path. Here is how to read the path out of the blocked thread's registers with lldb.">
+<link rel="canonical" href="https://unifyl.app/blog/macos-photos-permission-lldb.html">
+<link rel="icon" href="/icon.png">
+<meta property="og:title" content="Why does macOS think my app wants Photos access? Finding the path with lldb">
+<meta property="og:description" content="TCC tells you which permission was requested, never which path caused it. The blocked thread's registers know.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://unifyl.app/blog/macos-photos-permission-lldb.html">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+    --text: #e6edf3; --text2: #9da7b3; --border: #30363d;
+    --accent: #4da6ff;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.7; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
+  header.site { display: flex; align-items: center; gap: 10px; margin-bottom: 56px; }
+  header.site img { width: 28px; height: 28px; border-radius: 6px; }
+  header.site a { color: var(--text2); font-size: 14px; }
+  h1 { font-size: 32px; line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .meta { color: var(--text2); font-size: 14px; margin-bottom: 40px; }
+  h2 { font-size: 22px; margin: 44px 0 14px; letter-spacing: -0.01em; }
+  p { margin: 0 0 18px; }
+  ul { margin: 0 0 18px 24px; }
+  li { margin-bottom: 6px; }
+  pre { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+        padding: 16px; overflow-x: auto; margin: 0 0 18px; font-size: 13px; line-height: 1.55; }
+  code { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 0.92em;
+         background: var(--bg3); padding: 1px 5px; border-radius: 4px; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; color: var(--text2);
+               margin: 0 0 18px; }
+  .box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+         padding: 18px 20px; margin: 0 0 18px; }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
+           color: var(--text2); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="site">
+  <img src="/icon.png" alt="">
+  <a href="/">Unifyl — a dual-pane file manager for macOS</a>
+</header>
+
+<h1>Why does macOS think my file manager wants Photos access? Finding the guilty path with lldb</h1>
+<p class="meta">August 2026 · by the developer of <a href="/">Unifyl</a></p>
+
+<p>One day my app started triggering this dialog whenever it opened the user's home folder:</p>
+
+<blockquote>"Unifyl" would like to access your Photos library.</blockquote>
+
+<p>The app is a file manager. It contains zero photo-related code. It does not link the Photos
+framework, it never touches <code>.photoslibrary</code> bundles, and the size-calculation code that was
+running at the time deliberately skips <code>~/Pictures</code>. Yet macOS was certain.</p>
+
+<p>This post is about the debugging technique that finally answered the only question that matters
+in this situation — <strong>which path did I touch?</strong> — because Apple's privacy subsystem
+will tell you everything except that.</p>
+
+<h2>What TCC will and won't tell you</h2>
+
+<p>Privacy prompts come from <code>tccd</code>. You can watch it live:</p>
+
+<pre><code>log stream --predicate 'subsystem == "com.apple.TCC"' --info</code></pre>
+
+<p>This gives you a lot: the service being requested (<code>kTCCServicePhotos</code>), your bundle id, and
+whether the event is a mere status check or a real prompt. Two things I learned reading this
+stream for hours:</p>
+
+<ul>
+  <li>Entries with <code>preflight=yes</code> are status queries — they never produce a dialog. Chasing
+      them is a dead end. The actual prompt is the <code>preflight=no</code> request that escalates to
+      <code>AUTHREQ_PROMPTING</code>.</li>
+  <li>The log names the <em>service</em>, never the <em>path</em>. By design: the privacy log
+      protects your privacy from your own debugging session.</li>
+</ul>
+
+<p>So I knew <em>what</em> was being requested. I had no idea <em>why</em>. My app walks directories in a
+background queue to compute folder sizes; any one of thousands of paths could have been the
+trigger, and my mental list of "media-protected locations" — <code>~/Pictures</code>,
+<code>*.photoslibrary</code> — was apparently wrong. Auditing the skip-list and finding it correct proves
+the list, not the bug.</p>
+
+<h2>The trick: the prompt freezes the guilty thread</h2>
+
+<p>Here is the useful property of TCC prompts: while the dialog is on screen, the syscall that
+triggered it <strong>does not return</strong>. The offending thread is sitting blocked inside
+<code>open()</code>, and on arm64 the first argument to a syscall — the path pointer — is still in
+register <code>x0</code>, exactly where the calling convention put it.</p>
+
+<p>So, with the dialog up, don't dismiss it. Attach a debugger instead:</p>
+
+<pre><code>lldb -p $(pgrep -x Unifyl)
+(lldb) thread list
+# ... several threads with frame #0 = libsystem_kernel.dylib`__open ...
+(lldb) thread select 9
+(lldb) memory read -f s $x0
+0x16dae5a30: "/Users/me/Library/Photos"</code></pre>
+
+<p>I had four worker threads parked in <code>__open</code>. I read <code>x0</code> as a C string on each of
+them. All four gave the same answer:</p>
+
+<pre><code>/Users/me/Library/Photos</code></pre>
+
+<h2>The culprit is not documented anywhere</h2>
+
+<p><code>~/Library/Photos</code>. Not the <code>.photoslibrary</code> bundle in <code>~/Pictures</code> — a plain,
+ordinary-looking directory under <code>~/Library</code> that turns out to hold "Shared with You"
+photo content, and which macOS therefore guards with <code>kTCCServicePhotos</code>, the same
+protection as the photo library itself. I have not found it in any Apple documentation of
+photo-library locations. My background walk was faithfully descending into it, and the first
+<code>open()</code> inside raised the prompt.</p>
+
+<p>The fix was one line of policy: treat <code>~/Library/Photos</code> exactly like
+<code>~/Pictures</code> — never enter it uninvited during background size walks.</p>
+
+<h2>Making the experiment repeatable</h2>
+
+<p>Two practical notes that cost me time:</p>
+
+<div class="box">
+<p><strong>TCC remembers by code identity.</strong> Once you click "Don't Allow", subsequent runs won't
+prompt — they are silently denied, and your reproduction is gone. Resetting with
+<code>tccutil reset Photos com.your.bundle.id</code> works, but during a long session it is faster to
+re-sign a throwaway copy ad hoc: <code>codesign -f -s - --deep</code> gives the copy a fresh identity,
+so every rebuild starts with a clean TCC slate. Ad-hoc signing strips entitlements, so re-add
+<code>com.apple.security.get-task-allow</code> if you still want to attach lldb to it.</p>
+<p style="margin-bottom:0"><strong>The unified log buffer rolls fast.</strong> If you go looking for the tccd entry after the
+fact, it may already be gone. Stream it live into a file while you reproduce.</p>
+</div>
+
+<h2>The general recipe</h2>
+
+<ul>
+  <li>A privacy prompt (or a mysterious hang on folder access) means some thread is blocked in a
+      syscall right now.</li>
+  <li>While the dialog is up, attach lldb and list threads; look for frames in
+      <code>__open</code>, <code>__openat</code>, <code>getattrlist</code>, <code>opendir</code>.</li>
+  <li>Read the path argument straight out of the register (<code>x0</code>, or <code>x1</code> for the
+      <code>*at</code> variants' path).</li>
+  <li>Believe the register, not your model of which paths are protected. The protected set is
+      larger than the documented set.</li>
+</ul>
+
+<p>The register does not speculate. Four threads, one answer, bug closed — after weeks of
+guessing had produced nothing but a well-audited, wrong skip-list.</p>
+
+<footer>
+<p>This bug came out of building <a href="/">Unifyl</a>, a keyboard-first dual-pane file manager
+for macOS (free download, runs local-only AI — nothing leaves the machine). If you liked this
+kind of digging, the app is where all of it ends up.</p>
+</footer>
+</div>
+</body>
+</html>

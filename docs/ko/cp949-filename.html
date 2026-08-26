@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>맥에서 깨진 한글 파일명 복구 — CP949 인코딩 문제 해결 (2026)</title>
+<meta name="description" content="윈도우에서 받은 ZIP을 맥에서 풀면 파일명이 ¼³°è¹®¼­ 처럼 깨지는 이유(CP949 vs UTF-8)와, 원래 한글 이름으로 되돌리는 방법.">
+<link rel="canonical" href="https://unifyl.app/ko/cp949-filename.html">
+<link rel="icon" href="/icon.png">
+<meta property="og:title" content="맥에서 깨진 한글 파일명 복구 — CP949 문제 해결">
+<meta property="og:description" content="¼³°è¹®¼­.hwp 를 설계문서.hwp 로. 인코딩을 감지해 일괄 복원합니다.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://unifyl.app/ko/cp949-filename.html">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1117; --bg2:#161b22; --bg3:#21262d; --text:#e6edf3; --text2:#9da7b3;
+          --border:#30363d; --accent:#4da6ff; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.75; }
+  a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
+  header.site { display: flex; align-items: center; gap: 10px; margin-bottom: 56px; }
+  header.site img { width: 28px; height: 28px; border-radius: 6px; }
+  header.site a { color: var(--text2); font-size: 14px; }
+  h1 { font-size: 30px; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .meta { color: var(--text2); font-size: 14px; margin-bottom: 40px; }
+  h2 { font-size: 21px; margin: 44px 0 14px; }
+  p { margin: 0 0 18px; } ul, ol { margin: 0 0 18px 24px; } li { margin-bottom: 6px; }
+  code { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 0.92em;
+         background: var(--bg3); padding: 1px 5px; border-radius: 4px; }
+  .box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+         padding: 18px 20px; margin: 0 0 18px; }
+  .cta { display: inline-block; background: var(--accent); color: #fff; padding: 12px 24px;
+         border-radius: 8px; font-weight: 600; margin: 8px 0 18px; }
+  .cta:hover { text-decoration: none; opacity: .92; }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
+           color: var(--text2); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="site">
+  <img src="/icon.png" alt="">
+  <a href="/ko/">Unifyl — macOS 듀얼패인 파일 매니저</a>
+</header>
+
+<h1>맥에서 깨진 한글 파일명 복구하기 (CP949 → UTF-8)</h1>
+<p class="meta">2026년 기준 · <code>¼³°è¹®¼­.hwp</code>가 <code>설계문서.hwp</code>로 돌아옵니다</p>
+
+<p>윈도우 쓰는 동료가 보낸 ZIP을 맥에서 풀었더니 파일명이 이렇게 됐다면 —</p>
+
+<div class="box">
+<p style="margin-bottom:0"><code>»ç¾÷°èȹ¼­_ÃÖÁ¾.hwp</code> &nbsp; <code>¿¹»êºÎ¼­º°.xlsx</code> &nbsp; <code>È¸ÀÇ·Ï.docx</code></p>
+</div>
+
+<p>파일이 손상된 게 아닙니다. <strong>이름만</strong> 깨진 겁니다. 윈도우의 옛 압축 도구들은
+파일명을 CP949(한국어 완성형)로 기록하는데, macOS는 파일명을 UTF-8로 읽습니다. CP949
+바이트를 UTF-8인 척 해석하니 저런 외계어가 나옵니다. 내용물은 멀쩡합니다.</p>
+
+<h2>해결 방법</h2>
+
+<p>Unifyl에는 이 상황을 위한 인코딩 복구 기능이 내장돼 있습니다. 깨진 파일들을 선택하면
+CP949·Shift-JIS·GBK 중 어느 인코딩으로 깨졌는지 감지해서, 원래 이름의 미리보기를 먼저
+보여주고, 확인 후 일괄 변환합니다. 잘못 바꿨으면 <code>⌘Z</code>로 되돌립니다.</p>
+
+<ol>
+  <li><a href="/ko/">Unifyl</a>을 내려받아 실행합니다 (무료 기능입니다).</li>
+  <li>깨진 파일들이 있는 폴더로 이동해 파일을 선택합니다.</li>
+  <li>Tools ▸ 인코딩 변환을 실행하면 복원될 이름이 미리보기로 표시됩니다.</li>
+  <li>확인을 누르면 일괄 변환 — 실수해도 Undo가 됩니다.</li>
+</ol>
+
+<p>일본어(Shift-JIS)·중국어(GBK) 자료가 깨진 경우에도 같은 기능으로 복원됩니다.</p>
+
+<h2>애초에 안 깨지게 받는 법</h2>
+
+<p>ZIP을 macOS 기본 더블클릭으로 풀지 말고 Unifyl에서 ZIP 안으로 들어가(<code>Return</code>)
+필요한 파일을 <code>F5</code>로 꺼내면, 파일명 인코딩을 올바르게 처리한 상태로 나옵니다.
+ALZ로 온 파일도 마찬가지입니다 — <a href="/ko/alz-mac.html">맥에서 ALZ 여는 법</a>에 따로
+정리해 뒀습니다.</p>
+
+<a class="cta" href="/ko/">Unifyl 무료 다운로드</a>
+
+<footer>
+<p>Unifyl은 macOS 14 이상용 듀얼패인 파일 매니저입니다. 인코딩 복구, ALZ 해제, HWPX 미리보기,
+초성 검색이 모두 무료 버전에 포함됩니다. 문의:
+<a href="mailto:support@unifyl.app">support@unifyl.app</a></p>
+</footer>
+</div>
+</body>
+</html>
