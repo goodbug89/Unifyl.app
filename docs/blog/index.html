@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unifyl Blog — engineering notes from building a macOS file manager</title>
+<meta name="description" content="Engineering write-ups from building Unifyl: macOS privacy prompts, AppKit performance archaeology, localization pitfalls. No release-note filler.">
+<link rel="canonical" href="https://unifyl.app/blog/">
+<link rel="icon" href="/icon.png">
+<meta property="og:title" content="Unifyl Blog — engineering notes">
+<meta property="og:description" content="Write-ups from building a macOS file manager. No release-note filler.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://unifyl.app/blog/">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1117; --bg2:#161b22; --bg3:#21262d; --text:#e6edf3; --text2:#9da7b3;
+          --border:#30363d; --accent:#4da6ff; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.7; }
+  a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
+  header.site { display: flex; align-items: center; gap: 10px; margin-bottom: 56px; }
+  header.site img { width: 28px; height: 28px; border-radius: 6px; }
+  header.site a { color: var(--text2); font-size: 14px; }
+  h1 { font-size: 30px; line-height: 1.3; margin-bottom: 10px; letter-spacing: -0.02em; }
+  .sub { color: var(--text2); margin-bottom: 44px; }
+  .post { display: block; background: var(--bg2); border: 1px solid var(--border);
+          border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; }
+  .post:hover { border-color: var(--accent); text-decoration: none; }
+  .post h2 { font-size: 19px; color: var(--text); margin-bottom: 6px; }
+  .post .date { color: var(--text2); font-size: 13px; margin-bottom: 8px; }
+  .post p { color: var(--text2); font-size: 15px; }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
+           color: var(--text2); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="site">
+  <img src="/icon.png" alt="">
+  <a href="/">Unifyl — a dual-pane file manager for macOS</a>
+</header>
+
+<h1>Engineering notes</h1>
+<p class="sub">Write-ups from building Unifyl. Debugging stories and macOS internals — no
+release-note filler.</p>
+
+<a class="post" href="/blog/macos-photos-permission-lldb.html">
+  <h2>Why does macOS think my file manager wants Photos access? Finding the guilty path with lldb</h2>
+  <div class="date">August 2026</div>
+  <p>TCC names the service, never the path. But while the permission dialog is up, the guilty
+  thread is frozen inside <code>open()</code> — and the path pointer is still sitting in x0.</p>
+</a>
+
+<footer>
+<p>Built alongside <a href="/">Unifyl</a> — keyboard-first dual-pane file manager for macOS,
+free download, local-only AI. <a href="mailto:support@unifyl.app">support@unifyl.app</a></p>
+</footer>
+</div>
+</body>
+</html>

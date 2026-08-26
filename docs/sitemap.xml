@@ -96,6 +96,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://unifyl.app/blog/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://unifyl.app/blog/macos-photos-permission-lldb.html</loc>
     <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
