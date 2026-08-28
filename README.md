@@ -154,11 +154,15 @@ Also available on the [Mac App Store](https://apps.apple.com/app/unifyl/id677397
 2. Drag Unifyl to your Applications folder
 3. Launch and grant file access when prompted
 
-### Homebrew (planned)
+### Homebrew
 
 ```bash
-brew install --cask unifyl
+brew install goodbug89/unifyl/unifyl
 ```
+
+Recent Homebrew versions ask you to trust third-party taps once first:
+`brew trust goodbug89/unifyl`. Installs the notarized direct-distribution
+build (auto-updates via Sparkle).
 
 ---
 
