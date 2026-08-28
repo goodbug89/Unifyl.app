@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mac 解压 ZIP 文件名乱码怎么办(2026 修复方法)</title>
+<meta name="description" content="在 Mac 上解压 Windows 打包的 ZIP,文件名变成乱码?原因是 GBK 编码。如何检测原始编码并一键恢复正确的中文文件名。">
+<link rel="canonical" href="https://unifyl.app/zh-Hans/zip-luanma.html">
+<link rel="icon" href="/icon.png">
+<meta property="og:title" content="Mac 解压 ZIP 文件名乱码的修复方法">
+<meta property="og:description" content="文件没坏,只是名字用错了编码表。检测并一键恢复。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://unifyl.app/zh-Hans/zip-luanma.html">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1117; --bg2:#161b22; --bg3:#21262d; --text:#e6edf3; --text2:#9da7b3;
+          --border:#30363d; --accent:#4da6ff; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans CJK SC", sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.8; }
+  a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
+  header.site { display: flex; align-items: center; gap: 10px; margin-bottom: 56px; }
+  header.site img { width: 28px; height: 28px; border-radius: 6px; }
+  header.site a { color: var(--text2); font-size: 14px; }
+  h1 { font-size: 28px; line-height: 1.35; margin-bottom: 12px; }
+  .meta { color: var(--text2); font-size: 14px; margin-bottom: 40px; }
+  h2 { font-size: 21px; margin: 44px 0 14px; }
+  p { margin: 0 0 18px; } ul, ol { margin: 0 0 18px 24px; } li { margin-bottom: 6px; }
+  code { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 0.92em;
+         background: var(--bg3); padding: 1px 5px; border-radius: 4px; }
+  .box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+         padding: 18px 20px; margin: 0 0 18px; }
+  .cta { display: inline-block; background: var(--accent); color: #fff; padding: 12px 24px;
+         border-radius: 8px; font-weight: 600; margin: 8px 0 18px; }
+  .cta:hover { text-decoration: none; opacity: .92; }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
+           color: var(--text2); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="site">
+  <img src="/icon.png" alt="">
+  <a href="/zh-Hans/">Unifyl — macOS 双栏文件管理器</a>
+</header>
+
+<h1>Mac 解压 ZIP 后文件名乱码怎么办</h1>
+<p class="meta">2026 年版 · 把 <code>ÎÄµµ.docx</code> 变回 <code>文档.docx</code></p>
+
+<p>Windows 同事发来的 ZIP,在 Mac 上解压之后文件名成了这样——</p>
+
+<div class="box">
+<p style="margin-bottom:0"><code>ÎÄµµ.docx</code> &nbsp; <code>±¨¸æ.xlsx</code> &nbsp;
+<code>»áÒé¼Ç¼.pdf</code></p>
+</div>
+
+<p>文件本身没坏,坏的<strong>只是名字</strong>。老式 Windows 压缩工具用系统代码页
+(简体中文是 GBK)记录文件名,而 macOS 按 UTF-8 读取文件名——同一串字节被用错了
+解码表,就成了乱码。文件内容完好无损。</p>
+
+<h2>恢复正确的文件名</h2>
+
+<p>Unifyl 内置了针对这个问题的编码修复功能:选中乱码文件,它会自动检测名字原本是
+GBK、Shift-JIS 还是 CP949 编码,<strong>先预览</strong>恢复后的名字,确认后一键批量
+转换。转错了?<code>⌘Z</code> 整批撤销。</p>
+
+<ol>
+  <li>下载 <a href="/zh-Hans/">Unifyl</a> 并启动(此功能免费)。</li>
+  <li>进入乱码文件所在的文件夹,选中文件。</li>
+  <li>运行 Tools ▸ 编码转换 — 预览每个名字将恢复成什么。</li>
+  <li>确认即批量转换,支持撤销。</li>
+</ol>
+
+<h2>下次让它根本不乱码</h2>
+
+<p>别用 macOS 自带的双击解压。在 Unifyl 里按 <code>Return</code> 直接<em>进入</em>
+ZIP(压缩包会像文件夹一样打开),把需要的文件用 <code>F5</code> 拷出来——Unifyl 的
+ZIP 读取器会在展开时正确判断文件名编码,取出来的名字一开始就是对的。不用全部解压,
+也不用清理临时文件夹。</p>
+
+<a class="cta" href="/zh-Hans/">免费下载 Unifyl</a>
+
+<footer>
+<p>Unifyl 是 macOS 14+ 的双栏文件管理器。乱码修复、拼音搜索中文文件名、全角半角
+不敏感搜索——CJK 功能全部包含在免费版中。
+<a href="mailto:support@unifyl.app">support@unifyl.app</a></p>
+</footer>
+</div>
+</body>
+</html>

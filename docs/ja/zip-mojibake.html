@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MacでZIPのファイル名が文字化けするときの直し方(2026年版)</title>
+<meta name="description" content="Windowsから届いたZIPをMacで解凍するとファイル名が「•¶‘Ð.txt」のように文字化けする原因(Shift-JIS)と、元のファイル名に戻す方法。">
+<link rel="canonical" href="https://unifyl.app/ja/zip-mojibake.html">
+<link rel="icon" href="/icon.png">
+<meta property="og:title" content="MacでZIPのファイル名が文字化けするときの直し方">
+<meta property="og:description" content="ファイルは壊れていません。名前だけがShift-JISのまま。検出して一括修復します。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://unifyl.app/ja/zip-mojibake.html">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1117; --bg2:#161b22; --bg3:#21262d; --text:#e6edf3; --text2:#9da7b3;
+          --border:#30363d; --accent:#4da6ff; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.8; }
+  a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
+  header.site { display: flex; align-items: center; gap: 10px; margin-bottom: 56px; }
+  header.site img { width: 28px; height: 28px; border-radius: 6px; }
+  header.site a { color: var(--text2); font-size: 14px; }
+  h1 { font-size: 28px; line-height: 1.35; margin-bottom: 12px; letter-spacing: -0.01em; }
+  .meta { color: var(--text2); font-size: 14px; margin-bottom: 40px; }
+  h2 { font-size: 21px; margin: 44px 0 14px; }
+  p { margin: 0 0 18px; } ul, ol { margin: 0 0 18px 24px; } li { margin-bottom: 6px; }
+  code { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 0.92em;
+         background: var(--bg3); padding: 1px 5px; border-radius: 4px; }
+  .box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+         padding: 18px 20px; margin: 0 0 18px; }
+  .cta { display: inline-block; background: var(--accent); color: #fff; padding: 12px 24px;
+         border-radius: 8px; font-weight: 600; margin: 8px 0 18px; }
+  .cta:hover { text-decoration: none; opacity: .92; }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
+           color: var(--text2); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="site">
+  <img src="/icon.png" alt="">
+  <a href="/ja/">Unifyl — macOS用デュアルペインファイルマネージャー</a>
+</header>
+
+<h1>MacでZIPのファイル名が文字化けするときの直し方</h1>
+<p class="meta">2026年版 · <code>•¶‘Ð.txt</code> が <code>文書.txt</code> に戻ります</p>
+
+<p>Windowsの同僚から届いたZIPをMacで解凍したら、ファイル名がこうなっていた——</p>
+
+<div class="box">
+<p style="margin-bottom:0"><code>•¶‘Ð.txt</code> &nbsp; <code>ŒvŽZ‘.xlsx</code> &nbsp;
+<code>‰ï‹cŽ‘—¿.pdf</code></p>
+</div>
+
+<p>ファイルは壊れていません。<strong>名前だけ</strong>が化けています。古いWindowsの圧縮ツールは
+ファイル名をShift-JISで記録しますが、macOSはファイル名をUTF-8として読むため、
+バイト列が誤ったテーブルで解釈されてこうなります。中身は無事です。</p>
+
+<h2>元のファイル名に戻す</h2>
+
+<p>Unifylには、このためのエンコーディング修復機能が組み込まれています。化けたファイルを
+選択すると、Shift-JIS・CP949(韓国語)・GBK(中国語)のどれで化けたかを自動判定し、
+復元後の名前を<strong>プレビューで確認してから</strong>一括変換します。間違っていたら
+<code>⌘Z</code> で全部元に戻せます。</p>
+
+<ol>
+  <li><a href="/ja/">Unifyl</a> をダウンロードして起動します(無料機能です)。</li>
+  <li>化けたファイルのあるフォルダへ移動し、ファイルを選択します。</li>
+  <li>Tools ▸ エンコーディング変換を実行 — 復元後の名前がプレビュー表示されます。</li>
+  <li>確定すると一括変換。やり直しはUndoで。</li>
+</ol>
+
+<h2>そもそも化けさせない解凍方法</h2>
+
+<p>macOS標準のダブルクリック解凍を使わず、UnifylでZIPの<em>中に入って</em>
+(<code>Return</code>キーでアーカイブがフォルダのように開きます)必要なファイルだけ
+<code>F5</code> でコピーしてください。UnifylのZIPリーダーは展開時にファイル名の
+エンコーディングを正しく判定するので、最初から化けずに取り出せます。全部展開する必要も、
+一時フォルダの後始末もありません。</p>
+
+<a class="cta" href="/ja/">Unifylを無料でダウンロード</a>
+
+<footer>
+<p>UnifylはmacOS 14以降対応のデュアルペインファイルマネージャーです。文字化け修復、
+ローマ字での日本語ファイル名検索、全角・半角を区別しない検索——CJK対応はすべて
+無料版に含まれます。<a href="mailto:support@unifyl.app">support@unifyl.app</a></p>
+</footer>
+</div>
+</body>
+</html>
