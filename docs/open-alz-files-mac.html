@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to open ALZ files on a Mac (2026)</title>
+<meta name="description" content="ALZ is a Korean archive format macOS can't open natively. How to extract .alz files on a Mac — or browse them like folders and pull out just the file you need.">
+<link rel="canonical" href="https://unifyl.app/open-alz-files-mac.html">
+<link rel="icon" href="/icon.png">
+<meta property="og:title" content="How to open ALZ files on a Mac">
+<meta property="og:description" content="Browse .alz archives like folders and extract just what you need — free.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://unifyl.app/open-alz-files-mac.html">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1117; --bg2:#161b22; --bg3:#21262d; --text:#e6edf3; --text2:#9da7b3;
+          --border:#30363d; --accent:#4da6ff; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.7; }
+  a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
+  header.site { display: flex; align-items: center; gap: 10px; margin-bottom: 56px; }
+  header.site img { width: 28px; height: 28px; border-radius: 6px; }
+  header.site a { color: var(--text2); font-size: 14px; }
+  h1 { font-size: 30px; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .meta { color: var(--text2); font-size: 14px; margin-bottom: 40px; }
+  h2 { font-size: 21px; margin: 44px 0 14px; }
+  p { margin: 0 0 18px; } ul, ol { margin: 0 0 18px 24px; } li { margin-bottom: 6px; }
+  code { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 0.92em;
+         background: var(--bg3); padding: 1px 5px; border-radius: 4px; }
+  .box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+         padding: 18px 20px; margin: 0 0 18px; }
+  .cta { display: inline-block; background: var(--accent); color: #fff; padding: 12px 24px;
+         border-radius: 8px; font-weight: 600; margin: 8px 0 18px; }
+  .cta:hover { text-decoration: none; opacity: .92; }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
+           color: var(--text2); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="site">
+  <img src="/icon.png" alt="">
+  <a href="/">Unifyl — a dual-pane file manager for macOS</a>
+</header>
+
+<h1>How to open ALZ files on a Mac</h1>
+<p class="meta">Updated 2026 · for anyone who just received a <code>.alz</code> from Korea</p>
+
+<p>ALZ is a Korean archive format created by the ALZip utility — still everywhere in Korean
+business, government, and older download archives. macOS's built-in Archive Utility doesn't know
+it: double-click a <code>.alz</code> and you get "unable to expand".</p>
+
+<h2>Your options</h2>
+
+<ul>
+  <li><strong>Bandizip for Mac</strong> — free extractor that handles ALZ. Fine if extraction is
+      all you need.</li>
+  <li><strong>The Unarchiver</strong> — the veteran free tool; ALZ support is hit-or-miss
+      depending on the file.</li>
+  <li><strong>Unifyl (this site)</strong> — opens the ALZ <strong>like a folder</strong> inside a
+      file manager, so you can browse it and copy out just the file you need. Free; details
+      below.</li>
+</ul>
+
+<h2>Better than extracting: browse it like a folder</h2>
+
+<p>Most ALZ files arrive with one or two files you actually want. In Unifyl, press
+<code>Return</code> on the archive and you're inside it — a normal folder listing. Put the
+cursor on the file you need, press <code>F5</code>, and it lands in the opposite pane. No full
+extraction, no temp-folder cleanup. The same gesture works for ZIP, 7z, TAR and RAR.</p>
+
+<ol>
+  <li>Download <a href="/">Unifyl</a> (free) and launch it.</li>
+  <li>Navigate to the <code>.alz</code> file and press <code>Return</code>.</li>
+  <li>Select what you need and press <code>F5</code> to copy it out.</li>
+</ol>
+
+<div class="box">
+<p style="margin-bottom:0"><strong>Note:</strong> ALZ support ships in the
+<a href="/">direct download from unifyl.app</a>. The Mac App Store edition can't bundle the ALZ
+engine due to sandbox rules — if ALZ is why you're here, grab the direct build. It's free
+either way.</p>
+</div>
+
+<h2>If the filenames come out garbled</h2>
+
+<p>Files from Korean archives often extract with names like <code>»ç¾÷°èȹ¼­.hwp</code>. That's
+an encoding problem, not corruption — see
+<a href="/fix-garbled-zip-filenames-mac.html">fixing garbled filenames from ZIP/ALZ on a Mac</a>.
+Unifyl repairs them in place.</p>
+
+<a class="cta" href="/">Download Unifyl free</a>
+
+<footer>
+<p>Unifyl is a dual-pane file manager for macOS 14+. ALZ extraction, garbled-filename repair,
+and HWPX preview are all in the free tier.
+<a href="mailto:support@unifyl.app">support@unifyl.app</a></p>
+</footer>
+</div>
+</body>
+</html>

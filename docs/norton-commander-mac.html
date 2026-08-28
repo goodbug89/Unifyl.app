@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Norton Commander for Mac — the orthodox file manager in 2026</title>
+<meta name="description" content="Missing Norton Commander's two panels and F-keys on macOS? The orthodox file manager tradition is alive on the Mac — here's what carries it forward.">
+<link rel="canonical" href="https://unifyl.app/norton-commander-mac.html">
+<link rel="icon" href="/icon.png">
+<meta property="og:title" content="Norton Commander for Mac — the orthodox tradition in 2026">
+<meta property="og:description" content="Two panels, F5 to copy, Tab to switch. What keeps the NC way alive on macOS.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://unifyl.app/norton-commander-mac.html">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1117; --bg2:#161b22; --bg3:#21262d; --text:#e6edf3; --text2:#9da7b3;
+          --border:#30363d; --accent:#4da6ff; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.7; }
+  a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
+  header.site { display: flex; align-items: center; gap: 10px; margin-bottom: 56px; }
+  header.site img { width: 28px; height: 28px; border-radius: 6px; }
+  header.site a { color: var(--text2); font-size: 14px; }
+  h1 { font-size: 30px; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .meta { color: var(--text2); font-size: 14px; margin-bottom: 40px; }
+  h2 { font-size: 21px; margin: 44px 0 14px; }
+  p { margin: 0 0 18px; } ul, ol { margin: 0 0 18px 24px; } li { margin-bottom: 6px; }
+  code { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 0.92em;
+         background: var(--bg3); padding: 1px 5px; border-radius: 4px; }
+  img.shot { max-width: 100%; border: 1px solid var(--border); border-radius: 10px; margin: 0 0 18px; }
+  .cta { display: inline-block; background: var(--accent); color: #fff; padding: 12px 24px;
+         border-radius: 8px; font-weight: 600; margin: 8px 0 18px; }
+  .cta:hover { text-decoration: none; opacity: .92; }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
+           color: var(--text2); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="site">
+  <img src="/icon.png" alt="">
+  <a href="/">Unifyl — a dual-pane file manager for macOS</a>
+</header>
+
+<h1>Norton Commander for Mac: the orthodox tradition in 2026</h1>
+<p class="meta">Written by someone whose muscle memory dates to the DOS original</p>
+
+<p>Norton Commander itself has been gone for decades, but what it invented — the
+<em>orthodox file manager</em>: two panels, a command line underneath, F5 to copy from here to
+there — never died. It survived through Total Commander, Far Manager, Midnight Commander, and
+Krusader. If you've landed on macOS and your hands still expect Tab and F5, you have real
+options.</p>
+
+<h2>The terminal route: Midnight Commander</h2>
+
+<p>The closest literal descendant runs in your terminal:</p>
+
+<ul>
+  <li>Install with Homebrew: <code>brew install midnight-commander</code>, run with
+      <code>mc</code>.</li>
+  <li>Faithful NC feel, works over SSH, free and open source.</li>
+  <li>Limits: it's a TUI — no Quick Look, no drag and drop to other Mac apps, no macOS
+      integration (tags, Trash, cloud drives).</li>
+</ul>
+
+<h2>The native route</h2>
+
+<p>For an orthodox manager that is also a real Mac app, the field is
+<a href="/total-commander-for-mac.html">the same as for Total Commander switchers</a> —
+Marta, Commander One, ForkLift, and Unifyl (this site). The NC essentials as they exist in
+Unifyl:</p>
+
+<ul>
+  <li>Two panels (plus triple and free-split), <code>Tab</code> switches, <code>Return</code>
+      enters — folders always sort above files, name-ordered, the way orthodox managers do.</li>
+  <li><code>F5</code> copy / <code>F6</code> move to the other panel; F-keys do what your hands
+      expect, and all 133 shortcuts are remappable if your dialect differs.</li>
+  <li>A command line at the bottom of the panels, NC-style, plus an integrated terminal.</li>
+  <li>Archives open like directories — the NC gesture applied to ZIP/7z/TAR/RAR.</li>
+  <li>Select by pattern with the numpad gray keys (<code>+</code>/<code>-</code>), compare
+      directories, batch rename.</li>
+</ul>
+
+<img class="shot" src="/screenshots/01-dualpane.png" alt="Unifyl dual-pane view — the orthodox layout on macOS">
+
+<p>And one thing NC never had: on-device AI search — find files by describing them, with
+nothing leaving the Mac. The download is free (not a trial); power tools are a one-time
+purchase, no subscription.</p>
+
+<a class="cta" href="/">Download Unifyl free</a>
+
+<p style="color:var(--text2);font-size:14px">Easter egg for the faithful: Unifyl ships a hidden
+NC-blue retro theme. It's in the command palette.</p>
+
+<footer>
+<p>Unifyl runs on macOS 14+ (Apple Silicon optimized, Intel supported).
+Questions from fellow orthodox-manager veterans are the most useful mail we get:
+<a href="mailto:support@unifyl.app">support@unifyl.app</a></p>
+</footer>
+</div>
+</body>
+</html>
