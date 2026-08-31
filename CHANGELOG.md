@@ -5,6 +5,204 @@ All notable changes to Unifyl will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.7.3] — 2026-08-31
+
+### Security
+
+- **The keyboard monitor logged every character you typed.** An app-wide
+  `NSEvent` keyDown handler wrote `chars=` to the unified log on every
+  keystroke — including into password fields, since an in-process local
+  monitor is not covered by macOS secure event input, and `.notice` persists
+  to disk where any process running as you can read it. The key code and
+  modifier flags it actually needs are still logged. If you have been running
+  a build before this one, `sudo log erase --all` clears the history.
+- **119 log sites wrote your paths, file names, search queries and error text
+  with redaction disabled.** `privacy: .public` opts a value out of the
+  unified log's redaction; Cocoa error descriptions are the worst of it,
+  because file errors routinely embed the path that failed.
+- **FTPS could fall back to plaintext while the UI still showed a lock.**
+  curl's `--ftp-ssl` is opportunistic: a server that declines AUTH TLS was
+  talked to in the clear. It now requires TLS.
+- **WebDAV chose its scheme from the port number** — 443 meant https, and
+  anything else meant plain HTTP with Basic auth. A TLS server on 8443 or
+  Synology's 5006 had your password sent unencrypted with no way to say
+  otherwise. TLS is now a checkbox that defaults to on; connections saved
+  before this keep their existing behaviour rather than being switched behind
+  you.
+- **The connection test passed your password on the command line**, visible
+  through `ps` to anything else running as you. It writes a 0600 `.netrc`,
+  which the FTP provider itself has done since it was written.
+- **Plugin signature checks did not descend into nested code**, so a bundle
+  with a correctly signed executable could carry an unsigned dylib and pass.
+  Nested-code, strict and all-architecture validation added, plus a
+  re-validation after load to cover the swap window on a user-writable
+  directory.
+- **The companion server ignored its own "Allow local network only" setting**
+  and accepted from every interface, and its 6-digit pairing code had no
+  attempt limit. Both fixed.
+
+### Fixed
+
+- **Undo of a Multi-Rename across several folders half-worked.** The record
+  rebuilt every path under the first file's directory, so a rename over a
+  marked set spanning folders (Search results, a Smart Folder) put some files
+  back, left the rest renamed, and reported success.
+- **⌘Z could undo an operation older than the one you were looking at.** A
+  refused or failed undo left its record popped off the stack, so the next
+  ⌘Z reached past it.
+- **Trashing from Duplicate Finder, Large File Finder and Reclaim Space left
+  no undo entry at all** — Finder's own Put Back was the only way back.
+- **Backup files outlived the undo entries that could use them.** A hex edit
+  of a 1 GiB file left 1 GiB beside it forever once its history entry aged
+  out. Evicted entries now take their backups with them.
+- **Disconnecting a remote panel did not stop transfers already running.**
+  They kept writing against a session the panel had discarded.
+- **Directory Diff destroyed newer files.** The plan was built when you
+  pressed Compare; a file created or edited on the other side since then was
+  replaced outright. It goes to the Trash first.
+- **Duplicate Finder trusted a scan that might be stale.** A file edited after
+  the scan is no longer the duplicate the sheet claims it is; those are
+  skipped with a rescan prompt.
+- **Archive operations could act on the wrong panel.** Pressing Tab during a
+  long archive job redirected the rest of it — a folder move out of an archive
+  silently became a copy.
+- **Up to three permission dialogs on a brand-new install.** The size column
+  enumerated Desktop, Documents and Downloads unasked on a panel that opens in
+  your home folder, stacking macOS prompts on top of the welcome screen.
+- **The Tips sheet and the auto-update hint landed on top of onboarding.**
+- **Two migration paths could destroy what they were migrating.** A refused
+  keychain write was followed by deleting the original; the bookmark store
+  cleared its old location before confirming the new one was written.
+  Upgrading users could also have every restored tab judged unrestorable and
+  the collapsed workspace saved over the real one.
+- **Light themes made filenames nearly unreadable.** There was one hardcoded
+  palette, tuned for dark backgrounds, with no awareness of the appearance —
+  on GitHub Light or Solarized Light every file-type colour sat near 1.3:1
+  against the row. There is now a light palette that clears 4.5:1 everywhere.
+- **Marked filenames failed contrast in all twelve built-in themes** on the
+  cursor row, and five themes drew a toolbar rule in the same colour as the
+  surface beneath it. The mark colour is now lifted against whatever it is
+  actually drawn on, and the Theme Editor checks contrast as you edit.
+- **Splitting an empty file reported success** while writing nothing.
+- Archive-mode rename and New Folder skipped name validation entirely; no path
+  length was checked against PATH_MAX; Folder Sync showed "Click Compare"
+  after comparing two identical folders; an empty archive offered a drop
+  target and F7, which archives refuse; Duplicate Finder had no size floor, so
+  every empty file on the disk formed one enormous group.
+- The Mac App Store folder picker told users, in 15 languages, to grant more
+  folders via "File → Open Folder…" — a menu item that has never existed.
+
+### Accessibility
+
+- **Marked, git status, cloud-only, download progress and tags were conveyed
+  by colour alone.** Each is now stated in words, which also helps anyone who
+  cannot separate the hues.
+- **The thumbnail grid had no accessibility information whatsoever** —
+  VoiceOver read a wall of unlabelled images.
+- **Nothing was ever announced.** Every operation, count and refusal completed
+  in silence; they are spoken now.
+- The App Store description claimed "full VoiceOver support, WCAG 2.1 AA" in
+  all 15 languages. That was not true, and the line now says what is:
+  every action is reachable from the keyboard.
+
+### Fixed (earlier in this cycle)
+
+- **Copying a folder no longer empties its symbolic links.** A link inside a
+  copied folder — the kind every framework bundle, Homebrew tree and Python
+  venv is built from — arrived at the destination as an empty folder, and
+  everything it pointed at was silently missing while the copy reported
+  success. Drag-and-drop was never affected; F5 and ⌘D now behave the same way
+  it always did. Pipes and sockets are skipped with a reason instead of
+  aborting the batch, and they can no longer hang a speed-limited copy or a
+  checksum forever.
+- **Folder Sync with a server finally finishes.** Nothing preserved a file's
+  modification time across a transfer, so the next comparison saw every file
+  as changed and copied the whole set again — in alternating directions when
+  syncing both ways, leaving a Trash copy behind each time. Dates read from a
+  server are also no longer assumed to be from this year, which could date a
+  file from last December into the future and overwrite a newer local copy
+  with an older remote one.
+- **Every menu item and shortcut in the App Store edition now does something.**
+  Features macOS sandboxing doesn't allow (Git, Docker, SSH tunnels, scheduled
+  tasks, automations, terminals, media conversion) were still listed in menus
+  and the command palette, and clicking one offered to sell it. They're hidden
+  in that edition, and nothing that edition can't do can be purchased in it.
+  The cloud list shown there names only the services it can actually reach, and
+  the PDF converter explains the limit instead of prescribing an install that
+  can't work.
+- Closing a second window no longer kills the keyboard in the one you keep —
+  F-keys and custom shortcuts stopped working entirely after using ⌘N.
+- A ZIP larger than 4 GB no longer browses as empty (it says what it is), and
+  a folder deleted while the App Store edition was closed no longer takes a
+  different tab's place — with its pin, title and sort order — on the next
+  launch.
+- Scheduled automations survive sleep: a daily rule armed before your Mac
+  slept used to fire hours or days late. Directory Diff's "Sync All" copies
+  the newer side, as its description always claimed. A wrong system clock can
+  no longer permanently expire a trial or a license's offline grace period.
+  Archive edits can't be discarded because the archive was made in another
+  timezone.
+
+- **Cancel now cancels.** The queue bar's ✕ never reached a running
+  copy/move — no code path ever marked an operation as running, so the button
+  only signalled ops it believed were active, which was none of them; the
+  ⌘D/⇧⌘D copy-to-other-panel paths additionally polled neither Pause nor
+  Cancel at all, and a cancelled operation left a frozen ghost row in the
+  queue bar forever. Executors now advance the queue state, poll the queue
+  between items, mark cancelled operations terminal, and clean up the
+  half-written file a mid-file cancel leaves behind. Also newly cancellable:
+  SFTP/FTP/SMB/WebDAV transfers (a stalled child process now dies with the
+  task instead of waiting forever), remote batch download/upload (which had
+  no progress overlay or cancel at all), content search (Cancel used to hide
+  the results while the scan ran the whole tree), AI indexing (a Stop button
+  exists now — accidentally indexing your home folder was previously
+  unstoppable), Folder Sync's compare phase, copying a file out of a large
+  archive, and the connection test probe.
+- **Archive write-back can no longer double-fire.** Saving an edited archive
+  entry is triggered by app activation, launch recovery and quit; two of
+  those arriving while a slow archive rewrite was still in flight could run
+  a second rewrite of the same archive concurrently, or crash on a stale
+  index. Flushes are now serialized and sessions matched by identity.
+- **Folder Sync stops re-transferring CJK files forever.** Local names come
+  from the filesystem in decomposed Unicode, remote names in precomposed;
+  the comparator matched them as different files, so every Korean-named file
+  present on both sides was copied again on every single sync. Keys are now
+  normalized on both sides.
+- **Archive extraction rejects hostile entry paths again.** The pre-extract
+  guard re-checked an already-filtered listing (so it could never fire) and
+  the post-extract check couldn't see files that escaped the destination —
+  protection against `../` entries had quietly devolved to whatever the
+  external unarchiver does. The raw entry names are checked now.
+- **Failures stopped being silent.** Shift+F5 duplicate reports which items
+  failed instead of showing a partial success; an offline icon-pack download
+  no longer reports "complete (0 icons)" and wedges itself as installed;
+  OAuth token and connection-password Keychain failures are logged and
+  surfaced instead of signing you out mysteriously on the next launch;
+  Ctrl+P on a folder says why nothing happened; and when macros, layouts,
+  shortcuts, Saved Searches, connections or the workspace can't be written
+  to disk, a banner says so before quitting loses them.
+- **Long Korean filenames are no longer over-rejected.** The rename length
+  check counted every name in decomposed form (right for HFS+, verified by
+  real creates), but APFS accepts 255 UTF-16 units as supplied — Korean
+  names were refused from 86 characters. The check now knows which
+  filesystem it's talking to.
+- An instantly-failing ffmpeg conversion could hang the converter sheet
+  forever (termination handler installed after launch); closed windows no
+  longer keep background folder-size scans alive; failed SQLite opens leak
+  no handle; 16 new user-facing strings ship in all 15 languages, 3 dead
+  keys and 3 duplicate Korean entries removed.
+
+- **The last English in a Korean UI.** Four shapes of text that no
+  localisation check had ever looked at, found by reading three fresh
+  screenshots: an enum's raw value used as a tab label ("Semantic / Index /
+  Classify"), a message assigned to a status variable and shown later ("Scanned
+  6 items"), a literal handed to a `title:`-style argument ("Advanced Search"),
+  and a literal inside a ternary ("Free: …"). 463 such sites are localisable now
+  and the 390 strings behind them are translated in all 15 languages; the audit
+  catches all four shapes from here on. Also: a `%` that was meant literally in
+  "content overlap" was being read as a format specifier.
+
+
 ## [1.7.2] — 2026-08-23
 
 ### Added
