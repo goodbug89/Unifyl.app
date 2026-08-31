@@ -6,6 +6,52 @@
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>
+            <title>Version 1.7.3</title>
+            <description><![CDATA[
+                <h2>Unifyl 1.7.3</h2>
+                <h3>Security</h3>
+                <p><b>If you have been running an earlier build, this one matters.</b></p>
+                <ul>
+                <li><b>The keyboard monitor wrote every character you typed into the system log</b> — including into password fields, because an in-process event monitor is not covered by macOS secure event input. Those entries persist to disk, where anything running as you can read them. Only the key code and modifiers are logged now. To clear what earlier builds already wrote: <code>sudo log erase --all</code></li>
+                <li><b>119 log sites recorded your file paths, names, search queries and error text with redaction switched off.</b> Cocoa error messages were the worst of it: file errors routinely embed the path that failed.</li>
+                <li><b>FTPS could fall back to plaintext while the UI still showed a lock.</b> TLS is now required.</li>
+                <li><b>WebDAV picked its scheme from the port number</b>, so a TLS server on 8443 or Synology&#x27;s 5006 got plain HTTP with your password in a Basic auth header. There is now an explicit <b>Use TLS</b> checkbox, on by default; connections saved earlier keep their existing behaviour rather than being switched behind you.</li>
+                <li>The connection test passed your password on the command line, where any other process running as you could read it.</li>
+                <li>Plugin signature checks did not descend into nested code, so a bundle with a correctly signed executable could carry an unsigned library and pass.</li>
+                <li>The companion server ignored its own &quot;Allow local network only&quot; setting, and its pairing code had no limit on wrong attempts.</li>
+                </ul>
+                <h3>Fixed</h3>
+                <ul>
+                <li><b>Undo of a Multi-Rename across several folders only half-worked</b> — some files came back, the rest stayed renamed, and it reported success.</li>
+                <li><b>⌘Z could undo an older operation than the one you were looking at</b>, when a previous undo had been refused or had failed.</li>
+                <li><b>Trashing from Duplicate Finder, Large File Finder and Reclaim Space left no undo entry at all.</b></li>
+                <li><b>Backup files outlived the undo entries that could use them</b> — a hex edit of a large file left the whole previous version beside it forever.</li>
+                <li><b>Opening your home folder no longer asks for iCloud Drive.</b> The size column walked into <code>~/Library/Mobile Documents</code> unasked; that root and <code>~/Library/CloudStorage</code> are now stepped around, as are Desktop, Documents and Downloads.</li>
+                <li><b>Disconnecting a remote panel did not stop transfers already running.</b></li>
+                <li><b>Directory Diff could destroy a newer file</b> — anything created on the other side after you pressed Compare was replaced outright. It goes to the Trash first now.</li>
+                <li><b>Archive operations could act on the wrong panel</b> if you pressed Tab mid-operation; a folder move out of an archive silently became a copy.</li>
+                <li><b>Two migration paths could destroy what they were migrating</b> — saved passwords and folder access grants.</li>
+                <li><b>Light themes made filenames nearly unreadable.</b> There is now a light palette that stays legible on every light theme, and marked filenames pass contrast on the cursor row in all twelve built-ins.</li>
+                <li>The Tips sheet and the auto-update notice landed on top of onboarding; splitting an empty file reported success while writing nothing; archive rename and New Folder skipped name validation.</li>
+                </ul>
+                <h3>Accessibility</h3>
+                <ul>
+                <li><b>Marked, git status, cloud-only, download progress and tags were shown by colour alone.</b> Each is now also stated in words.</li>
+                <li><b>The thumbnail grid had no accessibility information at all</b>, and nothing was ever announced — every operation, count and refusal completed in silence.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 31 Aug 2026 14:00:00 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.7.3/Unifyl-1.7.3.dmg"
+                sparkle:version="45"
+                sparkle:shortVersionString="1.7.3"
+                sparkle:edSignature="Tp7LGmvHykHeqf2Q5fdXZFO2cR7cMucSSWlq/QrB9cfNiZQA2GozyeZW18+yU7GeEwEU9qo6GvvZNn9ctF3RDw=="
+                length="19026379"
+                type="application/octet-stream"
+            />
+        </item>
+        <item>
             <title>Version 1.7.2</title>
             <description><![CDATA[
                 <h2>Unifyl 1.7.2</h2>
