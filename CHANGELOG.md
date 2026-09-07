@@ -5,6 +5,158 @@ All notable changes to Unifyl will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.8.0] — 2026-09-07
+
+### Added — the Total Commander habits that had no home yet
+
+Fifteen things a long-time Total Commander user reaches for by reflex,
+each verified against the behaviour a TC veteran would notice being wrong.
+
+- **Directory hotlist (⌃D).** The bookmark list as a pop-up under the cursor
+  row — TC's Ctrl+D — with "Add this folder" / "Remove this folder" at the
+  bottom so the list is maintained from where it is used. ⌘B still opens the
+  full sheet for reordering.
+- **Folder history (⌥↓, and a clock button in the path bar).** Every tab's
+  back/forward stack as a list, newest first, current entry ticked. Pick a
+  folder instead of pressing Back n times; a jump keeps the forward entries.
+- **Linked browsing (View ▸ Linked Browsing, ⌥⌘L).** Entering or leaving a
+  folder in one panel takes the same step in the other when a same-named
+  folder exists there. Jumps to unrelated places don't propagate. A link badge
+  in the path bar shows it is on.
+- **Copy As… / Move As… (⌃F5 / ⌃F6).** TC's F5/F6 dialog with an editable
+  target: a single item can be renamed on the way, a folder that doesn't
+  exist yet is created, and the usual overwrite prompt applies.
+- **"Overwrite if Newer" in the conflict dialog**, which now also shows the
+  existing and incoming file's size and date side by side with the newer one
+  marked. Applies to copy, move, drag-drop and Copy As; an archive entry with
+  no date to compare is kept rather than clobbered.
+- **Keyboard context menu (⇧F10).** The row's right-click menu, anchored to
+  the cursor row.
+- **Open With submenu** in the context menu: every app Launch Services offers
+  for all selected items, default first, plus Other….
+- **Finder comments.** A Comment column (Settings ▸ General ▸ File List
+  Columns) reading the same xattr Finder uses, and Edit Comment… (⌃Z, TC's
+  Ctrl+Z) that writes it — visible in Finder's Get Info immediately.
+- **Change Attributes… (⌥⌘A).** Set modification and/or creation date on the
+  selection, optionally down into folders (deepest first, so a parent's date
+  isn't bumped again by its own children).
+- **Save Selection to File… / Load Selection from File…** — one name per
+  line, loaded back with exact-then-case-insensitive matching and a count of
+  what wasn't in the folder.
+- **Select Same Name.** Marks every file sharing the cursor file's stem —
+  the RAW+JPEG and video+subtitle case "Select Same Extension" can't do.
+- **Sort by Extension (⌃⌥E)**, and the Extension column header now sorts.
+- **Reopen Closed Tab (⇧⌘T)**, per panel, including tabs closed by "Close
+  Others" and "Close to the Right" (pinned survivors excluded).
+- **Copy Listing (Name, Size, Date)** — a tab-separated listing of the marked
+  items (or the whole folder) for a spreadsheet or a bug report.
+- **TC-style status bar**: "3 of 41 files, 1 of 6 folders · 12.4 MB of
+  1.2 GB" instead of "4 selected".
+
+- **Volumes for Left / Right Panel (⌥F1 / ⌥F2)** — TC's change-drive keys:
+  the mounted-volume list under that panel's cursor row, boot disk first,
+  free space as a second line; picking one shows its root there and gives
+  that panel focus.
+- **Open Cursor Folder in Opposite Panel (⌃⌥→)** — the Total Commander step
+  whose native chord macOS reserves for Mission Control, hence the extra ⌥.
+  ".." means the parent; a file shows its folder.
+- **Compare… on the conflict dialog** — the existing and incoming file open
+  side by side in the diff viewer before you decide.
+- **Pattern history on Select/Unselect by Pattern** — the last ten masks in a
+  dropdown, newest first.
+- **Sibling folders from the path bar** — each chevron between crumbs opens
+  the folders beside the next one, current one ticked.
+- **Deselect All (⌃⌘A)** — TC's Num-: clears the marks and leaves the cursor.
+- **Rename with a name of your own on the conflict dialog** — the field
+  starts with the automatic "name 2" so you see what Rename would do, and
+  anything you type replaces it. "Apply to all" carries the automatic suffix
+  forward, never the typed name.
+- **Select for Compare → Compare with “file”** (⌃⌥C, context menu, Compare
+  menu) — a two-step diff between any two files, across folders, tabs or
+  panels.
+- **Save Listing to File…** — the same tab-separated listing as Copy Listing,
+  as a `.tsv`.
+- **Brief View (⌃⌥B)** — TC's Ctrl+F1: icon and name only, filled
+  top-to-bottom in columns that scroll sideways. Same marks, cursor, keys,
+  drag-drop and context menu as the grid it shares a collection view with.
+- **Reverse Sort Order (⌃⌥R)** — flip the direction of the current sort
+  without changing its key; folders stay on top.
+- **Move to archive** on the Compress dialog — the originals go to the
+  Trash once the archive exists; refused (with the originals kept) when the
+  archive was written inside a folder being packed.
+- **Compare Directories (Mark Different by Content)** — same-named files
+  compared byte for byte off the main thread (size first, then a megabyte at
+  a time to the first difference); differing pairs marked on both sides,
+  uniques on theirs. Pro, like the date-based compare.
+- **Marked items only** on Advanced Search — TC's "search in selected
+  directories only": the roots are the panel's marks; a marked file is
+  tested itself, a marked folder is walked.
+- **"When a file already exists" policy** (Settings ▸ General ▸
+  Confirmations) — Ask each time / Overwrite if newer / Keep both / Skip /
+  Always overwrite. Anything but Ask answers every conflict of copy, move,
+  drag-drop and Copy As without a prompt.
+- **Calculate Occupied Space (⌃L)** — TC's Ctrl+L: bytes, on-disk size,
+  file and folder counts for the marked items, walked off the main thread.
+- **Restore Selection (⌃⌥/)** — TC's Num /: the marks that navigation,
+  Deselect All, a move or a delete cleared come back, matched by URL.
+- **⌥↩ opens Get Info** — TC's Alt+Enter "properties".
+- **Search inside archives** on Advanced Search — entries of ZIP, 7z, RAR
+  and tar archives met on the walk are matched by name, extension, size and
+  date; a hit opens the archive in the panel with the cursor on the entry.
+- **Rename in Brief view and the grid** — F2 / ⇧↩ opens a rename sheet with
+  the stem pre-selected where there is no cell to edit in place.
+- **Locked and Hidden on Change Attributes…** — the two macOS flags, each
+  Leave / On / Off; unlock is applied first so a locked file can be re-dated
+  and unlocked in one pass.
+- **The function-key bar shows its second layer** — hold ⇧, ⌥ or ⌃ and the
+  buttons relabel to what that chord does (⇧F5 Duplicate, ⌥F1 Volumes,
+  ⌃F5 Copy As…); keys with nothing on that layer dim. Clicking a relabelled
+  key runs the layered command.
+- **Bookmark names** — Rename Bookmark… in the Bookmarks sheet; the hotlist
+  and the sheet show the name, the folder's own name is the default.
+- **Panels Above Each Other** (View) — TC's vertical arrangement.
+- **Refresh Both Panels** (View).
+- **⌃⇞ / ⌃⇟** — TC's Ctrl+PageUp (parent) and Ctrl+PageDown (open the
+  cursor item), as remappable aliases.
+- **Pinned tabs open folders in a new tab** (Settings ▸ Layout, off by
+  default) — TC's locked tab: the pinned folder stays put and what you enter
+  opens beside it.
+- **Mirror Selection to Opposite Panel** — the same names marked on the
+  other side, case-insensitively.
+
+All new commands are in the command palette and remappable in
+Settings ▸ Shortcuts; 93 new strings in all 15 languages.
+
+### Fixed
+
+- **Entering a folder right after Unifyl comes forward could show the wrong
+  listing.** The app reloads both panels when it becomes active, and a
+  navigation that arrived while that reload was running was dropped: a pinned
+  tab's new tab opened empty, a plain tab kept the previous folder's rows
+  under the new path. Directory loads now queue behind a running one, and a
+  load whose tab moved on while it was listing discards its result.
+- **A sheet no longer opens on every window at once.** With more than one
+  main window open (File ▸ New Window), each hosts the same view bound to
+  app-wide UI state, so New Folder, the conflict prompt, the error alert and
+  every other app-level sheet appeared on all of them — a ghost behind the
+  one in front. Each sheet is now claimed by the window that is main when its
+  flag rises and shows only there.
+
+### Added — a few more Total Commander comforts
+
+- **Typing in the file list can filter it** (Settings ▸ Layout, off by
+  default). Off keeps Finder-style type-ahead — the cursor jumps to the first
+  matching name. On, the first key opens the quick-filter field with that
+  character, the way Total Commander's quick search works. Both the list and
+  the thumbnail grid honour it.
+- **Brief view columns fit the names.** The horizontal-flow layout sized every
+  column to a fixed width, clipping long names and wasting space on short
+  ones; columns are now as wide as the longest name on show, within bounds.
+- **The linked-browsing badge keeps its place.** The path-bar link glyph now
+  sits in a chip that holds its width, so a narrow pane no longer squeezes it
+  out from under the breadcrumb.
+- **Occupied-space wording (Korean).** The Ctrl+L summary reads more naturally.
+
 ## [1.7.3] — 2026-08-31
 
 ### Security
@@ -1607,7 +1759,8 @@ Initial public release.
 - **Themes & customization**: 12 built-in themes, custom editor, SVG icon packs, 120+ keyboard shortcuts.
 - **Cloud & remote**: FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive.
 
-[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v1.7.2...HEAD
+[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v1.8.0...HEAD
+[1.8.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.8.0
 [1.7.2]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.7.2
 [1.7.1]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.7.1
 [1.7.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.7.0
