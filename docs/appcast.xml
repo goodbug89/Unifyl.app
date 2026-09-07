@@ -6,6 +6,251 @@
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>
+            <title>Version 1.8.0</title>
+            <description><![CDATA[
+                <h2>Unifyl 1.8.0</h2>
+                <h3>Added — the Total Commander habits that had no home yet</h3>
+                <p>Fifteen things a long-time Total Commander user reaches for by reflex,</p>
+                <p>each verified against the behaviour a TC veteran would notice being wrong.</p>
+                <ul>
+                <li><b>Directory hotlist (⌃D).</b> The bookmark list as a pop-up under the cursor</li>
+                </ul>
+                <p>  row — TC&#x27;s Ctrl+D — with &quot;Add this folder&quot; / &quot;Remove this folder&quot; at the</p>
+                <p>  bottom so the list is maintained from where it is used. ⌘B still opens the</p>
+                <p>  full sheet for reordering.</p>
+                <ul>
+                <li><b>Folder history (⌥↓, and a clock button in the path bar).</b> Every tab's</li>
+                </ul>
+                <p>  back/forward stack as a list, newest first, current entry ticked. Pick a</p>
+                <p>  folder instead of pressing Back n times; a jump keeps the forward entries.</p>
+                <ul>
+                <li><b>Linked browsing (View ▸ Linked Browsing, ⌥⌘L).</b> Entering or leaving a</li>
+                </ul>
+                <p>  folder in one panel takes the same step in the other when a same-named</p>
+                <p>  folder exists there. Jumps to unrelated places don&#x27;t propagate. A link badge</p>
+                <p>  in the path bar shows it is on.</p>
+                <ul>
+                <li><b>Copy As… / Move As… (⌃F5 / ⌃F6).</b> TC's F5/F6 dialog with an editable</li>
+                </ul>
+                <p>  target: a single item can be renamed on the way, a folder that doesn&#x27;t</p>
+                <p>  exist yet is created, and the usual overwrite prompt applies.</p>
+                <ul>
+                <li><b>"Overwrite if Newer" in the conflict dialog</b>, which now also shows the</li>
+                </ul>
+                <p>  existing and incoming file&#x27;s size and date side by side with the newer one</p>
+                <p>  marked. Applies to copy, move, drag-drop and Copy As; an archive entry with</p>
+                <p>  no date to compare is kept rather than clobbered.</p>
+                <ul>
+                <li><b>Keyboard context menu (⇧F10).</b> The row's right-click menu, anchored to</li>
+                </ul>
+                <p>  the cursor row.</p>
+                <ul>
+                <li><b>Open With submenu</b> in the context menu: every app Launch Services offers</li>
+                </ul>
+                <p>  for all selected items, default first, plus Other….</p>
+                <ul>
+                <li><b>Finder comments.</b> A Comment column (Settings ▸ General ▸ File List</li>
+                </ul>
+                <p>  Columns) reading the same xattr Finder uses, and Edit Comment… (⌃Z, TC&#x27;s</p>
+                <p>  Ctrl+Z) that writes it — visible in Finder&#x27;s Get Info immediately.</p>
+                <ul>
+                <li><b>Change Attributes… (⌥⌘A).</b> Set modification and/or creation date on the</li>
+                </ul>
+                <p>  selection, optionally down into folders (deepest first, so a parent&#x27;s date</p>
+                <p>  isn&#x27;t bumped again by its own children).</p>
+                <ul>
+                <li><b>Save Selection to File… / Load Selection from File…</b> — one name per</li>
+                </ul>
+                <p>  line, loaded back with exact-then-case-insensitive matching and a count of</p>
+                <p>  what wasn&#x27;t in the folder.</p>
+                <ul>
+                <li><b>Select Same Name.</b> Marks every file sharing the cursor file's stem —</li>
+                </ul>
+                <p>  the RAW+JPEG and video+subtitle case &quot;Select Same Extension&quot; can&#x27;t do.</p>
+                <ul>
+                <li><b>Sort by Extension (⌃⌥E)</b>, and the Extension column header now sorts.</li>
+                <li><b>Reopen Closed Tab (⇧⌘T)</b>, per panel, including tabs closed by "Close</li>
+                </ul>
+                <p>  Others&quot; and &quot;Close to the Right&quot; (pinned survivors excluded).</p>
+                <ul>
+                <li><b>Copy Listing (Name, Size, Date)</b> — a tab-separated listing of the marked</li>
+                </ul>
+                <p>  items (or the whole folder) for a spreadsheet or a bug report.</p>
+                <ul>
+                <li><b>TC-style status bar</b>: "3 of 41 files, 1 of 6 folders · 12.4 MB of</li>
+                </ul>
+                <p>  1.2 GB&quot; instead of &quot;4 selected&quot;.</p>
+                <ul>
+                <li><b>Volumes for Left / Right Panel (⌥F1 / ⌥F2)</b> — TC's change-drive keys:</li>
+                </ul>
+                <p>  the mounted-volume list under that panel&#x27;s cursor row, boot disk first,</p>
+                <p>  free space as a second line; picking one shows its root there and gives</p>
+                <p>  that panel focus.</p>
+                <ul>
+                <li><b>Open Cursor Folder in Opposite Panel (⌃⌥→)</b> — the Total Commander step</li>
+                </ul>
+                <p>  whose native chord macOS reserves for Mission Control, hence the extra ⌥.</p>
+                <p>  &quot;..&quot; means the parent; a file shows its folder.</p>
+                <ul>
+                <li><b>Compare… on the conflict dialog</b> — the existing and incoming file open</li>
+                </ul>
+                <p>  side by side in the diff viewer before you decide.</p>
+                <ul>
+                <li><b>Pattern history on Select/Unselect by Pattern</b> — the last ten masks in a</li>
+                </ul>
+                <p>  dropdown, newest first.</p>
+                <ul>
+                <li><b>Sibling folders from the path bar</b> — each chevron between crumbs opens</li>
+                </ul>
+                <p>  the folders beside the next one, current one ticked.</p>
+                <ul>
+                <li><b>Deselect All (⌃⌘A)</b> — TC's Num-: clears the marks and leaves the cursor.</li>
+                <li><b>Rename with a name of your own on the conflict dialog</b> — the field</li>
+                </ul>
+                <p>  starts with the automatic &quot;name 2&quot; so you see what Rename would do, and</p>
+                <p>  anything you type replaces it. &quot;Apply to all&quot; carries the automatic suffix</p>
+                <p>  forward, never the typed name.</p>
+                <ul>
+                <li><b>Select for Compare → Compare with “file”</b> (⌃⌥C, context menu, Compare</li>
+                </ul>
+                <p>  menu) — a two-step diff between any two files, across folders, tabs or</p>
+                <p>  panels.</p>
+                <ul>
+                <li><b>Save Listing to File…</b> — the same tab-separated listing as Copy Listing,</li>
+                </ul>
+                <p>  as a `.tsv`.</p>
+                <ul>
+                <li><b>Brief View (⌃⌥B)</b> — TC's Ctrl+F1: icon and name only, filled</li>
+                </ul>
+                <p>  top-to-bottom in columns that scroll sideways. Same marks, cursor, keys,</p>
+                <p>  drag-drop and context menu as the grid it shares a collection view with.</p>
+                <ul>
+                <li><b>Reverse Sort Order (⌃⌥R)</b> — flip the direction of the current sort</li>
+                </ul>
+                <p>  without changing its key; folders stay on top.</p>
+                <ul>
+                <li><b>Move to archive</b> on the Compress dialog — the originals go to the</li>
+                </ul>
+                <p>  Trash once the archive exists; refused (with the originals kept) when the</p>
+                <p>  archive was written inside a folder being packed.</p>
+                <ul>
+                <li><b>Compare Directories (Mark Different by Content)</b> — same-named files</li>
+                </ul>
+                <p>  compared byte for byte off the main thread (size first, then a megabyte at</p>
+                <p>  a time to the first difference); differing pairs marked on both sides,</p>
+                <p>  uniques on theirs. Pro, like the date-based compare.</p>
+                <ul>
+                <li><b>Marked items only</b> on Advanced Search — TC's "search in selected</li>
+                </ul>
+                <p>  directories only&quot;: the roots are the panel&#x27;s marks; a marked file is</p>
+                <p>  tested itself, a marked folder is walked.</p>
+                <ul>
+                <li><b>"When a file already exists" policy</b> (Settings ▸ General ▸</li>
+                </ul>
+                <p>  Confirmations) — Ask each time / Overwrite if newer / Keep both / Skip /</p>
+                <p>  Always overwrite. Anything but Ask answers every conflict of copy, move,</p>
+                <p>  drag-drop and Copy As without a prompt.</p>
+                <ul>
+                <li><b>Calculate Occupied Space (⌃L)</b> — TC's Ctrl+L: bytes, on-disk size,</li>
+                </ul>
+                <p>  file and folder counts for the marked items, walked off the main thread.</p>
+                <ul>
+                <li><b>Restore Selection (⌃⌥/)</b> — TC's Num /: the marks that navigation,</li>
+                </ul>
+                <p>  Deselect All, a move or a delete cleared come back, matched by URL.</p>
+                <ul>
+                <li><b>⌥↩ opens Get Info</b> — TC's Alt+Enter "properties".</li>
+                <li><b>Search inside archives</b> on Advanced Search — entries of ZIP, 7z, RAR</li>
+                </ul>
+                <p>  and tar archives met on the walk are matched by name, extension, size and</p>
+                <p>  date; a hit opens the archive in the panel with the cursor on the entry.</p>
+                <ul>
+                <li><b>Rename in Brief view and the grid</b> — F2 / ⇧↩ opens a rename sheet with</li>
+                </ul>
+                <p>  the stem pre-selected where there is no cell to edit in place.</p>
+                <ul>
+                <li><b>Locked and Hidden on Change Attributes…</b> — the two macOS flags, each</li>
+                </ul>
+                <p>  Leave / On / Off; unlock is applied first so a locked file can be re-dated</p>
+                <p>  and unlocked in one pass.</p>
+                <ul>
+                <li><b>The function-key bar shows its second layer</b> — hold ⇧, ⌥ or ⌃ and the</li>
+                </ul>
+                <p>  buttons relabel to what that chord does (⇧F5 Duplicate, ⌥F1 Volumes,</p>
+                <p>  ⌃F5 Copy As…); keys with nothing on that layer dim. Clicking a relabelled</p>
+                <p>  key runs the layered command.</p>
+                <ul>
+                <li><b>Bookmark names</b> — Rename Bookmark… in the Bookmarks sheet; the hotlist</li>
+                </ul>
+                <p>  and the sheet show the name, the folder&#x27;s own name is the default.</p>
+                <ul>
+                <li><b>Panels Above Each Other</b> (View) — TC's vertical arrangement.</li>
+                <li><b>Refresh Both Panels</b> (View).</li>
+                <li><b>⌃⇞ / ⌃⇟</b> — TC's Ctrl+PageUp (parent) and Ctrl+PageDown (open the</li>
+                </ul>
+                <p>  cursor item), as remappable aliases.</p>
+                <ul>
+                <li><b>Pinned tabs open folders in a new tab</b> (Settings ▸ Layout, off by</li>
+                </ul>
+                <p>  default) — TC&#x27;s locked tab: the pinned folder stays put and what you enter</p>
+                <p>  opens beside it.</p>
+                <ul>
+                <li><b>Mirror Selection to Opposite Panel</b> — the same names marked on the</li>
+                </ul>
+                <p>  other side, case-insensitively.</p>
+                <p>All new commands are in the command palette and remappable in</p>
+                <p>Settings ▸ Shortcuts; 93 new strings in all 15 languages.</p>
+                <h3>Fixed</h3>
+                <ul>
+                <li>**Entering a folder right after Unifyl comes forward could show the wrong</li>
+                </ul>
+                <p>  listing.** The app reloads both panels when it becomes active, and a</p>
+                <p>  navigation that arrived while that reload was running was dropped: a pinned</p>
+                <p>  tab&#x27;s new tab opened empty, a plain tab kept the previous folder&#x27;s rows</p>
+                <p>  under the new path. Directory loads now queue behind a running one, and a</p>
+                <p>  load whose tab moved on while it was listing discards its result.</p>
+                <ul>
+                <li><b>A sheet no longer opens on every window at once.</b> With more than one</li>
+                </ul>
+                <p>  main window open (File ▸ New Window), each hosts the same view bound to</p>
+                <p>  app-wide UI state, so New Folder, the conflict prompt, the error alert and</p>
+                <p>  every other app-level sheet appeared on all of them — a ghost behind the</p>
+                <p>  one in front. Each sheet is now claimed by the window that is main when its</p>
+                <p>  flag rises and shows only there.</p>
+                <h3>Added — a few more Total Commander comforts</h3>
+                <ul>
+                <li><b>Typing in the file list can filter it</b> (Settings ▸ Layout, off by</li>
+                </ul>
+                <p>  default). Off keeps Finder-style type-ahead — the cursor jumps to the first</p>
+                <p>  matching name. On, the first key opens the quick-filter field with that</p>
+                <p>  character, the way Total Commander&#x27;s quick search works. Both the list and</p>
+                <p>  the thumbnail grid honour it.</p>
+                <ul>
+                <li><b>Brief view columns fit the names.</b> The horizontal-flow layout sized every</li>
+                </ul>
+                <p>  column to a fixed width, clipping long names and wasting space on short</p>
+                <p>  ones; columns are now as wide as the longest name on show, within bounds.</p>
+                <ul>
+                <li><b>The linked-browsing badge keeps its place.</b> The path-bar link glyph now</li>
+                </ul>
+                <p>  sits in a chip that holds its width, so a narrow pane no longer squeezes it</p>
+                <p>  out from under the breadcrumb.</p>
+                <ul>
+                <li><b>Occupied-space wording (Korean).</b> The Ctrl+L summary reads more naturally.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 07 Sep 2026 12:31:32 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v1.8.0/Unifyl-1.8.0.dmg"
+                sparkle:version="46"
+                sparkle:shortVersionString="1.8.0"
+                sparkle:edSignature="bydv8fq38tyNrrAyLhA/+uJYgUoB+VWqhLtoDAcaE71EGws1wkJJ41LFQ/+UMiUf27p4w9UmhLcPsgcmhfSdCw=="
+                length="19621796"
+                type="application/octet-stream"
+            />
+        </item>
+        <item>
             <title>Version 1.7.3</title>
             <description><![CDATA[
                 <h2>Unifyl 1.7.3</h2>
