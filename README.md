@@ -60,11 +60,11 @@
 
 ### :file_folder: Dual-Pane File Management
 
-- Single, dual, triple, and free-split pane layouts
+- Two panels, side by side or stacked (View ▸ Panels Above Each Other)
 - Tabbed browsing with tab groups and persistent workspaces
 - Drag-and-drop with spring-loaded folders
 - Queue manager with pause, resume, and speed throttling
-- Inline terminal per pane
+- Terminal panel and Quick Terminal (direct download only)
 
 ### :mag: Search & Filter
 
@@ -76,12 +76,13 @@
 
 ### :robot: AI-Powered Tools
 
+- **Downloads Auto-pilot** (new in 2.0, Pro) — watches Downloads and any folder you add, proposes a folder for each new file and moves nothing until you approve; ⌘Z undoes. File names in any language are matched.
 - **Semantic search** -- find files by meaning, not just name (local embeddings + vector DB)
 - **AI rename** -- suggest filenames from image recognition or document content
 - **Smart tagging** -- auto-classify files using on-device NLP
 - **Duplicate intelligence** -- perceptual hashing to surface near-duplicates
 - **Natural language commands** -- tell the command palette what you want in plain English
-- All AI processing runs locally on Apple Neural Engine. Your files never leave your Mac.
+- All AI processing runs on your Mac with Apple's Natural Language and Vision frameworks. Your files never leave your Mac.
 
 ### :globe_with_meridians: Remote & Cloud
 
@@ -109,7 +110,7 @@
 - EXIF/metadata bulk editor: batch edit date, GPS, author, copyright
 - Incremental backup with delta analysis (new, modified, unchanged)
 - Real-time log viewer with keyword highlighting and filter
-- File operation undo/redo (copy, move, delete reversible)
+- File operation undo (copy, move, delete and 10 more reversible via ⌘Z)
 - Macro recorder: record file operations, save, replay with variables
 - Multi-panel workspace layouts: save and restore tab arrangements
 - File operation scheduler with cron-based automation
@@ -160,9 +161,8 @@ Also available on the [Mac App Store](https://apps.apple.com/app/unifyl/id677397
 brew install goodbug89/unifyl/unifyl
 ```
 
-Recent Homebrew versions ask you to trust third-party taps once first:
-`brew trust goodbug89/unifyl`. Installs the notarized direct-distribution
-build (auto-updates via Sparkle).
+Recent Homebrew versions ask you to trust the tap once first: `brew trust goodbug89/unifyl`.
+The Homebrew install is the direct-download edition, updated in the app.
 
 ---
 
@@ -174,7 +174,7 @@ the full power-user feature set.
 
 | | **Free** (anyone) | **Pro — $24.99 once** |
 |---|---|---|
-| Pane layouts | Dual / triple / free-split (all) | (same) |
+| Pane layouts | Two panels, side by side or stacked | (same) |
 | Tabs & workspaces | Unlimited | (same) |
 | Search | Filename + Spotlight + CJK multilingual | + in-file content search (regex) |
 | Remote connections | FTP, SFTP | + FTPS, WebDAV, SMB, all cloud (Google Drive, Dropbox, OneDrive, S3, B2, GCS, Azure Blob) |

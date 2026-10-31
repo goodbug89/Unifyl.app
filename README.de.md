@@ -39,8 +39,9 @@
 
 Unifyl ist der Zweipanel-Dateimanager für macOS, der professionelle Power-Tools mit lokaler KI-Intelligenz verbindet. Ihre Dateien verlassen Ihren Mac nie.
 
-- **Zweipanel** — Einzel-, Zwei-, Dreipanel- und freie Split-Layouts, Tabs, Arbeitsbereiche, Inline-Terminal in jedem Panel
-- **KI-gestützt** — Semantische Suche, KI-Umbenennung, intelligente Tags, Duplikat-Erkennung — alles lokal auf Apple Neural Engine
+- **Downloads-Autopilot** (neu in 2.0, Pro) — beobachtet Downloads und jeden hinzugefügten Ordner, schlägt für jede neue Datei einen Ordner vor und bewegt nichts ohne deine Freigabe; ⌘Z macht es rückgängig. Dateinamen werden in jeder Sprache abgeglichen.
+- **Zweipanel** — Zwei Panels nebeneinander oder übereinander, Tabs, Arbeitsbereiche, Terminalbereich und Schnellterminal (nur Direkt-Download)
+- **KI-gestützt** — Semantische Suche, KI-Umbenennung, intelligente Tags, Duplikat-Erkennung — alles lokal auf dem Mac mit Apples Frameworks Natural Language und Vision
 - **Remote & Cloud** — FTP, SFTP, WebDAV, SMB, S3, Google Drive, Dropbox, OneDrive, Docker, Kubernetes
 - **Über 50 professionelle Werkzeuge** — Mehrfach-Umbenennen, Text/Binär/Bildvergleich, Verzeichnissynchronisation, 3-Wege-Merge, EXIF-Stapeleditor
 - **Archive als virtuelle Ordner** — ZIP, 7z, TAR, GZ, BZ2, XZ, ZSTD, RAR (inkl. automatischer Kodierungserkennung für CJK-Legacy-ZIPs)
@@ -67,7 +68,7 @@ Auch im [Mac App Store](https://apps.apple.com/app/unifyl/id6773977314?mt=12) er
 
 | | **Free** | **Pro — $24.99** |
 |---|---|---|
-| Panel-Layouts | Zwei/drei/frei geteilt (alle) | Einzel, Zwei, Drei, freier Split |
+| Panel-Layouts | Zwei Panels, nebeneinander oder übereinander | Zwei Panels, nebeneinander oder übereinander |
 | Suche | Basis + Spotlight | Voller Regex + Inhaltssuche |
 | KI-Werkzeuge | — | Alle KI-Funktionen |
 | Remote-Verbindungen | FTP, SFTP | Alle Protokolle + Cloud-Speicher |

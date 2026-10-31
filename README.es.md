@@ -39,8 +39,9 @@
 
 Unifyl es el gestor de archivos de doble panel para macOS que combina herramientas profesionales con inteligencia artificial local. Tus archivos nunca salen de tu Mac.
 
-- **Doble panel** — Diseños de uno, dos, tres y división libre, pestañas, espacios de trabajo, terminal integrado en cada panel
-- **Impulsado por IA** — Búsqueda semántica, renombrado por IA, etiquetado inteligente, detección de duplicados — todo local en Apple Neural Engine
+- **Piloto automático de Descargas** (novedad en 2.0, Pro): vigila Descargas y las carpetas que añadas, propone una carpeta para cada archivo nuevo y no mueve nada sin tu aprobación; ⌘Z lo deshace. Los nombres de archivo se comparan en cualquier idioma.
+- **Doble panel** — Dos paneles, uno junto al otro o uno sobre otro, pestañas, espacios de trabajo, panel de terminal y Terminal rápido (solo descarga directa)
+- **Impulsado por IA** — Búsqueda semántica, renombrado por IA, etiquetado inteligente, detección de duplicados — todo local en el Mac con los frameworks Natural Language y Vision de Apple
 - **Remoto y nube** — FTP, SFTP, WebDAV, SMB, S3, Google Drive, Dropbox, OneDrive, Docker, Kubernetes
 - **Más de 50 herramientas profesionales** — Renombrado por lotes, comparación de texto/binario/imagen, sincronización de directorios, fusión a 3 vías, edición masiva de EXIF
 - **Archivos como carpetas virtuales** — ZIP, 7z, TAR, GZ, BZ2, XZ, ZSTD, RAR (incluida la detección automática de codificación de ZIP heredados CJK)
@@ -67,7 +68,7 @@ También disponible en el [Mac App Store](https://apps.apple.com/app/unifyl/id67
 
 | | **Free** | **Pro — $24.99** |
 |---|---|---|
-| Diseños de panel | Doble, triple, división libre (todos) | Doble, triple, división libre (todos) |
+| Diseños de panel | Dos paneles, uno junto al otro o uno sobre otro | Dos paneles, uno junto al otro o uno sobre otro |
 | Búsqueda | Básica + Spotlight | Regex completo + búsqueda de contenido |
 | Herramientas con IA | — | Todas las funciones de IA |
 | Conexiones remotas | FTP, SFTP | Todos los protocolos + almacenamiento en la nube |

@@ -16,8 +16,9 @@
 
 Unifyl, profesyonel araçları yerel cihaz üstü AI ile birleştiren macOS için çift bölmeli dosya yöneticisidir. Dosyalarınız asla Mac'inizden ayrılmaz.
 
-- **Çift bölme** — Tek/çift/üçlü/serbest bölünmüş düzenler, sekmeler, çalışma alanları, her bölmede satır içi terminal
-- **AI destekli** — Anlamsal arama, AI ile yeniden adlandırma, akıllı etiketleme, yinelenenleri tespit — tümü Apple Neural Engine üzerinde yerel
+- **İndirilenler Otopilotu** (2.0'da yeni, Pro) — İndirilenler'i ve eklediğiniz klasörleri izler, her yeni dosya için bir klasör önerir ve siz onaylamadan hiçbir şeyi taşımaz; ⌘Z geri alır. Dosya adları her dilde eşleştirilir.
+- **Çift bölme** — Yan yana ya da üst üste iki panel, sekmeler, çalışma alanları, Terminal Paneli ve Hızlı Terminal (yalnızca doğrudan indirme sürümünde)
+- **AI destekli** — Anlamsal arama, AI ile yeniden adlandırma, akıllı etiketleme, yinelenenleri tespit — tümü Apple'ın Natural Language ve Vision çerçeveleriyle Mac üzerinde yerel
 - **Uzaktan & bulut** — FTP/SFTP/WebDAV/SMB/S3/Google Drive/Dropbox/OneDrive/Docker/Kubernetes
 - **50'ten fazla profesyonel araç** — Toplu yeniden adlandırma, metin/ikili/resim karşılaştırma, dizin eşitleme, 3 yönlü birleştirme, EXIF toplu düzenleme
 - **Arşivler sanal klasör olarak** — ZIP/7z/TAR/GZ/BZ2/XZ/ZSTD/RAR (eski CJK ZIP'lerinin otomatik kodlama algılaması dahil)
@@ -30,7 +31,7 @@ Unifyl, profesyonel araçları yerel cihaz üstü AI ile birleştiren macOS içi
 
 | | **Free** | **Pro — $24.99** |
 |---|---|---|
-| Bölme düzenleri | İkili/üçlü/serbest bölme (tümü) | Tek/çift/üçlü/serbest bölünme |
+| Bölme düzenleri | İki panel, yan yana ya da üst üste | İki panel, yan yana ya da üst üste |
 | AI araçları | — | Tüm AI fonksiyonları |
 | Uzaktan bağlantılar | FTP, SFTP | Tüm protokoller + bulut |
 | Arşivler | ZIP | ZIP/7z/TAR/GZ/BZ2/XZ/ZSTD/RAR/**ALZ** |

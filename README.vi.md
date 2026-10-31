@@ -16,8 +16,9 @@
 
 Unifyl là trình quản lý tệp hai cửa sổ cho macOS, kết hợp công cụ chuyên nghiệp với AI cục bộ trên thiết bị. Tệp của bạn không bao giờ rời khỏi Mac.
 
-- **Hai cửa sổ** — Bố cục đơn/đôi/ba/chia tự do, các tab, không gian làm việc, thiết bị đầu cuối tích hợp cho từng cửa sổ
-- **Hỗ trợ bởi AI** — Tìm kiếm theo ngữ nghĩa, đổi tên bằng AI, gắn thẻ thông minh, phát hiện trùng lặp — tất cả chạy cục bộ trên Apple Neural Engine
+- **Tự động dọn thư mục Tải về** (mới trong 2.0, Pro) — theo dõi thư mục Tải về và các thư mục bạn thêm, đề xuất thư mục cho mỗi tệp mới và không di chuyển gì cho đến khi bạn chấp thuận; ⌘Z hoàn tác. Tên tệp ở bất kỳ ngôn ngữ nào cũng được so khớp.
+- **Hai cửa sổ** — Hai bảng đặt cạnh nhau hoặc xếp trên dưới, các tab, không gian làm việc, Bảng Terminal và Terminal nhanh (chỉ bản tải trực tiếp)
+- **Hỗ trợ bởi AI** — Tìm kiếm theo ngữ nghĩa, đổi tên bằng AI, gắn thẻ thông minh, phát hiện trùng lặp — tất cả chạy cục bộ trên Mac bằng các framework Natural Language và Vision của Apple
 - **Từ xa & đám mây** — FTP/SFTP/WebDAV/SMB/S3/Google Drive/Dropbox/OneDrive/Docker/Kubernetes
 - **Hơn 50 công cụ chuyên nghiệp** — Đổi tên hàng loạt, so sánh văn bản/nhị phân/hình ảnh, đồng bộ thư mục, hợp nhất 3 hướng, chỉnh sửa EXIF hàng loạt
 - **Tệp nén thành thư mục ảo** — ZIP/7z/TAR/GZ/BZ2/XZ/ZSTD/RAR (bao gồm tự động phát hiện mã hóa ZIP CJK cũ)
@@ -30,7 +31,7 @@ Unifyl là trình quản lý tệp hai cửa sổ cho macOS, kết hợp công c
 
 | | **Free** | **Pro — $24.99** |
 |---|---|---|
-| Bố cục cửa sổ | Đôi/ba/chia tự do (tất cả) | Đơn/đôi/ba/chia tự do |
+| Bố cục cửa sổ | Hai bảng, cạnh nhau hoặc trên dưới | Hai bảng, cạnh nhau hoặc trên dưới |
 | Công cụ AI | — | Tất cả các chức năng AI |
 | Kết nối từ xa | FTP, SFTP | Tất cả giao thức + đám mây |
 | Tệp nén | ZIP | ZIP/7z/TAR/GZ/BZ2/XZ/ZSTD/RAR/**ALZ** |

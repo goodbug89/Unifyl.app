@@ -39,8 +39,9 @@
 
 Unifyl est le gestionnaire de fichiers à double panneau pour macOS qui combine des outils professionnels et une intelligence artificielle locale. Vos fichiers ne quittent jamais votre Mac.
 
-- **Double panneau** — Mises en page simple, double, triple et libre, onglets, espaces de travail, terminal intégré dans chaque panneau
-- **Propulsé par l'IA** — Recherche sémantique, renommage par IA, étiquetage intelligent, détection de doublons — le tout local sur Apple Neural Engine
+- **Pilote automatique des Téléchargements** (nouveau dans la 2.0, Pro) — surveille Téléchargements et les dossiers que vous ajoutez, propose un dossier pour chaque nouveau fichier et ne déplace rien sans votre accord ; ⌘Z annule. Les noms de fichiers sont comparés dans toutes les langues.
+- **Double panneau** — Deux panneaux côte à côte ou superposés, onglets, espaces de travail, panneau Terminal et Terminal rapide (téléchargement direct uniquement)
+- **Propulsé par l'IA** — Recherche sémantique, renommage par IA, étiquetage intelligent, détection de doublons — le tout en local sur le Mac grâce aux frameworks Natural Language et Vision d'Apple
 - **Distant et cloud** — FTP, SFTP, WebDAV, SMB, S3, Google Drive, Dropbox, OneDrive, Docker, Kubernetes
 - **Plus de 50 outils professionnels** — Renommer par lot, comparaison texte/binaire/image, synchronisation de dossiers, fusion à 3 voies, édition EXIF par lot
 - **Archives en dossiers virtuels** — ZIP, 7z, TAR, GZ, BZ2, XZ, ZSTD, RAR (avec détection automatique de l'encodage des ZIP CJK hérités)
@@ -67,7 +68,7 @@ Obtenez la dernière version sur [unifyl.app/download](https://github.com/goodbu
 
 | | **Free** | **Pro — $24.99** |
 |---|---|---|
-| Mises en page | Double, triple, division libre (toutes) | Simple, double, triple, libre |
+| Mises en page | Deux panneaux, côte à côte ou superposés | Deux panneaux, côte à côte ou superposés |
 | Recherche | Basique + Spotlight | Regex complet + recherche de contenu |
 | Outils IA | — | Toutes les fonctions IA |
 | Connexions distantes | FTP, SFTP | Tous les protocoles + stockage cloud |

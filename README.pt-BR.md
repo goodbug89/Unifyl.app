@@ -16,8 +16,9 @@
 
 Unifyl é o gerenciador de arquivos de painel duplo para macOS que combina ferramentas profissionais com IA local no dispositivo. Seus arquivos nunca saem do seu Mac.
 
-- **Painel duplo** — Layouts simples/duplo/triplo/divisão livre, abas, espaços de trabalho, terminal embutido por painel
-- **Impulsionado por IA** — Busca semântica, renomeação por IA, etiquetagem inteligente, detecção de duplicatas — tudo rodando localmente no Apple Neural Engine
+- **Piloto automático de Downloads** (novidade na 2.0, Pro) — observa Downloads e as pastas que você adicionar, propõe uma pasta para cada arquivo novo e não move nada sem a sua aprovação; ⌘Z desfaz. Nomes de arquivo são comparados em qualquer idioma.
+- **Painel duplo** — Dois painéis lado a lado ou um sobre o outro, abas, espaços de trabalho, painel do Terminal e Terminal rápido (só no download direto)
+- **Impulsionado por IA** — Busca semântica, renomeação por IA, etiquetagem inteligente, detecção de duplicatas — tudo rodando localmente no Mac com os frameworks Natural Language e Vision da Apple
 - **Remoto & nuvem** — FTP/SFTP/WebDAV/SMB/S3/Google Drive/Dropbox/OneDrive/Docker/Kubernetes
 - **Mais de 50 ferramentas profissionais** — Renomeação em lote, comparação de texto/binário/imagem, sincronização de diretórios, mesclagem de 3 vias, edição em lote de EXIF
 - **Arquivos como pastas virtuais** — ZIP/7z/TAR/GZ/BZ2/XZ/ZSTD/RAR (inclui detecção automática de codificação de ZIP CJK legados)
@@ -30,7 +31,7 @@ Unifyl é o gerenciador de arquivos de painel duplo para macOS que combina ferra
 
 | | **Free** | **Pro — $24.99** |
 |---|---|---|
-| Layouts de painel | Duplo/triplo/divisão livre (todos) | Simples/duplo/triplo/divisão livre |
+| Layouts de painel | Dois painéis, lado a lado ou um sobre o outro | Dois painéis, lado a lado ou um sobre o outro |
 | Ferramentas com IA | — | Todas as funções de IA |
 | Conexões remotas | FTP, SFTP | Todos os protocolos + nuvem |
 | Arquivos | ZIP | ZIP/7z/TAR/GZ/BZ2/XZ/ZSTD/RAR/**ALZ** |
