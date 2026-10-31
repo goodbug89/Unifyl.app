@@ -5,6 +5,354 @@ All notable changes to Unifyl will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.0.0] — 2026-10-31
+
+### Changed
+
+- **The folder you are in is the path bar's title, and it never clips.** The
+  bar used to flow left to right, so a deep path pushed the current folder
+  off the right edge. It is now a 15pt title followed by the full path,
+  ending in that folder, as a small mono path that clips at its head. Focus shows as a 3pt accent rule on
+  the active pane's leading edge; the tinted path bar and its top stripe are
+  gone. Size and date columns draw in the system monospace and column
+  headers drop to 10.5pt, so a listing reads as a table under a title. The
+  toolbar keeps to navigation (Home, Bookmarks and Recent Folders moved into
+  the folder menu at its centre, Help into the ⋯ menu), tabs lose their
+  fill, and the function-key bar is one line of "F5 Copy" pairs the way
+  Total Commander draws it. Checked on all eleven built-in palettes: the
+  quieter metadata colour is measured against the row it lands on and lifted
+  wherever it would fall under 4.5:1, and the function-key labels use the
+  secondary text colour, which clears 3:1 everywhere the muted one did not.
+- **Size, date and kind step back behind the name.** They sit half a point
+  smaller and slightly translucent, so a row reads as name-then-details
+  instead of four columns of equal weight. Same row height, same fonts, same
+  density. The per-type name colours (yellow folders, green images) stay on
+  by default and are now a setting — Settings ▸ General ▸ File List Display ▸
+  "Color file names by type" — for anyone who wants names in the text colour
+  with the icon carrying the type.
+- **The background size gauge draws in the theme's accent.** It was a fixed
+  system green (files) and blue (folders) at low opacity, which over a dark
+  purple-black theme rendered as a grey smear behind every name. Files at 9%
+  and folders at 16% of the accent colour now read as a gauge on every
+  built-in theme; the System Default preset uses the macOS accent.
+
+### Added
+
+- **Drag out of an archive.** A row inside a ZIP, 7z, tar or RAR can be
+  dragged to Finder, the Desktop or the other panel; the entry is extracted
+  where it lands, under whatever name the receiver chose. The drag was refused
+  before, because an archive row's URL points at a real file beside the
+  archive and handing that out acted on the wrong file. Rows now drag as file
+  promises instead: the archive is unpacked once per drag, on the first drop,
+  and each promised file is copied out of that. Marked sets drag together.
+  Encrypted archives explain that F5 is the way out; dropping promised files
+  into an archive, onto an archive row, back into the source panel, or into a
+  Smart Folder is refused. Promises requested together share one extraction;
+  its scratch copy is removed when extraction fails, after 15 idle minutes,
+  and at the next launch if the app quit mid-drag. Dropping an archive folder
+  onto a folder row of the same name copies into that folder. Files dropped in
+  from other apps that fail to arrive are reported.
+- **Downloads Auto-pilot (Pro; Settings ▸ General ▸ Auto-pilot, off by
+  default).** Unifyl watches Downloads and, once a new file has stopped
+  growing, proposes the folder it belongs in — Documents, Desktop or one of
+  your bookmarked folders, chosen by the same on-device classifier and folder
+  profiles AI Organize uses. Proposals wait in Tools ▸ Auto-pilot Inbox (and
+  as a count in the toolbar); nothing moves until you approve it, every move
+  is a single ⌘Z away, a landing that would collide is renamed "name 2", and
+  a kind of proposal you dismiss twice is not offered again. Browser
+  in-progress downloads are ignored, files already in Downloads when it was
+  switched on are left alone unless you ask for them, and the media libraries
+  (~/Pictures, ~/Movies, ~/Music) are never read or proposed. Rule memory and
+  pending proposals survive a relaunch; a corrupt store is set aside rather
+  than silently dropped. Auto-pilot can watch more than Downloads: Settings ▸
+  General ▸ Auto-pilot lists the watched folders — add the Desktop, a
+  messenger's receive folder or a scanner drop — and every one feeds the same
+  inbox; a watched folder is never a destination. Tuned against a real
+  Downloads folder: the shown
+  confidence is capped at 95% and drops when the runner-up folder is a
+  coin toss away; one pass sends at most eight files to the same folder so
+  "Approve All" cannot misfile a batch into a folder that merely holds many
+  documents; messenger and browser receive folders (KakaoTalk, WeChat, LINE,
+  Daou, Whale, Telegram, Slack) are never proposed as destinations; and a
+  root folder with no subfolders is a destination itself, with a subfolder
+  winning whenever it is close behind. A move that fails stays in the inbox
+  with the reason shown there, and is not learned as an approval; Approve All
+  reports how many moved. A watched folder that cannot be read is reported
+  instead of being treated as empty (which would have re-proposed everything
+  in it once it came back). Zero-byte placeholders — Firefox creates the final
+  name empty while it writes to `.part` — wait until they hold data. In the
+  App Store build, added watched folders keep their access across relaunches
+  and only folders the app may write to are proposed. Approving checks the
+  Pro licence at that moment, so a lapsed licence stops moves. The line
+  reporting a move ends with "⌘Z undoes it"; a file ⌘Z brings back is not
+  proposed again, a dismissal counts in every watched folder, and a file
+  still downloading when a setting changes is proposed once it settles
+  instead of being folded into the new baseline. In the inbox, Return
+  approves the highlighted proposal and Delete dismisses it, Escape closes
+  it, and VoiceOver reads each row as one sentence — file, folder, match and
+  reason — with the file named on its Approve and Dismiss buttons. With
+  Auto-pilot off, the inbox offers Open Settings.
+
+- **The command palette opens Help and your recent folders.** "Unifyl
+  Help" is a palette command, and typing a folder name lists the folders
+  you visit most as "Recent Folder: name"; choosing one opens it in the
+  active panel.
+
+- **S3 service presets.** The S3 connection sheet has a Service menu — NAVER
+  Cloud Object Storage, KakaoCloud Object Storage, Cloudflare R2, Wasabi,
+  DigitalOcean Spaces — that fills in the region and endpoint the service
+  signs with. Any other S3-compatible endpoint still goes in by hand; the menu
+  reads back whatever the endpoint field names.
+
+- **The Help manual is rewritten for 2.0, in all 15 languages.** It had
+  last been written for 1.2.2 and described neither Auto-pilot, the 1.8.0
+  Total Commander habits, Statistics, Reclaim Space nor the App Store edition,
+  while getting things wrong: a redo (⇧⌘Z) that does not exist, ⌘G for Go to
+  Folder (⇧⌘G), ⇧F9 as Extract (it packs; Extract is ⌥F9), ⇧⌘H as the Heatmap
+  (it goes Home), a two-second right-button hold (0.8 s), Vim keys that
+  type-to-select took over long ago, and a QR generator, OCR tool, REST
+  explorer and environment-variable editor the app no longer has. Its
+  complete shortcut list is now generated from the app's own default bindings
+  in each language (`scripts/gen-manual-shortcuts.py`), and audit F81 fails
+  when the two drift apart.
+
+### Fixed
+
+- **Overwriting during archive extraction goes to the Trash.** Answering
+  "Overwrite" when an extracted file or folder collided with one already in
+  the destination deleted the existing item permanently — a folder with
+  everything in it, not merged. It now goes to the Trash, as an ordinary
+  copy's overwrite always has.
+- **A crafted or truncated binary no longer crashes File X-Ray.** The Mach-O
+  reader read a load command's fields past the end of the file when the
+  command declared the minimum size. Found by a new mutation fuzz suite
+  (Mach-O, DMG trailer, S3/Azure/WebDAV XML, FTP/SFTP/SMB listings, text
+  encoding detection — about 30,000 cases per run).
+- **One malformed line from an SFTP server no longer crashes the app.** A
+  listing whose time field was a bare ":" indexed an empty array.
+- **An S3 endpoint that is not a full address is refused when saving**, with
+  the reason next to the field. A value that did not parse as a URL used to
+  connect to AWS instead, silently.
+- **VoiceOver says which pane and which tab are active.** Both were shown only
+  by colour; the file list reads "File list, active pane" and the active tab
+  and path-bar title carry the selected trait.
+- **Settings ▸ Keyboard Shortcuts speaks your language.** Command and
+  category names were drawn as plain strings, so every language saw the
+  English list; 38 of them had no translation anywhere. They are localized
+  now, and the search field matches both the localized and the English name.
+- **Opening the disk root no longer hangs when the automounter stalls.**
+  Listing "/" read the Finder tags of every entry, and reading them follows
+  symlinks — `/home` is a link into the auto_home automount, so a stuck
+  automounter blocked the listing forever (found when a test of "/" hung).
+  Tags are now read per item and never through a symlink.
+- **Traditional Chinese shows Traditional Chinese.** About 220 entries in the
+  zh-Hant catalog were Simplified Chinese (个, 选择, 服务器…); they now use
+  Taiwan forms and vocabulary (個, 選擇, 伺服器, 檔案, 資料夾).
+- **Auto-pilot's Dismiss buttons say "reject", not "close".** They shared the
+  generic Dismiss string, which eleven languages translate as Close.
+- **An S3 or Azure object without a modification date no longer shows as
+  modified now.** A listing entry with a missing or unreadable date was
+  stamped with the current time, so Folder Sync compared it as newer than
+  anything local. It now has no date, and Folder Sync flags it for you to
+  decide. HTTP-style dates (`Tue, 29 Sep 2026 09:00:00 GMT`) are read too.
+
+- **The direct download checks for updates on its own again.** Automatic
+  checks were switched off in April as a stopgap while the update-signing
+  key was missing, and stayed off after the key shipped in 1.0.3: a new
+  install only learned of an update from Unifyl ▸ Check for Updates….
+  From 2.0 it checks daily. Installs older than 2.0 still need that one
+  manual check to arrive here.
+- **Photo summaries keep the location on your Mac.** AI Summarize looked up
+  the place name of every GPS-tagged photo through Apple's geocoding
+  service — sending its coordinates out of a feature described as
+  on-device — and dropped the hemisphere, placing southern and western
+  photos elsewhere. It now shows the coordinates from the photo itself
+  ("38.7223°N, 9.1393°W"), and the description is in the app's language.
+  The AI classification pitch no longer claims Core ML, which Unifyl does
+  not use.
+- **The natural-language command works.** Search ▸ AI Natural Language
+  Command… opened a sheet with no field, which parsed an empty sentence and
+  sat on "Analyzing command…" forever. It now has a field (Return
+  analyses, ⌘↩ runs), acts on the current folder when the sentence names
+  none, and reads which folder is the source and which the destination —
+  a lone "to ~/Documents" used to become the folder files were taken
+  *from*, and Korean sentences ("~/Downloads에서 ~/Documents로",
+  "30일 지난", "100MB보다 큰") found no path or condition at all. Only move,
+  copy and delete run; other verbs say so instead of enabling a button
+  that did nothing.
+- **Settings ▸ AI's provider choice is used.** It saved a plugin choice for
+  five capabilities and nothing read it. Tags (classification) and name
+  suggestions (renaming) now come from the chosen AI plugin in AI Smart
+  Tagging, AI Rename and Multi-Rename's AI rule; the capabilities a plugin
+  cannot serve are no longer offered, and Test runs the chosen providers
+  instead of the built-in embedding engine.
+- **A custom theme's Hidden Files colour colours hidden files** in the list;
+  it was saved with the theme and shown only in the editor's preview.
+- **SFTP password login works in the Mac App Store edition.** ssh asks for
+  the password through a helper program, and the edition pointed it at a
+  script it had just written — which the App Store sandbox refuses to
+  execute ("ssh_askpass: exec: Operation not permitted"), so a password
+  login could not succeed. The edition now carries a small signed helper
+  the sandbox does allow, and hands it the password in a private file
+  instead of a script. Found and verified with a probe signed with the
+  edition's own entitlements.
+- **Auto-pilot proposes files whose names are not English.** Matching ran
+  on an English word model, which has no entry for `계약서.pdf`, `報告書.docx`
+  or `IMG_4021.HEIC` — such a file was never proposed, and a folder full of
+  such files could only be chosen for sharing an extension, which let any
+  all-PDF folder outrank a real match. Those names are now matched on the
+  names themselves, in any script: a file goes where the folder's name or
+  several of its files look like it. One look-alike among unrelated files is
+  not enough, and an extension in common is no longer a match by itself.
+- **Find Duplicates no longer lists unrelated non-English text files as
+  duplicates.** "Same content" was judged on an English word model. A
+  Korean, Japanese or Chinese note that mentioned one English word — "Excel"
+  — became that word's vector, identical to every other such note of the
+  same size, and the two were shown as content duplicates. Content is now
+  compared only when the model can read most of the text; otherwise files
+  are duplicates only when they are byte-identical. Text files too large to
+  read whole were compared by their *names* (`notes-2025.txt` and
+  `notes-2026.txt` matched); they are now compared by how they begin, and
+  text in a legacy encoding is decoded instead of read as Latin-1.
+- **AI search finds Korean, Japanese and Chinese documents by their words.**
+  Such a document was indexed with no keywords — the word-class tagger
+  labels every word in those languages "other", and only nouns, verbs and
+  adjectives were kept — so it could be found by its name and first 200
+  characters only. Their words are now indexed, and a query of several
+  words matches when each word appears, not only when they sit side by side.
+  A document indexed by an earlier version gains its keywords when it changes
+  or after Clear Index and a fresh indexing run.
+- **Auto-pilot: a name whose only English word is its extension**
+  (`KakaoTalk_20261008.jpg`) is matched on the name, not on "jpg".
+- **Auto-pilot: files that did not fit under the eight-per-folder limit come
+  back** once the inbox has room, instead of waiting for Propose existing
+  files.
+- **Auto-pilot keeps track of files across a settings change.** A file that
+  had just finished downloading when a setting changed is proposed without
+  waiting for the next change in the folder, and adding several watched
+  folders at once no longer forgets the files that were arriving. A move
+  that fails after such a change returns to the inbox; before, it went to
+  an engine nobody was listening to and the file was never proposed again.
+- **Auto-pilot: quitting during a long move keeps the proposal.** The row
+  left the saved inbox when the move started; a quit or crash during a copy
+  to another volume left the file in Downloads with nothing proposing it.
+- **Auto-pilot: switching it off during Approve All no longer empties the
+  saved inbox**, and Approve All says how many files it moved when it stops
+  early. Rows dismissed or gone meanwhile are no longer counted as "couldn't
+  be moved", a second click or a held Return no longer reports a file that
+  moved as missing, and holding Return no longer approves row after row.
+- **Auto-pilot: one ⌘Z undoes an Approve All.** Each file was recorded as
+  its own step, so ⌘Z after approving twenty files brought back the last
+  one.
+- **Auto-pilot proposes a file you download again.** A file with the name
+  and size of one just approved was taken for that move being undone and
+  never proposed; it is now recognised as the same file only when its date
+  matches too.
+- **Auto-pilot notices a watched folder coming back.** A folder on a volume
+  that was not mounted, or one deleted and recreated, was never watched
+  again until a restart; the watch is now re-established, proposals saved
+  for it are kept while it cannot be read, and Propose existing files says
+  the folder cannot be read instead of "nothing matched". A download written
+  in place (an empty file that grows) is noticed without another file
+  arriving.
+- **An SSH key chosen with Browse still works after a relaunch in the Mac
+  App Store edition.** The sandbox lets that edition read the key only while
+  the app that picked it keeps running; the saved connection kept the path
+  and nothing else, so the next launch could not read the key. Browse now
+  keeps the permission, opens in your real `~/.ssh` (it opened in the app's
+  own container, where there is none) and shows hidden files; a typed path
+  the edition cannot read says to use Browse.
+- **An SFTP host or user name can no longer be read by ssh as an option.**
+  Both were handed to ssh and scp as a bare argument, so a value starting
+  with `-` — `-oProxyCommand=…` — was parsed as an option and could run a
+  local command. Such a name, or one containing spaces or control
+  characters, is now refused in the connection sheet and again at connect
+  time. Found in a security review of the App Store SFTP work; the opening
+  is older than that work.
+- **A leftover SFTP password file is cleaned up.** The file that hands the
+  password to ssh is removed when the command ends, which a crash or a
+  force quit skips; leftovers older than ten minutes are now removed the
+  next time SFTP is used. The helper also stays silent when ssh asks to
+  confirm a host key, instead of answering with the password.
+- **A server whose SFTP key changed can be connected to again.** After a
+  reinstall the server presents a new key, ssh refuses it, and the panel
+  showed ssh's own wall of warning text — which, in the Mac App Store
+  edition, pointed at a file the app keeps in its container and offered no
+  way to change. The panel now says in plain words that the key changed and
+  what that can mean, and a saved SFTP connection's menu has **Forget Host
+  Key**, which drops the saved key so the next connection stores the new one.
+- **The Mac App Store edition no longer offers SMB.** SMB runs Homebrew's
+  `smbclient`, and the App Store sandbox can neither read nor execute
+  anything under Homebrew's prefix — measured with a probe signed with the
+  edition's own entitlements — so the connection could only fail and advise
+  installing Samba. SMB is gone from that edition's protocol list, a saved
+  SMB connection explains why and points to Finder's Connect to Server
+  (`smb://…`, then `/Volumes`), and the store listing and Help say SMB is in
+  the direct download.
+- **Backblaze B2 connects.** The connection sheet gave B2 the host-and-port
+  form and no region, so every B2 connection dialled
+  `s3.us-east-1.backblazeb2.com`, a region B2 does not have. B2 now asks for
+  its bucket and region (default `us-west-004`), GCS for its bucket, and both
+  take access keys like S3. Connections saved earlier use `us-west-004`
+  instead of AWS's default.
+- **S3 no longer offers an "AWS Profile" sign-in it never used.** The profile
+  name was saved and ignored, so that choice could not connect; the sheet now
+  asks for access keys only.
+- **WebDAV starts on port 443 with TLS on**, and follows the TLS checkbox
+  while the port is still a default — it used to suggest https on port 80.
+- **⌘F clears the filter when it already has focus.** The toolbar filter was
+  recognised by its old 120-point width; since it grew, a second ⌘F only
+  refocused it.
+- **Recording ⇧⌘Z, ⌥⌘H or a screenshot chord in Settings ▸ Keyboard
+  Shortcuts warns that macOS owns it.** The reserved list was written in a
+  different modifier order than the recorder produces, so those never
+  matched.
+- **Deleting inside an archive says what really happens** — in every
+  language the confirmation claimed it could not be undone; Undo puts the
+  entries back while the archive stays where it is.
+- **Smaller corrections found while checking the wiki against the app:** the
+  Pro upgrade text and a tip card no longer list two server protocols
+  Unifyl does not have; AI
+  capability names in Settings ▸ AI read "Image Description" rather than
+  "Imagedescription", in every language; the palette no longer shows ⌃S on
+  Smart Folders or ⎋ on Exit Archive, which those keys never did; the
+  status bar's Space key hint no longer reads as "free space" in Korean; the
+  Uninstall and Force Quit confirmations, the trial chip and "Upgrade →" are
+  translated.
+
+- **Settings ▸ General ▸ App Language is no longer blank on a new install.**
+  It read the system-wide language list ("ko-KR", "en-US"), which matched
+  none of its choices, so everyone who had never picked a language saw an
+  empty menu. It now shows System Default, translated, or the language you
+  chose.
+- **The Kind column speaks your language.** It showed the internal type name
+  — "Directory", "Image", "Document" — in every language. It now reads
+  Folder, Image, Document… in all 15, and Keynote decks (.key) are
+  Presentations instead of Other.
+- **Connect to Server reads as one form.** Its title, its Connect button and
+  the password hint were English in every language, and each field showed
+  its hint twice, once as a label and once beside the value ("Username
+  username", "us-east-1 … us-east-1"). Hints now sit inside the fields, and
+  a protocol you have unlocked no longer carries "(PRO)".
+- **Statistics counts your days in your language** ("Day 12" was English
+  everywhere).
+
+- **Every language names each feature one way.** A menu item and the
+  feature it opens are two catalog entries, and all 14 translations had
+  drifted into two names for dozens of them (Korean 헥스 편집기 / HEX 편집기…,
+  German Speicher zurückgewinnen / Speicherplatz freigeben…), with "File
+  X-Ray…" left in English next to a translated "File X-Ray". About 3,200
+  values changed across the 14 languages: one
+  term per concept following Apple's own vocabulary in that language
+  (Trash, Quick Look, tabs vs panels, folder rather than directory), one
+  form of address per language (German and Italian had mixed du/Sie and
+  tu/Lei, Spanish tú/usted, Korean 합니다/해요), leftover English UI text
+  translated, and the Help manual updated to the same terms. Audit F82
+  now fails when a name and its "…" menu form are translated differently.
+- "Add to Favorites" in the folder menu is translated in all 15 languages.
+- The project builds with Xcode 27 (Swift 6.4), whose region-isolation checks
+  rejected the rename engine's collision probe.
+
 ## [1.8.0] — 2026-09-07
 
 ### Added — the Total Commander habits that had no home yet
@@ -1759,7 +2107,8 @@ Initial public release.
 - **Themes & customization**: 12 built-in themes, custom editor, SVG icon packs, 120+ keyboard shortcuts.
 - **Cloud & remote**: FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive.
 
-[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v1.8.0...HEAD
+[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.0
 [1.8.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.8.0
 [1.7.2]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.7.2
 [1.7.1]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.7.1
