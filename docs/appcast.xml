@@ -6,6 +6,462 @@
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>
+            <title>Version 2.0.0</title>
+            <description><![CDATA[
+                <h2>Unifyl 2.0.0</h2>
+                <h3>Changed</h3>
+                <ul>
+                <li><b>The folder you are in is the path bar's title, and it never clips.</b> The</li>
+                </ul>
+                <p>  bar used to flow left to right, so a deep path pushed the current folder</p>
+                <p>  off the right edge. It is now a 15pt title followed by the full path,</p>
+                <p>  ending in that folder, as a small mono path that clips at its head. Focus shows as a 3pt accent rule on</p>
+                <p>  the active pane&#x27;s leading edge; the tinted path bar and its top stripe are</p>
+                <p>  gone. Size and date columns draw in the system monospace and column</p>
+                <p>  headers drop to 10.5pt, so a listing reads as a table under a title. The</p>
+                <p>  toolbar keeps to navigation (Home, Bookmarks and Recent Folders moved into</p>
+                <p>  the folder menu at its centre, Help into the ⋯ menu), tabs lose their</p>
+                <p>  fill, and the function-key bar is one line of &quot;F5 Copy&quot; pairs the way</p>
+                <p>  Total Commander draws it. Checked on all eleven built-in palettes: the</p>
+                <p>  quieter metadata colour is measured against the row it lands on and lifted</p>
+                <p>  wherever it would fall under 4.5:1, and the function-key labels use the</p>
+                <p>  secondary text colour, which clears 3:1 everywhere the muted one did not.</p>
+                <ul>
+                <li><b>Size, date and kind step back behind the name.</b> They sit half a point</li>
+                </ul>
+                <p>  smaller and slightly translucent, so a row reads as name-then-details</p>
+                <p>  instead of four columns of equal weight. Same row height, same fonts, same</p>
+                <p>  density. The per-type name colours (yellow folders, green images) stay on</p>
+                <p>  by default and are now a setting — Settings ▸ General ▸ File List Display ▸</p>
+                <p>  &quot;Color file names by type&quot; — for anyone who wants names in the text colour</p>
+                <p>  with the icon carrying the type.</p>
+                <ul>
+                <li><b>The background size gauge draws in the theme's accent.</b> It was a fixed</li>
+                </ul>
+                <p>  system green (files) and blue (folders) at low opacity, which over a dark</p>
+                <p>  purple-black theme rendered as a grey smear behind every name. Files at 9%</p>
+                <p>  and folders at 16% of the accent colour now read as a gauge on every</p>
+                <p>  built-in theme; the System Default preset uses the macOS accent.</p>
+                <h3>Added</h3>
+                <ul>
+                <li><b>Drag out of an archive.</b> A row inside a ZIP, 7z, tar or RAR can be</li>
+                </ul>
+                <p>  dragged to Finder, the Desktop or the other panel; the entry is extracted</p>
+                <p>  where it lands, under whatever name the receiver chose. The drag was refused</p>
+                <p>  before, because an archive row&#x27;s URL points at a real file beside the</p>
+                <p>  archive and handing that out acted on the wrong file. Rows now drag as file</p>
+                <p>  promises instead: the archive is unpacked once per drag, on the first drop,</p>
+                <p>  and each promised file is copied out of that. Marked sets drag together.</p>
+                <p>  Encrypted archives explain that F5 is the way out; dropping promised files</p>
+                <p>  into an archive, onto an archive row, back into the source panel, or into a</p>
+                <p>  Smart Folder is refused. Promises requested together share one extraction;</p>
+                <p>  its scratch copy is removed when extraction fails, after 15 idle minutes,</p>
+                <p>  and at the next launch if the app quit mid-drag. Dropping an archive folder</p>
+                <p>  onto a folder row of the same name copies into that folder. Files dropped in</p>
+                <p>  from other apps that fail to arrive are reported.</p>
+                <ul>
+                <li>**Downloads Auto-pilot (Pro; Settings ▸ General ▸ Auto-pilot, off by</li>
+                </ul>
+                <p>  default).** Unifyl watches Downloads and, once a new file has stopped</p>
+                <p>  growing, proposes the folder it belongs in — Documents, Desktop or one of</p>
+                <p>  your bookmarked folders, chosen by the same on-device classifier and folder</p>
+                <p>  profiles AI Organize uses. Proposals wait in Tools ▸ Auto-pilot Inbox (and</p>
+                <p>  as a count in the toolbar); nothing moves until you approve it, every move</p>
+                <p>  is a single ⌘Z away, a landing that would collide is renamed &quot;name 2&quot;, and</p>
+                <p>  a kind of proposal you dismiss twice is not offered again. Browser</p>
+                <p>  in-progress downloads are ignored, files already in Downloads when it was</p>
+                <p>  switched on are left alone unless you ask for them, and the media libraries</p>
+                <p>  (~/Pictures, ~/Movies, ~/Music) are never read or proposed. Rule memory and</p>
+                <p>  pending proposals survive a relaunch; a corrupt store is set aside rather</p>
+                <p>  than silently dropped. Auto-pilot can watch more than Downloads: Settings ▸</p>
+                <p>  General ▸ Auto-pilot lists the watched folders — add the Desktop, a</p>
+                <p>  messenger&#x27;s receive folder or a scanner drop — and every one feeds the same</p>
+                <p>  inbox; a watched folder is never a destination. Tuned against a real</p>
+                <p>  Downloads folder: the shown</p>
+                <p>  confidence is capped at 95% and drops when the runner-up folder is a</p>
+                <p>  coin toss away; one pass sends at most eight files to the same folder so</p>
+                <p>  &quot;Approve All&quot; cannot misfile a batch into a folder that merely holds many</p>
+                <p>  documents; messenger and browser receive folders (KakaoTalk, WeChat, LINE,</p>
+                <p>  Daou, Whale, Telegram, Slack) are never proposed as destinations; and a</p>
+                <p>  root folder with no subfolders is a destination itself, with a subfolder</p>
+                <p>  winning whenever it is close behind. A move that fails stays in the inbox</p>
+                <p>  with the reason shown there, and is not learned as an approval; Approve All</p>
+                <p>  reports how many moved. A watched folder that cannot be read is reported</p>
+                <p>  instead of being treated as empty (which would have re-proposed everything</p>
+                <p>  in it once it came back). Zero-byte placeholders — Firefox creates the final</p>
+                <p>  name empty while it writes to `.part` — wait until they hold data. In the</p>
+                <p>  App Store build, added watched folders keep their access across relaunches</p>
+                <p>  and only folders the app may write to are proposed. Approving checks the</p>
+                <p>  Pro licence at that moment, so a lapsed licence stops moves. The line</p>
+                <p>  reporting a move ends with &quot;⌘Z undoes it&quot;; a file ⌘Z brings back is not</p>
+                <p>  proposed again, a dismissal counts in every watched folder, and a file</p>
+                <p>  still downloading when a setting changes is proposed once it settles</p>
+                <p>  instead of being folded into the new baseline. In the inbox, Return</p>
+                <p>  approves the highlighted proposal and Delete dismisses it, Escape closes</p>
+                <p>  it, and VoiceOver reads each row as one sentence — file, folder, match and</p>
+                <p>  reason — with the file named on its Approve and Dismiss buttons. With</p>
+                <p>  Auto-pilot off, the inbox offers Open Settings.</p>
+                <ul>
+                <li><b>The command palette opens Help and your recent folders.</b> "Unifyl</li>
+                </ul>
+                <p>  Help&quot; is a palette command, and typing a folder name lists the folders</p>
+                <p>  you visit most as &quot;Recent Folder: name&quot;; choosing one opens it in the</p>
+                <p>  active panel.</p>
+                <ul>
+                <li><b>S3 service presets.</b> The S3 connection sheet has a Service menu — NAVER</li>
+                </ul>
+                <p>  Cloud Object Storage, KakaoCloud Object Storage, Cloudflare R2, Wasabi,</p>
+                <p>  DigitalOcean Spaces — that fills in the region and endpoint the service</p>
+                <p>  signs with. Any other S3-compatible endpoint still goes in by hand; the menu</p>
+                <p>  reads back whatever the endpoint field names.</p>
+                <ul>
+                <li><b>The Help manual is rewritten for 2.0, in all 15 languages.</b> It had</li>
+                </ul>
+                <p>  last been written for 1.2.2 and described neither Auto-pilot, the 1.8.0</p>
+                <p>  Total Commander habits, Statistics, Reclaim Space nor the App Store edition,</p>
+                <p>  while getting things wrong: a redo (⇧⌘Z) that does not exist, ⌘G for Go to</p>
+                <p>  Folder (⇧⌘G), ⇧F9 as Extract (it packs; Extract is ⌥F9), ⇧⌘H as the Heatmap</p>
+                <p>  (it goes Home), a two-second right-button hold (0.8 s), Vim keys that</p>
+                <p>  type-to-select took over long ago, and a QR generator, OCR tool, REST</p>
+                <p>  explorer and environment-variable editor the app no longer has. Its</p>
+                <p>  complete shortcut list is now generated from the app&#x27;s own default bindings</p>
+                <p>  in each language (`scripts/gen-manual-shortcuts.py`), and audit F81 fails</p>
+                <p>  when the two drift apart.</p>
+                <h3>Fixed</h3>
+                <ul>
+                <li><b>Overwriting during archive extraction goes to the Trash.</b> Answering</li>
+                </ul>
+                <p>  &quot;Overwrite&quot; when an extracted file or folder collided with one already in</p>
+                <p>  the destination deleted the existing item permanently — a folder with</p>
+                <p>  everything in it, not merged. It now goes to the Trash, as an ordinary</p>
+                <p>  copy&#x27;s overwrite always has.</p>
+                <ul>
+                <li><b>A crafted or truncated binary no longer crashes File X-Ray.</b> The Mach-O</li>
+                </ul>
+                <p>  reader read a load command&#x27;s fields past the end of the file when the</p>
+                <p>  command declared the minimum size. Found by a new mutation fuzz suite</p>
+                <p>  (Mach-O, DMG trailer, S3/Azure/WebDAV XML, FTP/SFTP/SMB listings, text</p>
+                <p>  encoding detection — about 30,000 cases per run).</p>
+                <ul>
+                <li><b>One malformed line from an SFTP server no longer crashes the app.</b> A</li>
+                </ul>
+                <p>  listing whose time field was a bare &quot;:&quot; indexed an empty array.</p>
+                <ul>
+                <li><b>An S3 endpoint that is not a full address is refused when saving</b>, with</li>
+                </ul>
+                <p>  the reason next to the field. A value that did not parse as a URL used to</p>
+                <p>  connect to AWS instead, silently.</p>
+                <ul>
+                <li><b>VoiceOver says which pane and which tab are active.</b> Both were shown only</li>
+                </ul>
+                <p>  by colour; the file list reads &quot;File list, active pane&quot; and the active tab</p>
+                <p>  and path-bar title carry the selected trait.</p>
+                <ul>
+                <li><b>Settings ▸ Keyboard Shortcuts speaks your language.</b> Command and</li>
+                </ul>
+                <p>  category names were drawn as plain strings, so every language saw the</p>
+                <p>  English list; 38 of them had no translation anywhere. They are localized</p>
+                <p>  now, and the search field matches both the localized and the English name.</p>
+                <ul>
+                <li><b>Opening the disk root no longer hangs when the automounter stalls.</b></li>
+                </ul>
+                <p>  Listing &quot;/&quot; read the Finder tags of every entry, and reading them follows</p>
+                <p>  symlinks — `/home` is a link into the auto_home automount, so a stuck</p>
+                <p>  automounter blocked the listing forever (found when a test of &quot;/&quot; hung).</p>
+                <p>  Tags are now read per item and never through a symlink.</p>
+                <ul>
+                <li><b>Traditional Chinese shows Traditional Chinese.</b> About 220 entries in the</li>
+                </ul>
+                <p>  zh-Hant catalog were Simplified Chinese (个, 选择, 服务器…); they now use</p>
+                <p>  Taiwan forms and vocabulary (個, 選擇, 伺服器, 檔案, 資料夾).</p>
+                <ul>
+                <li><b>Auto-pilot's Dismiss buttons say "reject", not "close".</b> They shared the</li>
+                </ul>
+                <p>  generic Dismiss string, which eleven languages translate as Close.</p>
+                <ul>
+                <li>**An S3 or Azure object without a modification date no longer shows as</li>
+                </ul>
+                <p>  modified now.** A listing entry with a missing or unreadable date was</p>
+                <p>  stamped with the current time, so Folder Sync compared it as newer than</p>
+                <p>  anything local. It now has no date, and Folder Sync flags it for you to</p>
+                <p>  decide. HTTP-style dates (`Tue, 29 Sep 2026 09:00:00 GMT`) are read too.</p>
+                <ul>
+                <li><b>The direct download checks for updates on its own again.</b> Automatic</li>
+                </ul>
+                <p>  checks were switched off in April as a stopgap while the update-signing</p>
+                <p>  key was missing, and stayed off after the key shipped in 1.0.3: a new</p>
+                <p>  install only learned of an update from Unifyl ▸ Check for Updates….</p>
+                <p>  From 2.0 it checks daily. Installs older than 2.0 still need that one</p>
+                <p>  manual check to arrive here.</p>
+                <ul>
+                <li><b>Photo summaries keep the location on your Mac.</b> AI Summarize looked up</li>
+                </ul>
+                <p>  the place name of every GPS-tagged photo through Apple&#x27;s geocoding</p>
+                <p>  service — sending its coordinates out of a feature described as</p>
+                <p>  on-device — and dropped the hemisphere, placing southern and western</p>
+                <p>  photos elsewhere. It now shows the coordinates from the photo itself</p>
+                <p>  (&quot;38.7223°N, 9.1393°W&quot;), and the description is in the app&#x27;s language.</p>
+                <p>  The AI classification pitch no longer claims Core ML, which Unifyl does</p>
+                <p>  not use.</p>
+                <ul>
+                <li><b>The natural-language command works.</b> Search ▸ AI Natural Language</li>
+                </ul>
+                <p>  Command… opened a sheet with no field, which parsed an empty sentence and</p>
+                <p>  sat on &quot;Analyzing command…&quot; forever. It now has a field (Return</p>
+                <p>  analyses, ⌘↩ runs), acts on the current folder when the sentence names</p>
+                <p>  none, and reads which folder is the source and which the destination —</p>
+                <p>  a lone &quot;to ~/Documents&quot; used to become the folder files were taken</p>
+                <p>  *from*, and Korean sentences (&quot;~/Downloads에서 ~/Documents로&quot;,</p>
+                <p>  &quot;30일 지난&quot;, &quot;100MB보다 큰&quot;) found no path or condition at all. Only move,</p>
+                <p>  copy and delete run; other verbs say so instead of enabling a button</p>
+                <p>  that did nothing.</p>
+                <ul>
+                <li><b>Settings ▸ AI's provider choice is used.</b> It saved a plugin choice for</li>
+                </ul>
+                <p>  five capabilities and nothing read it. Tags (classification) and name</p>
+                <p>  suggestions (renaming) now come from the chosen AI plugin in AI Smart</p>
+                <p>  Tagging, AI Rename and Multi-Rename&#x27;s AI rule; the capabilities a plugin</p>
+                <p>  cannot serve are no longer offered, and Test runs the chosen providers</p>
+                <p>  instead of the built-in embedding engine.</p>
+                <ul>
+                <li><b>A custom theme's Hidden Files colour colours hidden files</b> in the list;</li>
+                </ul>
+                <p>  it was saved with the theme and shown only in the editor&#x27;s preview.</p>
+                <ul>
+                <li><b>SFTP password login works in the Mac App Store edition.</b> ssh asks for</li>
+                </ul>
+                <p>  the password through a helper program, and the edition pointed it at a</p>
+                <p>  script it had just written — which the App Store sandbox refuses to</p>
+                <p>  execute (&quot;ssh_askpass: exec: Operation not permitted&quot;), so a password</p>
+                <p>  login could not succeed. The edition now carries a small signed helper</p>
+                <p>  the sandbox does allow, and hands it the password in a private file</p>
+                <p>  instead of a script. Found and verified with a probe signed with the</p>
+                <p>  edition&#x27;s own entitlements.</p>
+                <ul>
+                <li><b>Auto-pilot proposes files whose names are not English.</b> Matching ran</li>
+                </ul>
+                <p>  on an English word model, which has no entry for `계약서.pdf`, `報告書.docx`</p>
+                <p>  or `IMG_4021.HEIC` — such a file was never proposed, and a folder full of</p>
+                <p>  such files could only be chosen for sharing an extension, which let any</p>
+                <p>  all-PDF folder outrank a real match. Those names are now matched on the</p>
+                <p>  names themselves, in any script: a file goes where the folder&#x27;s name or</p>
+                <p>  several of its files look like it. One look-alike among unrelated files is</p>
+                <p>  not enough, and an extension in common is no longer a match by itself.</p>
+                <ul>
+                <li>**Find Duplicates no longer lists unrelated non-English text files as</li>
+                </ul>
+                <p>  duplicates.** &quot;Same content&quot; was judged on an English word model. A</p>
+                <p>  Korean, Japanese or Chinese note that mentioned one English word — &quot;Excel&quot;</p>
+                <p>  — became that word&#x27;s vector, identical to every other such note of the</p>
+                <p>  same size, and the two were shown as content duplicates. Content is now</p>
+                <p>  compared only when the model can read most of the text; otherwise files</p>
+                <p>  are duplicates only when they are byte-identical. Text files too large to</p>
+                <p>  read whole were compared by their *names* (`notes-2025.txt` and</p>
+                <p>  `notes-2026.txt` matched); they are now compared by how they begin, and</p>
+                <p>  text in a legacy encoding is decoded instead of read as Latin-1.</p>
+                <ul>
+                <li><b>AI search finds Korean, Japanese and Chinese documents by their words.</b></li>
+                </ul>
+                <p>  Such a document was indexed with no keywords — the word-class tagger</p>
+                <p>  labels every word in those languages &quot;other&quot;, and only nouns, verbs and</p>
+                <p>  adjectives were kept — so it could be found by its name and first 200</p>
+                <p>  characters only. Their words are now indexed, and a query of several</p>
+                <p>  words matches when each word appears, not only when they sit side by side.</p>
+                <p>  A document indexed by an earlier version gains its keywords when it changes</p>
+                <p>  or after Clear Index and a fresh indexing run.</p>
+                <ul>
+                <li><b>Auto-pilot: a name whose only English word is its extension</b></li>
+                </ul>
+                <p>  (`KakaoTalk_20261008.jpg`) is matched on the name, not on &quot;jpg&quot;.</p>
+                <ul>
+                <li>**Auto-pilot: files that did not fit under the eight-per-folder limit come</li>
+                </ul>
+                <p>  back** once the inbox has room, instead of waiting for Propose existing</p>
+                <p>  files.</p>
+                <ul>
+                <li><b>Auto-pilot keeps track of files across a settings change.</b> A file that</li>
+                </ul>
+                <p>  had just finished downloading when a setting changed is proposed without</p>
+                <p>  waiting for the next change in the folder, and adding several watched</p>
+                <p>  folders at once no longer forgets the files that were arriving. A move</p>
+                <p>  that fails after such a change returns to the inbox; before, it went to</p>
+                <p>  an engine nobody was listening to and the file was never proposed again.</p>
+                <ul>
+                <li><b>Auto-pilot: quitting during a long move keeps the proposal.</b> The row</li>
+                </ul>
+                <p>  left the saved inbox when the move started; a quit or crash during a copy</p>
+                <p>  to another volume left the file in Downloads with nothing proposing it.</p>
+                <ul>
+                <li>**Auto-pilot: switching it off during Approve All no longer empties the</li>
+                </ul>
+                <p>  saved inbox**, and Approve All says how many files it moved when it stops</p>
+                <p>  early. Rows dismissed or gone meanwhile are no longer counted as &quot;couldn&#x27;t</p>
+                <p>  be moved&quot;, a second click or a held Return no longer reports a file that</p>
+                <p>  moved as missing, and holding Return no longer approves row after row.</p>
+                <ul>
+                <li><b>Auto-pilot: one ⌘Z undoes an Approve All.</b> Each file was recorded as</li>
+                </ul>
+                <p>  its own step, so ⌘Z after approving twenty files brought back the last</p>
+                <p>  one.</p>
+                <ul>
+                <li><b>Auto-pilot proposes a file you download again.</b> A file with the name</li>
+                </ul>
+                <p>  and size of one just approved was taken for that move being undone and</p>
+                <p>  never proposed; it is now recognised as the same file only when its date</p>
+                <p>  matches too.</p>
+                <ul>
+                <li><b>Auto-pilot notices a watched folder coming back.</b> A folder on a volume</li>
+                </ul>
+                <p>  that was not mounted, or one deleted and recreated, was never watched</p>
+                <p>  again until a restart; the watch is now re-established, proposals saved</p>
+                <p>  for it are kept while it cannot be read, and Propose existing files says</p>
+                <p>  the folder cannot be read instead of &quot;nothing matched&quot;. A download written</p>
+                <p>  in place (an empty file that grows) is noticed without another file</p>
+                <p>  arriving.</p>
+                <ul>
+                <li>**An SSH key chosen with Browse still works after a relaunch in the Mac</li>
+                </ul>
+                <p>  App Store edition.** The sandbox lets that edition read the key only while</p>
+                <p>  the app that picked it keeps running; the saved connection kept the path</p>
+                <p>  and nothing else, so the next launch could not read the key. Browse now</p>
+                <p>  keeps the permission, opens in your real `~/.ssh` (it opened in the app&#x27;s</p>
+                <p>  own container, where there is none) and shows hidden files; a typed path</p>
+                <p>  the edition cannot read says to use Browse.</p>
+                <ul>
+                <li><b>An SFTP host or user name can no longer be read by ssh as an option.</b></li>
+                </ul>
+                <p>  Both were handed to ssh and scp as a bare argument, so a value starting</p>
+                <p>  with `-` — `-oProxyCommand=…` — was parsed as an option and could run a</p>
+                <p>  local command. Such a name, or one containing spaces or control</p>
+                <p>  characters, is now refused in the connection sheet and again at connect</p>
+                <p>  time. Found in a security review of the App Store SFTP work; the opening</p>
+                <p>  is older than that work.</p>
+                <ul>
+                <li><b>A leftover SFTP password file is cleaned up.</b> The file that hands the</li>
+                </ul>
+                <p>  password to ssh is removed when the command ends, which a crash or a</p>
+                <p>  force quit skips; leftovers older than ten minutes are now removed the</p>
+                <p>  next time SFTP is used. The helper also stays silent when ssh asks to</p>
+                <p>  confirm a host key, instead of answering with the password.</p>
+                <ul>
+                <li><b>A server whose SFTP key changed can be connected to again.</b> After a</li>
+                </ul>
+                <p>  reinstall the server presents a new key, ssh refuses it, and the panel</p>
+                <p>  showed ssh&#x27;s own wall of warning text — which, in the Mac App Store</p>
+                <p>  edition, pointed at a file the app keeps in its container and offered no</p>
+                <p>  way to change. The panel now says in plain words that the key changed and</p>
+                <p>  what that can mean, and a saved SFTP connection&#x27;s menu has **Forget Host</p>
+                <p>  Key**, which drops the saved key so the next connection stores the new one.</p>
+                <ul>
+                <li><b>The Mac App Store edition no longer offers SMB.</b> SMB runs Homebrew's</li>
+                </ul>
+                <p>  `smbclient`, and the App Store sandbox can neither read nor execute</p>
+                <p>  anything under Homebrew&#x27;s prefix — measured with a probe signed with the</p>
+                <p>  edition&#x27;s own entitlements — so the connection could only fail and advise</p>
+                <p>  installing Samba. SMB is gone from that edition&#x27;s protocol list, a saved</p>
+                <p>  SMB connection explains why and points to Finder&#x27;s Connect to Server</p>
+                <p>  (`smb://…`, then `/Volumes`), and the store listing and Help say SMB is in</p>
+                <p>  the direct download.</p>
+                <ul>
+                <li><b>Backblaze B2 connects.</b> The connection sheet gave B2 the host-and-port</li>
+                </ul>
+                <p>  form and no region, so every B2 connection dialled</p>
+                <p>  `s3.us-east-1.backblazeb2.com`, a region B2 does not have. B2 now asks for</p>
+                <p>  its bucket and region (default `us-west-004`), GCS for its bucket, and both</p>
+                <p>  take access keys like S3. Connections saved earlier use `us-west-004`</p>
+                <p>  instead of AWS&#x27;s default.</p>
+                <ul>
+                <li><b>S3 no longer offers an "AWS Profile" sign-in it never used.</b> The profile</li>
+                </ul>
+                <p>  name was saved and ignored, so that choice could not connect; the sheet now</p>
+                <p>  asks for access keys only.</p>
+                <ul>
+                <li><b>WebDAV starts on port 443 with TLS on</b>, and follows the TLS checkbox</li>
+                </ul>
+                <p>  while the port is still a default — it used to suggest https on port 80.</p>
+                <ul>
+                <li><b>⌘F clears the filter when it already has focus.</b> The toolbar filter was</li>
+                </ul>
+                <p>  recognised by its old 120-point width; since it grew, a second ⌘F only</p>
+                <p>  refocused it.</p>
+                <ul>
+                <li>**Recording ⇧⌘Z, ⌥⌘H or a screenshot chord in Settings ▸ Keyboard</li>
+                </ul>
+                <p>  Shortcuts warns that macOS owns it.** The reserved list was written in a</p>
+                <p>  different modifier order than the recorder produces, so those never</p>
+                <p>  matched.</p>
+                <ul>
+                <li><b>Deleting inside an archive says what really happens</b> — in every</li>
+                </ul>
+                <p>  language the confirmation claimed it could not be undone; Undo puts the</p>
+                <p>  entries back while the archive stays where it is.</p>
+                <ul>
+                <li><b>Smaller corrections found while checking the wiki against the app:</b> the</li>
+                </ul>
+                <p>  Pro upgrade text and a tip card no longer list two server protocols</p>
+                <p>  Unifyl does not have; AI</p>
+                <p>  capability names in Settings ▸ AI read &quot;Image Description&quot; rather than</p>
+                <p>  &quot;Imagedescription&quot;, in every language; the palette no longer shows ⌃S on</p>
+                <p>  Smart Folders or ⎋ on Exit Archive, which those keys never did; the</p>
+                <p>  status bar&#x27;s Space key hint no longer reads as &quot;free space&quot; in Korean; the</p>
+                <p>  Uninstall and Force Quit confirmations, the trial chip and &quot;Upgrade →&quot; are</p>
+                <p>  translated.</p>
+                <ul>
+                <li><b>Settings ▸ General ▸ App Language is no longer blank on a new install.</b></li>
+                </ul>
+                <p>  It read the system-wide language list (&quot;ko-KR&quot;, &quot;en-US&quot;), which matched</p>
+                <p>  none of its choices, so everyone who had never picked a language saw an</p>
+                <p>  empty menu. It now shows System Default, translated, or the language you</p>
+                <p>  chose.</p>
+                <ul>
+                <li><b>The Kind column speaks your language.</b> It showed the internal type name</li>
+                </ul>
+                <p>  — &quot;Directory&quot;, &quot;Image&quot;, &quot;Document&quot; — in every language. It now reads</p>
+                <p>  Folder, Image, Document… in all 15, and Keynote decks (.key) are</p>
+                <p>  Presentations instead of Other.</p>
+                <ul>
+                <li><b>Connect to Server reads as one form.</b> Its title, its Connect button and</li>
+                </ul>
+                <p>  the password hint were English in every language, and each field showed</p>
+                <p>  its hint twice, once as a label and once beside the value (&quot;Username</p>
+                <p>  username&quot;, &quot;us-east-1 … us-east-1&quot;). Hints now sit inside the fields, and</p>
+                <p>  a protocol you have unlocked no longer carries &quot;(PRO)&quot;.</p>
+                <ul>
+                <li><b>Statistics counts your days in your language</b> ("Day 12" was English</li>
+                </ul>
+                <p>  everywhere).</p>
+                <ul>
+                <li><b>Every language names each feature one way.</b> A menu item and the</li>
+                </ul>
+                <p>  feature it opens are two catalog entries, and all 14 translations had</p>
+                <p>  drifted into two names for dozens of them (Korean 헥스 편집기 / HEX 편집기…,</p>
+                <p>  German Speicher zurückgewinnen / Speicherplatz freigeben…), with &quot;File</p>
+                <p>  X-Ray…&quot; left in English next to a translated &quot;File X-Ray&quot;. About 3,200</p>
+                <p>  values changed across the 14 languages: one</p>
+                <p>  term per concept following Apple&#x27;s own vocabulary in that language</p>
+                <p>  (Trash, Quick Look, tabs vs panels, folder rather than directory), one</p>
+                <p>  form of address per language (German and Italian had mixed du/Sie and</p>
+                <p>  tu/Lei, Spanish tú/usted, Korean 합니다/해요), leftover English UI text</p>
+                <p>  translated, and the Help manual updated to the same terms. Audit F82</p>
+                <p>  now fails when a name and its &quot;…&quot; menu form are translated differently.</p>
+                <ul>
+                <li>"Add to Favorites" in the folder menu is translated in all 15 languages.</li>
+                <li>The project builds with Xcode 27 (Swift 6.4), whose region-isolation checks</li>
+                </ul>
+                <p>  rejected the rename engine&#x27;s collision probe.</p>
+            ]]></description>
+            <pubDate>Sun, 01 Nov 2026 07:15:33 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v2.0.0/Unifyl-2.0.0.dmg"
+                sparkle:version="47"
+                sparkle:shortVersionString="2.0.0"
+                sparkle:edSignature="Z/5Vz+bgwMuydH/31nmhpD5bRT/y4Sl/DmYgbIxejPdDd8JLgHVQYs1GqGiF95DMJOz/sz75gZoLtO2tkewsDQ=="
+                length="19487867"
+                type="application/octet-stream"
+            />
+        </item>
+        <item>
             <title>Version 1.8.0</title>
             <description><![CDATA[
                 <h2>Unifyl 1.8.0</h2>
