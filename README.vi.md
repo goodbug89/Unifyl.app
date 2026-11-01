@@ -20,9 +20,9 @@ Unifyl là trình quản lý tệp hai cửa sổ cho macOS, kết hợp công c
 - **Hai cửa sổ** — Hai bảng đặt cạnh nhau hoặc xếp trên dưới, các tab, không gian làm việc, Bảng Terminal và Terminal nhanh (chỉ bản tải trực tiếp)
 - **Hỗ trợ bởi AI** — Tìm kiếm theo ngữ nghĩa, đổi tên bằng AI, gắn thẻ thông minh, phát hiện trùng lặp — tất cả chạy cục bộ trên Mac bằng các framework Natural Language và Vision của Apple
 - **Từ xa & đám mây** — FTP/SFTP/WebDAV/SMB/S3/Google Drive/Dropbox/OneDrive/Docker/Kubernetes
-- **Hơn 50 công cụ chuyên nghiệp** — Đổi tên hàng loạt, so sánh văn bản/nhị phân/hình ảnh, đồng bộ thư mục, hợp nhất 3 hướng, chỉnh sửa EXIF hàng loạt
+- **Công cụ chuyên nghiệp** — Đổi tên hàng loạt, so sánh văn bản/nhị phân/hình ảnh, đồng bộ thư mục, hợp nhất 3 hướng, chỉnh sửa EXIF hàng loạt
 - **Tệp nén thành thư mục ảo** — ZIP/7z/TAR/GZ/BZ2/XZ/ZSTD/RAR (bao gồm tự động phát hiện mã hóa ZIP CJK cũ)
-- **Bàn phím ưu tiên** — Bảng lệnh, điều hướng kiểu Vim, hơn 120 phím tắt có thể gán lại
+- **Bàn phím ưu tiên** — Bảng lệnh, phím tương thích Total Commander, hơn 120 phím tắt có thể gán lại
 - **15 ngôn ngữ**
 - **Tăng cường CJK** (1.3.0): trích xuất tệp nén `.alz` (`unalz` tích hợp), xem trước `.hwpx` trực tiếp, tìm kiếm tên tệp đa ngôn ngữ (Pinyin / Romaji / Hangul-Hanja)
 - **Tăng cường CJK mở rộng** (1.3.1): tự động đánh dấu thư mục nhắn tin/đám mây (KakaoTalk · LINE · WeChat · iCloud Drive — 12 đường dẫn), gấp toàn rộng/nửa rộng trong tìm kiếm, chuyển đổi mã hóa EUC-KR/Shift-JIS/GBK → UTF-8 (kèm hoàn tác), phát hiện biểu mẫu chính phủ Hàn Quốc bằng heuristic

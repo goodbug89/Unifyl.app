@@ -92,7 +92,7 @@
 - Docker container and Kubernetes pod browsing
 - iOS/Android device connectivity
 
-### :wrench: 50+ Professional Tools
+### :wrench: Professional Tools
 
 - File → PDF conversion (images, text, Office docs via LibreOffice; HWP / HWPX with Hancom-app fallback when LibreOffice's filter rejects the file)
 - Multi-rename with regex, numbering, EXIF data, AI suggestions, and undo
@@ -135,7 +135,7 @@
 
 ### :keyboard: Keyboard-First Design
 
-Every action is reachable from the keyboard. Command palette (`Cmd+Shift+P`), Vim-style navigation, and full shortcut customization. Remap any of 120+ commands across 12 categories in Settings > Keyboard Shortcuts, with conflict detection and one-click reassignment.
+Every action is reachable from the keyboard. Command palette (`Cmd+Shift+P`), Total Commander key compatibility, and full shortcut customization. Remap any of 120+ commands across 12 categories in Settings > Keyboard Shortcuts, with conflict detection and one-click reassignment.
 
 ### :earth_americas: 15 Languages
 

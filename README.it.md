@@ -20,9 +20,9 @@ Unifyl è il gestore file a doppio pannello per macOS che combina strumenti prof
 - **Doppio pannello** — Due pannelli affiancati o uno sopra l'altro, tab, spazi di lavoro, pannello Terminale e Terminale rapido (solo download diretto)
 - **Alimentato da IA** — Ricerca semantica, rinomina con IA, tagging intelligente, rilevamento duplicati — tutto in locale sul Mac con i framework Natural Language e Vision di Apple
 - **Remoto & cloud** — FTP/SFTP/WebDAV/SMB/S3/Google Drive/Dropbox/OneDrive/Docker/Kubernetes
-- **Oltre 50 strumenti professionali** — Rinomina batch, confronto testo/binario/immagine, sincronizzazione directory, merge a 3 vie, editor EXIF batch
+- **Strumenti professionali** — Rinomina batch, confronto testo/binario/immagine, sincronizzazione directory, merge a 3 vie, editor EXIF batch
 - **Archivi come cartelle virtuali** — ZIP/7z/TAR/GZ/BZ2/XZ/ZSTD/RAR (incluso rilevamento codifica per ZIP CJK legacy)
-- **Tastiera prima di tutto** — Tavolozza comandi, navigazione in stile Vim, oltre 120 scorciatoie riassegnabili
+- **Tastiera prima di tutto** — Tavolozza comandi, tasti compatibili con Total Commander, oltre 120 scorciatoie riassegnabili
 - **15 lingue**
 - **Rafforzamento CJK** (1.3.0): estrazione di archivi `.alz` (`unalz` integrato), anteprima inline di `.hwpx`, ricerca multilingue dei nomi file (Pinyin / Romaji / Hangul-Hanja)
 - **Rafforzamento CJK esteso** (1.3.1): segnalibri automatici per cartelle di messaggistica/cloud (KakaoTalk · LINE · WeChat · iCloud Drive — 12 percorsi), riduzione larghezza intera/metà nella ricerca, conversione di codifica EUC-KR/Shift-JIS/GBK → UTF-8 (con annullamento), rilevamento euristico dei moduli governativi coreani

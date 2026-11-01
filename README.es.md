@@ -43,9 +43,9 @@ Unifyl es el gestor de archivos de doble panel para macOS que combina herramient
 - **Doble panel** — Dos paneles, uno junto al otro o uno sobre otro, pestañas, espacios de trabajo, panel de terminal y Terminal rápido (solo descarga directa)
 - **Impulsado por IA** — Búsqueda semántica, renombrado por IA, etiquetado inteligente, detección de duplicados — todo local en el Mac con los frameworks Natural Language y Vision de Apple
 - **Remoto y nube** — FTP, SFTP, WebDAV, SMB, S3, Google Drive, Dropbox, OneDrive, Docker, Kubernetes
-- **Más de 50 herramientas profesionales** — Renombrado por lotes, comparación de texto/binario/imagen, sincronización de directorios, fusión a 3 vías, edición masiva de EXIF
+- **Herramientas profesionales** — Renombrado por lotes, comparación de texto/binario/imagen, sincronización de directorios, fusión a 3 vías, edición masiva de EXIF
 - **Archivos como carpetas virtuales** — ZIP, 7z, TAR, GZ, BZ2, XZ, ZSTD, RAR (incluida la detección automática de codificación de ZIP heredados CJK)
-- **Teclado primero** — Paleta de comandos, navegación al estilo Vim, más de 120 atajos reasignables
+- **Teclado primero** — Paleta de comandos, teclas compatibles con Total Commander, más de 120 atajos reasignables
 - **15 idiomas** — Inglés, coreano, japonés, chino (simplificado y tradicional), alemán, francés, español, portugués, italiano, ruso, turco, árabe, tailandés, vietnamita
 - **Refuerzo CJK** (1.3.0): extracción de archivos `.alz` (`unalz` incorporado), vista previa en línea de `.hwpx`, búsqueda multilingüe de nombres de archivo (Pinyin / Romaji / Hangul-Hanja)
 - **Refuerzo CJK ampliado** (1.3.1): marcadores automáticos para carpetas de mensajería/nube (KakaoTalk · LINE · WeChat · iCloud Drive — 12 rutas), plegado ancho completo/medio en la búsqueda, conversión de codificación EUC-KR/Shift-JIS/GBK → UTF-8 (con deshacer), detección heurística de formularios del gobierno coreano

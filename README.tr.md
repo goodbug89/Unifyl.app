@@ -20,9 +20,9 @@ Unifyl, profesyonel araçları yerel cihaz üstü AI ile birleştiren macOS içi
 - **Çift bölme** — Yan yana ya da üst üste iki panel, sekmeler, çalışma alanları, Terminal Paneli ve Hızlı Terminal (yalnızca doğrudan indirme sürümünde)
 - **AI destekli** — Anlamsal arama, AI ile yeniden adlandırma, akıllı etiketleme, yinelenenleri tespit — tümü Apple'ın Natural Language ve Vision çerçeveleriyle Mac üzerinde yerel
 - **Uzaktan & bulut** — FTP/SFTP/WebDAV/SMB/S3/Google Drive/Dropbox/OneDrive/Docker/Kubernetes
-- **50'ten fazla profesyonel araç** — Toplu yeniden adlandırma, metin/ikili/resim karşılaştırma, dizin eşitleme, 3 yönlü birleştirme, EXIF toplu düzenleme
+- **Profesyonel araçlar** — Toplu yeniden adlandırma, metin/ikili/resim karşılaştırma, dizin eşitleme, 3 yönlü birleştirme, EXIF toplu düzenleme
 - **Arşivler sanal klasör olarak** — ZIP/7z/TAR/GZ/BZ2/XZ/ZSTD/RAR (eski CJK ZIP'lerinin otomatik kodlama algılaması dahil)
-- **Klavye önce** — Komut paleti, Vim tarzı gezinme, yeniden atanabilir 120'den fazla kısayol
+- **Klavye önce** — Komut paleti, Total Commander uyumlu tuşlar, yeniden atanabilir 120'den fazla kısayol
 - **15 dil**
 - **CJK güçlendirmesi** (1.3.0): `.alz` arşiv çıkarma (paketli `unalz`), `.hwpx` satır içi önizleme, çok dilli dosya adı arama (Pinyin / Romaji / Hangul-Hanja)
 - **CJK güçlendirmesi genişletildi** (1.3.1): mesajlaşma/bulut klasörleri için otomatik yer imleri (KakaoTalk · LINE · WeChat · iCloud Drive — 12 yol), aramada tam/yarım genişlik katlaması, EUC-KR/Shift-JIS/GBK → UTF-8 kodlama dönüştürme (geri alma destekli), Kore hükümet formlarının sezgisel olarak algılanması

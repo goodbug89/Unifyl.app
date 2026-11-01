@@ -43,9 +43,9 @@ Unifyl ist der Zweipanel-Dateimanager für macOS, der professionelle Power-Tools
 - **Zweipanel** — Zwei Panels nebeneinander oder übereinander, Tabs, Arbeitsbereiche, Terminalbereich und Schnellterminal (nur Direkt-Download)
 - **KI-gestützt** — Semantische Suche, KI-Umbenennung, intelligente Tags, Duplikat-Erkennung — alles lokal auf dem Mac mit Apples Frameworks Natural Language und Vision
 - **Remote & Cloud** — FTP, SFTP, WebDAV, SMB, S3, Google Drive, Dropbox, OneDrive, Docker, Kubernetes
-- **Über 50 professionelle Werkzeuge** — Mehrfach-Umbenennen, Text/Binär/Bildvergleich, Verzeichnissynchronisation, 3-Wege-Merge, EXIF-Stapeleditor
+- **Professionelle Werkzeuge** — Mehrfach-Umbenennen, Text/Binär/Bildvergleich, Verzeichnissynchronisation, 3-Wege-Merge, EXIF-Stapeleditor
 - **Archive als virtuelle Ordner** — ZIP, 7z, TAR, GZ, BZ2, XZ, ZSTD, RAR (inkl. automatischer Kodierungserkennung für CJK-Legacy-ZIPs)
-- **Tastatur zuerst** — Befehlspalette, Vim-artige Navigation, über 120 frei belegbare Kurzbefehle
+- **Tastatur zuerst** — Befehlspalette, Total-Commander-kompatible Tasten, über 120 frei belegbare Kurzbefehle
 - **15 Sprachen** — Englisch, Koreanisch, Japanisch, Chinesisch (vereinfacht & traditionell), Deutsch, Französisch, Spanisch, Portugiesisch, Italienisch, Russisch, Türkisch, Arabisch, Thailändisch, Vietnamesisch
 - **CJK-Verstärkung** (1.3.0): `.alz`-Archive entpacken (gebündeltes `unalz`), `.hwpx`-Inline-Vorschau, mehrsprachige Dateinamen-Suche (Pinyin / Romaji / Hangul-Hanja)
 - **CJK-Verstärkung erweitert** (1.3.1): Auto-Lesezeichen für Messenger-/Cloud-Ordner (KakaoTalk · LINE · WeChat · iCloud Drive — 12 Pfade), Voll-/Halbbreite-Suchfaltung, EUC-KR/Shift-JIS/GBK → UTF-8 Kodierungskonvertierung (mit Rückgängig), Heuristische Erkennung koreanischer Behördenformulare

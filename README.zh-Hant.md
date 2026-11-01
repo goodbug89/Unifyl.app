@@ -20,9 +20,9 @@ Unifyl 是 macOS 上的雙窗格檔案管理器,將專業級強力工具與本�
 - **雙窗格** — 兩個面板左右或上下排列、標籤頁、工作區、終端機面板與快速終端機(僅限直接下載版)
 - **AI 驅動** — 語義搜尋、AI 重新命名、智慧標籤、重複偵測 — 全部透過 Apple 的 Natural Language 與 Vision 框架在 Mac 本機執行
 - **遠端與雲端** — FTP/SFTP/WebDAV/SMB/S3/Google Drive/Dropbox/OneDrive/Docker/Kubernetes
-- **50 多項專業工具** — 批次重新命名、文字/二進位/影像比較、目錄同步、三方合併、EXIF 批次編輯
+- **專業工具** — 批次重新命名、文字/二進位/影像比較、目錄同步、三方合併、EXIF 批次編輯
 - **壓縮檔作為虛擬資料夾** — ZIP/7z/TAR/GZ/BZ2/XZ/ZSTD/RAR(含 CJK 舊版 ZIP 自動編碼偵測)
-- **鍵盤優先** — 命令面板、Vim 風格導覽、120 多個可重新指定的快速鍵
+- **鍵盤優先** — 命令面板、相容 Total Commander 的按鍵、120 多個可重新指定的快速鍵
 - **15 種語言**
 - **CJK 強化** (1.3.0): `.alz` 壓縮檔解壓(內建 `unalz`),`.hwpx` 內嵌預覽,拼音 / 羅馬字 / 韓文-漢字多語言檔名搜尋
 - **CJK 進一步強化** (1.3.1): 通訊/雲端資料夾自動書籤(KakaoTalk · LINE · WeChat · iCloud Drive 等 12 種),全形 ↔ 半形搜尋摺疊,EUC-KR/Shift-JIS/GBK → UTF-8 編碼轉換(支援復原),韓國政府表格啟發式偵測

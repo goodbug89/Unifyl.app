@@ -43,9 +43,9 @@ Unifyl est le gestionnaire de fichiers à double panneau pour macOS qui combine 
 - **Double panneau** — Deux panneaux côte à côte ou superposés, onglets, espaces de travail, panneau Terminal et Terminal rapide (téléchargement direct uniquement)
 - **Propulsé par l'IA** — Recherche sémantique, renommage par IA, étiquetage intelligent, détection de doublons — le tout en local sur le Mac grâce aux frameworks Natural Language et Vision d'Apple
 - **Distant et cloud** — FTP, SFTP, WebDAV, SMB, S3, Google Drive, Dropbox, OneDrive, Docker, Kubernetes
-- **Plus de 50 outils professionnels** — Renommer par lot, comparaison texte/binaire/image, synchronisation de dossiers, fusion à 3 voies, édition EXIF par lot
+- **Outils professionnels** — Renommer par lot, comparaison texte/binaire/image, synchronisation de dossiers, fusion à 3 voies, édition EXIF par lot
 - **Archives en dossiers virtuels** — ZIP, 7z, TAR, GZ, BZ2, XZ, ZSTD, RAR (avec détection automatique de l'encodage des ZIP CJK hérités)
-- **Clavier d'abord** — Palette de commandes, navigation à la Vim, plus de 120 raccourcis réassignables
+- **Clavier d'abord** — Palette de commandes, touches compatibles Total Commander, plus de 120 raccourcis réassignables
 - **15 langues** — Anglais, coréen, japonais, chinois (simplifié et traditionnel), allemand, français, espagnol, portugais, italien, russe, turc, arabe, thaï, vietnamien
 - **Renforcement CJK** (1.3.0) : extraction d'archives `.alz` (`unalz` intégré), aperçu en ligne de `.hwpx`, recherche multilingue de noms de fichiers (Pinyin / Romaji / Hangul-Hanja)
 - **Renforcement CJK étendu** (1.3.1) : signets automatiques pour dossiers de messagerie/cloud (KakaoTalk · LINE · WeChat · iCloud Drive — 12 chemins), repli plein/demi-largeur dans la recherche, conversion d'encodage EUC-KR/Shift-JIS/GBK → UTF-8 (avec annulation), détection heuristique des formulaires gouvernementaux coréens

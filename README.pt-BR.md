@@ -20,9 +20,9 @@ Unifyl é o gerenciador de arquivos de painel duplo para macOS que combina ferra
 - **Painel duplo** — Dois painéis lado a lado ou um sobre o outro, abas, espaços de trabalho, painel do Terminal e Terminal rápido (só no download direto)
 - **Impulsionado por IA** — Busca semântica, renomeação por IA, etiquetagem inteligente, detecção de duplicatas — tudo rodando localmente no Mac com os frameworks Natural Language e Vision da Apple
 - **Remoto & nuvem** — FTP/SFTP/WebDAV/SMB/S3/Google Drive/Dropbox/OneDrive/Docker/Kubernetes
-- **Mais de 50 ferramentas profissionais** — Renomeação em lote, comparação de texto/binário/imagem, sincronização de diretórios, mesclagem de 3 vias, edição em lote de EXIF
+- **Ferramentas profissionais** — Renomeação em lote, comparação de texto/binário/imagem, sincronização de diretórios, mesclagem de 3 vias, edição em lote de EXIF
 - **Arquivos como pastas virtuais** — ZIP/7z/TAR/GZ/BZ2/XZ/ZSTD/RAR (inclui detecção automática de codificação de ZIP CJK legados)
-- **Teclado em primeiro lugar** — Paleta de comandos, navegação no estilo Vim, mais de 120 atalhos reatribuíveis
+- **Teclado em primeiro lugar** — Paleta de comandos, teclas compatíveis com o Total Commander, mais de 120 atalhos reatribuíveis
 - **15 idiomas**
 - **Reforço CJK** (1.3.0): extração de arquivos `.alz` (`unalz` integrado), pré-visualização inline de `.hwpx`, busca multilíngue de nomes de arquivo (Pinyin / Romaji / Hangul-Hanja)
 - **Reforço CJK ampliado** (1.3.1): marcadores automáticos para pastas de mensagens/nuvem (KakaoTalk · LINE · WeChat · iCloud Drive — 12 caminhos), dobramento de largura completa/meia na busca, conversão de codificação EUC-KR/Shift-JIS/GBK → UTF-8 (com desfazer), detecção heurística de formulários do governo coreano
