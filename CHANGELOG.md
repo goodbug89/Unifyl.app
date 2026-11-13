@@ -5,6 +5,16 @@ All notable changes to Unifyl will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.0.1] — 2026-11-12
+
+### Fixed
+
+- **Memory no longer grows the longer Unifyl stays open.** Each file list
+  stayed in memory after the panel was rebuilt, with every row it had shown:
+  the icon in the name column was drawn by a closure that held on to the
+  list. A two-week session reached 19 GB with 1,736 old lists alive, and
+  2.0.0 sat at 619 MB after two days. Old lists are now freed.
+
 ## [2.0.0] — 2026-10-31
 
 ### Changed
@@ -2107,7 +2117,8 @@ Initial public release.
 - **Themes & customization**: 12 built-in themes, custom editor, SVG icon packs, 120+ keyboard shortcuts.
 - **Cloud & remote**: FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive.
 
-[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.1
 [2.0.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.0
 [1.8.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.8.0
 [1.7.2]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.7.2
