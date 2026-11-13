@@ -11,12 +11,8 @@
                 <h2>Unifyl 2.0.1</h2>
                 <h3>Fixed</h3>
                 <ul>
-                <li><b>Memory no longer grows the longer Unifyl stays open.</b> Each file list</li>
+                <li><b>Memory no longer grows the longer Unifyl stays open.</b> Each file list stayed in memory after the panel was rebuilt, with every row it had shown: the icon in the name column was drawn by a closure that held on to the list. A two-week session reached 19 GB with 1,736 old lists alive, and 2.0.0 sat at 619 MB after two days. Old lists are now freed.</li>
                 </ul>
-                <p>  stayed in memory after the panel was rebuilt, with every row it had shown:</p>
-                <p>  the icon in the name column was drawn by a closure that held on to the</p>
-                <p>  list. A two-week session reached 19 GB with 1,736 old lists alive, and</p>
-                <p>  2.0.0 sat at 619 MB after two days. Old lists are now freed.</p>
             ]]></description>
             <pubDate>Sat, 14 Nov 2026 05:59:53 +0900</pubDate>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
