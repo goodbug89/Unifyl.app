@@ -5,6 +5,84 @@ All notable changes to Unifyl will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.0.2] — 2026-11-17
+
+### Fixed
+
+- **SFTP downloads and uploads work.** Every transfer failed with "No such
+  file or directory": the remote path was sent to `scp` in shell quotes, and
+  the `scp` in macOS 13 and later takes the quotes as part of the name. Only
+  browsing worked. Names with spaces, quotes, `*`, `?` and `[` now transfer
+  as themselves.
+- **A path-bar crumb on a remote connection stays on the server.** Clicking a
+  parent folder, or typing a path, on an SFTP or cloud panel opened that path
+  on this Mac instead and dropped the connection without saying so.
+- **Forget Host Key works in the Mac App Store edition.** The saved keys
+  were written to a different file than the one the button read, so it always
+  reported that no key was saved and a server whose key had changed could not
+  be reached again. A host typed in mixed case is matched too.
+- **A space after an S3 or B2 region no longer crashes the app.** A pasted
+  `ap-northeast-2 ` passed the connection sheet and then crashed on every
+  click of the saved connection.
+- **Deleting or copying an S3 folder finishes, and deletes that folder
+  only.** A sub-folder listing contained a nameless row that sent the
+  operation into itself without end, and a `#` or `?` in a folder name made
+  delete act on a sibling folder.
+- **Tool windows follow the theme.** With a dark theme on a light system,
+  Settings, Multi-Rename, the Theme Editor, alerts and menus were drawn
+  light, and several headers — Multi-Rename's column titles among them —
+  were dark text on a dark band.
+- **The delete confirmations for a server and for online-only cloud files
+  are translated**, with about a hundred other labels that were English in
+  every language: the Multi-Rename rule editor, the Theme Editor's colour
+  names, Media Info, progress captions, table column titles, tag colours.
+- **The video preview stops when you move to another file**, and shows the
+  new file's frames. It kept playing, sound included, and kept the first
+  video's frames on screen.
+- **The preview pane's folder size no longer walks into Photos, Music or
+  another app's data**, which could raise a privacy prompt, and stops when
+  the cursor moves on instead of measuring every folder passed over.
+- **Thumbnail view holds far less memory.** It cached each photo at full
+  resolution, 500 at a time; it now caches a small copy.
+- **The Theme Editor preview shows marked files as the list draws them.**
+  The marked row's name was painted in the selection colour, nearly
+  invisible on every dark theme, and the hidden-file row was not dimmed.
+- **Settings ▸ General lists your shortcuts as they are bound.** The list
+  was fixed text, English in every language, under "Remap any of these".
+- **Settings ▸ AI is laid out like the other panes.** It opened with an
+  empty band above the first row.
+- **Cancelling a remote or archive operation before it starts no longer
+  risks a crash.** The cancel reached a helper process that had not been
+  launched yet.
+- **Advanced Search's saved-searches menu is labelled as one.** In Korean,
+  Japanese and other languages it read "Save complete".
+
+### Changed
+
+- **Auto-pilot proposes files that arrived while Unifyl was closed.** A
+  download that finished before the next launch was taken for a file that had
+  always been there and was never proposed.
+- **Dismiss All counts as one "no" per kind of file**, not one per row — two
+  rows of a kind used to silence that kind for good in a single click.
+  Settings ▸ General ▸ Auto-pilot has **Ask About Every Kind Again** to undo
+  what it has learned.
+- **Three commands are named for what they do.** AI Auto-Classify is **AI
+  Category Tags** (it writes Finder tags), AI Organize is **AI Folder
+  Suggestions**, and Enhanced Duplicate Scan is **Find Similar Files**, beside
+  Find Duplicate Files for exact copies.
+- **The line under a short file list no longer says that nothing matches the
+  other pane.** Two unrelated folders is the usual state; the line now appears
+  only when some names are on both sides.
+- **Advanced Search's last button is Show in Panel.** It was Navigate, which
+  several languages rendered with the same word as Move.
+- **The path bar's sibling-folder menus are read once per folder, in the
+  background.** They were read on every redraw on the main thread, where a
+  stalled network volume could freeze the window.
+- **Auto-pilot stops watching when Pro is no longer active**, never proposes
+  a package (an app, an `.rtfd`) as a destination, and no longer downloads an
+  online-only file just to pick its icon.
+
+
 ## [2.0.1] — 2026-11-12
 
 ### Fixed
@@ -2117,7 +2195,8 @@ Initial public release.
 - **Themes & customization**: 12 built-in themes, custom editor, SVG icon packs, 120+ keyboard shortcuts.
 - **Cloud & remote**: FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive.
 
-[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v2.0.1...HEAD
+[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v2.0.2...HEAD
+[2.0.2]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.2
 [2.0.1]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.1
 [2.0.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.0
 [1.8.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v1.8.0
