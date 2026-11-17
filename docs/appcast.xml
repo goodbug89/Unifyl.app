@@ -6,6 +6,50 @@
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>
+            <title>Version 2.0.2</title>
+            <description><![CDATA[
+                <h2>Unifyl 2.0.2</h2>
+                <h3>Fixed</h3>
+                <ul>
+                <li><b>SFTP downloads and uploads work.</b> Every transfer failed with "No such file or directory": the remote path was sent to <code>scp</code> in shell quotes, and the <code>scp</code> in macOS 13 and later takes the quotes as part of the name. Only browsing worked. Names with spaces, quotes, <code>*</code>, <code>?</code> and <code>[</code> now transfer as themselves.</li>
+                <li><b>A path-bar crumb on a remote connection stays on the server.</b> Clicking a parent folder, or typing a path, on an SFTP or cloud panel opened that path on this Mac instead and dropped the connection without saying so.</li>
+                <li><b>Forget Host Key works in the Mac App Store edition.</b> The saved keys were written to a different file than the one the button read, so it always reported that no key was saved and a server whose key had changed could not be reached again. A host typed in mixed case is matched too.</li>
+                <li><b>A space after an S3 or B2 region no longer crashes the app.</b> A pasted <code>ap-northeast-2 </code> passed the connection sheet and then crashed on every click of the saved connection.</li>
+                <li><b>Deleting or copying an S3 folder finishes, and deletes that folder only.</b> A sub-folder listing contained a nameless row that sent the operation into itself without end, and a <code>#</code> or <code>?</code> in a folder name made delete act on a sibling folder.</li>
+                <li><b>Tool windows follow the theme.</b> With a dark theme on a light system, Settings, Multi-Rename, the Theme Editor, alerts and menus were drawn light, and several headers — Multi-Rename's column titles among them — were dark text on a dark band.</li>
+                <li><b>The delete confirmations for a server and for online-only cloud files are translated</b>, with about a hundred other labels that were English in every language: the Multi-Rename rule editor, the Theme Editor's colour names, Media Info, progress captions, table column titles, tag colours.</li>
+                <li><b>The video preview stops when you move to another file</b>, and shows the new file's frames. It kept playing, sound included, and kept the first video's frames on screen.</li>
+                <li><b>The preview pane's folder size no longer walks into Photos, Music or another app's data</b>, which could raise a privacy prompt, and stops when the cursor moves on instead of measuring every folder passed over.</li>
+                <li><b>Thumbnail view holds far less memory.</b> It cached each photo at full resolution, 500 at a time; it now caches a small copy.</li>
+                <li><b>The Theme Editor preview shows marked files as the list draws them.</b> The marked row's name was painted in the selection colour, nearly invisible on every dark theme, and the hidden-file row was not dimmed.</li>
+                <li><b>Settings ▸ General lists your shortcuts as they are bound.</b> The list was fixed text, English in every language, under "Remap any of these".</li>
+                <li><b>Settings ▸ AI is laid out like the other panes.</b> It opened with an empty band above the first row.</li>
+                <li><b>Cancelling a remote or archive operation before it starts no longer risks a crash.</b> The cancel reached a helper process that had not been launched yet.</li>
+                <li><b>Advanced Search's saved-searches menu is labelled as one.</b> In Korean, Japanese and other languages it read "Save complete".</li>
+                </ul>
+                <h3>Changed</h3>
+                <ul>
+                <li><b>Auto-pilot proposes files that arrived while Unifyl was closed.</b> A download that finished before the next launch was taken for a file that had always been there and was never proposed.</li>
+                <li><b>Dismiss All counts as one "no" per kind of file</b>, not one per row — two rows of a kind used to silence that kind for good in a single click. Settings ▸ General ▸ Auto-pilot has <b>Ask About Every Kind Again</b> to undo what it has learned.</li>
+                <li><b>Three commands are named for what they do.</b> AI Auto-Classify is <b>AI Category Tags</b> (it writes Finder tags), AI Organize is <b>AI Folder Suggestions</b>, and Enhanced Duplicate Scan is <b>Find Similar Files</b>, beside Find Duplicate Files for exact copies.</li>
+                <li><b>The line under a short file list no longer says that nothing matches the other pane.</b> Two unrelated folders is the usual state; the line now appears only when some names are on both sides.</li>
+                <li><b>Advanced Search's last button is Show in Panel.</b> It was Navigate, which several languages rendered with the same word as Move.</li>
+                <li><b>The path bar's sibling-folder menus are read once per folder, in the background.</b> They were read on every redraw on the main thread, where a stalled network volume could freeze the window.</li>
+                <li><b>Auto-pilot stops watching when Pro is no longer active</b>, never proposes a package (an app, an <code>.rtfd</code>) as a destination, and no longer downloads an online-only file just to pick its icon.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 17 Nov 2026 14:12:33 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v2.0.2/Unifyl-2.0.2.dmg"
+                sparkle:version="49"
+                sparkle:shortVersionString="2.0.2"
+                sparkle:edSignature="iGGzxVXgaPqKdrdLdpjn3/lV7FPQtL5DXEZdltxOVaRWyXJagf/DJ0TLhrGyUUkBZr7Jgp1HME0g+Zl3UBCKAg=="
+                length="19581147"
+                type="application/octet-stream"
+            />
+        </item>
+        <item>
             <title>Version 2.0.1</title>
             <description><![CDATA[
                 <h2>Unifyl 2.0.1</h2>
