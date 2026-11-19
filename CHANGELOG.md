@@ -5,6 +5,125 @@ All notable changes to Unifyl will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.0.3] — 2026-11-20
+
+### Added
+
+- **Hancom documents preview as documents.** The viewer (F3) and the preview
+  pane read `.hwpx` only, and only its text, so the older binary `.hwp` —
+  still the format most Korean documents arrive in — showed nothing but a file
+  icon. Both formats now open laid out the way they were written: pages on
+  paper-sized sheets, tables with their borders, shading and merged cells,
+  pictures, text boxes, fonts, sizes, colours, alignment, indents, line
+  spacing, outline numbers and bullets, and footnotes. The page scales to the
+  width of the pane. No Hancom Office is needed, and nothing is converted or
+  written to disk. A password-protected or distribution-locked document shows
+  the short preview text it carries and says so; a file saved as one format
+  under the other's extension is read as what it is.
+  Not drawn: headers and footers, lines and freehand shapes, WMF/EMF pictures
+  and embedded OLE objects (an empty frame holds their place), multi-column
+  layout, and text set to a narrower width than its font (it is tightened
+  instead). Hancom's own fonts are replaced by the nearest system face when
+  they are not installed, so lines can break in different places.
+
+### Fixed
+
+- **Unifyl opens at once while a cloud provider is busy.** Launch restored
+  every remembered folder permission before it showed a window, and each one
+  inside OneDrive, iCloud Drive or another provider's folder waits for that
+  provider to answer. With OneDrive re-syncing and a hundred such folders
+  remembered, no window appeared for minutes. Permissions for folders on the
+  Mac's own disk are restored first, as before; those on a cloud provider or a
+  mounted volume follow in the background, starting with the ones the open
+  panels need.
+- **Reclaim Space no longer lists apps you use every day as unused.** "Apps
+  you haven't launched" read the date on the app's folder, which launching an
+  app does not change — and an app unpacked by its own updater carries 1980
+  there. An app run that morning was offered for deletion as "not launched in
+  570 months"; a browser in daily use, at seven. The list now goes by the
+  date macOS records for each launch, and by the last read of the app's
+  executable where that is missing.
+- **Hex Editor, EXIF Editor, Git History and Find Duplicate Files open
+  again.** Choosing any of the four quit Unifyl before its window appeared,
+  and so did the Hex button in the viewer (F3). Each opens in a window of its
+  own, and that window was built without the app state those four tools had
+  come to read. Every separate window is now given the same state the main
+  window has.
+- **Invert Selection leaves the parent row alone.** Edit ▸ Invert Selection
+  also marked `..`, and the status bar counted "1 of 0 folders" selected. The
+  keyboard shortcut never did; the menu item now matches it.
+- **The viewer's format badge sits inside its toolbar capsule.** On macOS 26
+  the badge ("HWP", "PDF") lay across the rounded left end of the capsule that
+  holds the Auto, Text and Hex buttons. The three buttons are also larger
+  targets now — only the glyph itself took a click — and VoiceOver reads their
+  names instead of one symbol name for all three.
+- **A short folder no longer hides its first rows under the column header.**
+  On macOS 26 a list of a few files could rest scrolled by the height of the
+  header — `..` gone, the next row cut in half, and nothing to scroll back —
+  after opening a new window or tab with the cursor below the first row. The
+  list was one header taller than the space it showed in.
+- **macOS (Automatic) follows the Mac again after another theme.** Coming
+  from a dark theme on a light Mac, the toolbar turned light while the panels
+  stayed dark, and three toolbar buttons were white on white. On that theme
+  the cursor row is now a tint with a stripe, as on every other theme; the
+  solid system band left names and sizes dark on saturated blue.
+- **Thumbnail and Brief view follow the theme.** Both kept the system
+  background, text and selection colours under every theme, so changing the
+  view mode switched the theme off for that pane.
+- **The panes return to equal width after "Panels Above Each Other".**
+  Switching the stacked arrangement off left them at about 75 / 25.
+- **The preview pane shows only the preview.** The list's "N items changed
+  here" line, and its empty-folder and loading states, were drawn across the
+  previewed page.
+- **Quick Terminal is drawn as one piece.** Its title read through to the tab
+  bar underneath, and its green rule sat across the function-key bar at the
+  bottom of the window instead of under the console.
+- **Errors and status messages are in your language.** About 200 strings
+  were English in all fifteen languages — "Copy failed", "Move failed" and
+  "Delete failed", every archive error, the progress heading ("Copying..."),
+  Undo's confirmations, the Hex Editor's status line, Find Similar Files'
+  labels, Regex Rename's and Smart Folders' presets, the names of default
+  folders and layouts, and more. They entered the screen as plain text rather
+  than through the catalogue, which is why no earlier check saw them.
+- **A failure is no longer shown in green.** Text Tools, File Split / Merge,
+  PDF Tools, 3-Way Merge, the EXIF editor and the audio tools chose red or
+  green by looking for the English word "Error" or "failed" in their own
+  message, so outside English a failure was coloured as a success.
+- **Sizes agree between tools.** Get Info gave a folder's size as the disk
+  blocks it occupies ("16 KB") where the status bar gave its contents ("108
+  bytes"); it now shows both, as Finder does. Find Similar Files counted
+  reclaimable space by content and Find Duplicate Files by blocks; both count
+  blocks, which is what deleting frees, and say "on disk". A file under 1 KB
+  read "27 bytes (27 bytes)".
+- **Media Info reads pictures.** It is offered for images and answered
+  "Failed to read metadata: Cannot Open"; it now shows pixel size, colour
+  model, bit depth, resolution, colour profile and transparency.
+- **Commands that have nothing to act on say why.** From the command
+  palette, Show Context Menu did nothing unless the list had the keyboard,
+  and Folder History, Download from Remote, Upload to Remote, Exit Archive
+  and Disconnect returned without a word when they did not apply.
+- **Reveal in Opposite Panel puts the cursor on the file.** It opened the
+  folder and left the cursor on `..`.
+- **The disk's root no longer lists a second "Macintosh HD".** `/.nofollow`,
+  a system directory that stands for the volume itself, was shown under the
+  volume's name among the visible folders.
+- **Folder History lists each folder once**, newest first. Walking between
+  two folders filled it with the same two lines, and `/tmp/…` appeared beside
+  `/private/tmp/…`.
+- **Smaller fixes found by looking at every window:** Regex Rename's presets
+  wrap instead of running off the window; Go to Folder's field stays on one
+  line; AI Folder Suggestions and Find Large Files fill their window instead
+  of floating between blank bands; Manage Automations and Manage Plugins have
+  a title and a sidebar wide enough to read; the path bar fades at the head
+  when it is clipped and keeps its end in view; a long status message takes
+  the status bar instead of being cut beside a squeezed file readout; the
+  Folder Heatmap legend wraps as whole entries; the EXIF Editor opens wide
+  enough for its columns; the Smart Folder cart explains itself when empty;
+  Bookmarks shows iCloud Drive by name; a change made this second reads "just
+  now" rather than "in 0 seconds"; the Window menu's dead "Unifyl Help" item
+  is gone.
+
+
 ## [2.0.2] — 2026-11-17
 
 ### Fixed
@@ -2195,7 +2314,8 @@ Initial public release.
 - **Themes & customization**: 12 built-in themes, custom editor, SVG icon packs, 120+ keyboard shortcuts.
 - **Cloud & remote**: FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive.
 
-[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v2.0.2...HEAD
+[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v2.0.3...HEAD
+[2.0.3]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.3
 [2.0.2]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.2
 [2.0.1]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.1
 [2.0.0]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.0
