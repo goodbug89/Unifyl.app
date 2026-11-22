@@ -5,6 +5,74 @@ All notable changes to Unifyl will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.0.4] — 2026-11-22
+
+### Added
+
+- **Document versions.** Where a document exists in several versions on the
+  Mac, the file list puts a green tick on the icon of the newest. With the
+  cursor on an older one the status bar says where the newer is and when it
+  was saved; on the newest it says "Newest of 3 known versions" — known,
+  because a later one may sit in a folder Unifyl has not been shown. **Search ▸ Show Document Versions** (also in the context menu and
+  the command palette) lists every version Unifyl has come across, newest
+  first, with byte-identical copies folded under one of them and the site
+  each was downloaded from. Opening a marked file still opens it, with a line
+  saying a later one exists.
+  Versions are told by what the documents say, not by their names alone: the
+  text of Hancom `.hwp`/`.hwpx`, Word, Excel, PowerPoint, PDF and plain-text
+  files is compared, so `보고서_최종.hwp`, `보고서_최종_수정(1).hwp` and
+  `보고서_261105.hwp` are found to be one document. Which is newest comes
+  from the date saved inside the file, not the file's own — an old attachment
+  downloaded again today is not today's version — and where no date can be
+  trusted, none is named the newest. Two documents made from one template
+  under different names are listed as "Possibly Related" and never marked;
+  **Not the Same Document** removes a file from a document's versions for good.
+  The window also says how many lines each version added and removed against
+  the one before it. **Compare with Older Version** opens the two texts side
+  by side, a sentence to a line; **Keep Newest…** moves every older version
+  to the Trash after listing them by path, and one ⌘Z brings them all back.
+  All of it is in the free tier. Double-clicking a version opens it, and the line shown when an
+  older version is opened has a button that opens the newer one instead.
+  It looks in the folders a panel has shown, on this Mac, and never downloads
+  an online-only file to read it. Settings ▸ General ▸ Document Versions has
+  the switch and, outside the Mac App Store build, the folders to look
+  through ahead of time: Downloads, Desktop and Documents, and any others
+  added — a messenger's received-files folder among them.
+  Not read: documents kept online-only in a cloud folder; the text of `.xls`
+  and `.ppt`.
+
+### Fixed
+
+- **Unifyl 2.0.3 quit on macOS 15 a few seconds into browsing folders.**
+  macOS 14 and 15 sometimes draw a window's contents off the main thread
+  while the main thread waits. Swift 6's runtime check in the path bar's
+  folder list took that for a threading bug and stopped the app ("quit
+  unexpectedly"), reported on an M4 MacBook Air with macOS 15.7.7. The check
+  is a debugging aid, not a guard: the compile-time concurrency checking
+  stays, and the runtime traps are off in every target. Release archives are
+  now clean builds and refuse to package a binary that still carries them —
+  2.0.3 had about 4,100.
+
+- **The preview's Hex tab was the full Hex Editor for everyone.** Typing in it
+  changed bytes and ⌘S wrote them to the file, without Unifyl Pro, while
+  Tools ▸ Hex Editor… asked for Pro. Looking at the bytes — offset, find, the
+  ASCII column — stays free in the preview; typing there now explains that
+  editing is part of Pro, and there is no Save or Revert to press.
+
+- **The preview's Hex tab hid its own offset column.** It kept the editor
+  window's 750-point minimum inside a narrower panel, so it sat centred and
+  clipped on both sides — no offsets, no title, no file name. It now fits the
+  panel: rows stay whole and scroll sideways when the panel is narrow, the
+  toolbar folds into two lines, and the panel has no Close button of its own.
+
+- **Compare (text) drew its table as a narrow block in the middle of the
+  window.** The two columns were only as wide as the two file names in the
+  header, so every line was cut to that width, and with a short file the
+  block sat half-way down the window. The table fills the window from the
+  top; a line too long for its column is cut at the end and shown whole on
+  hover.
+
+
 ## [2.0.3] — 2026-11-20
 
 ### Added
@@ -2314,7 +2382,8 @@ Initial public release.
 - **Themes & customization**: 12 built-in themes, custom editor, SVG icon packs, 120+ keyboard shortcuts.
 - **Cloud & remote**: FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive.
 
-[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v2.0.3...HEAD
+[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v2.0.4...HEAD
+[2.0.4]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.4
 [2.0.3]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.3
 [2.0.2]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.2
 [2.0.1]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.1
