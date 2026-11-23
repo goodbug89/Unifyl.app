@@ -5,6 +5,21 @@ All notable changes to Unifyl will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.0.5] — 2026-11-23
+
+### Fixed
+
+- **macOS 14 and 15: the last of the runtime checks behind the 2.0.3 quit.**
+  2.0.4 removed them from the app itself; 119 were still in the file list and
+  the other built-in libraries, at the points where the system calls in (the
+  list's mouse, keyboard, drag and drawing entry points, Quick Look, the
+  context menu). Any of them could stop the app the same way if macOS 14 or 15
+  called in from a background thread. A release build now has none, and the
+  release scripts refuse one that does.
+- **Icons that were blank on macOS 14:** Git History in the command palette,
+  the EXIF editor's empty state, and AI Folder Suggestions' "No
+  Recommendations" (that one named a symbol that exists on no macOS).
+
 ## [2.0.4] — 2026-11-22
 
 ### Added
