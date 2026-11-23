@@ -6,6 +6,27 @@
         <description>Unifyl — AI-Powered Dual-Pane File Manager for macOS</description>
         <language>en</language>
         <item>
+            <title>Version 2.0.5</title>
+            <description><![CDATA[
+                <h2>Unifyl 2.0.5</h2>
+                <h3>Fixed</h3>
+                <ul>
+                <li><b>macOS 14 and 15: the last of the runtime checks behind the 2.0.3 quit.</b> 2.0.4 removed them from the app itself; 119 were still in the file list and the other built-in libraries, at the points where the system calls in (the list's mouse, keyboard, drag and drawing entry points, Quick Look, the context menu). Any of them could stop the app the same way if macOS 14 or 15 called in from a background thread. A release build now has none, and the release scripts refuse one that does.</li>
+                <li><b>Icons that were blank on macOS 14:</b> Git History in the command palette, the EXIF editor's empty state, and AI Folder Suggestions' "No Recommendations" (that one named a symbol that exists on no macOS).</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 23 Nov 2026 09:56:49 +0900</pubDate>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/goodbug89/Unifyl.app/releases/download/v2.0.5/Unifyl-2.0.5.dmg"
+                sparkle:version="52"
+                sparkle:shortVersionString="2.0.5"
+                sparkle:edSignature="i11wbc35SisZ+tFLhEdXTknY503FW4ymHlULOkahwPvCIgoPYg4S9U0w9ZZhVfoewZgNWmu2IuW0Fx4vLH2oBA=="
+                length="19940257"
+                type="application/octet-stream"
+            />
+        </item>
+        <item>
             <title>Version 2.0.4</title>
             <description><![CDATA[
                 <h2>Unifyl 2.0.4</h2>
