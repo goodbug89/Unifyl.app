@@ -5,6 +5,99 @@ All notable changes to Unifyl will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.0.6] — 2026-11-28
+
+### Fixed
+
+- **Preview ▸ Hex showed the previous file's bytes.** With the hex view open
+  in the preview panel, moving the cursor to another file changed the name in
+  the header but left the first file's bytes on screen (a SQLite database under
+  "Q3 Report.pdf"); only switching to Auto and back reloaded it. The hex view
+  now reads each file the cursor lands on. A Pro user who changed bytes and
+  then moves the cursor is asked whether to save them first, and a save goes
+  to the file the bytes came from.
+- **"1 lines added", "1 items", "1 files".** Counted phrases now use the
+  singular where the language has one, in all 15 languages (with Russian's and
+  Arabic's several plural forms): Document Versions' "what changed" line, the
+  status bar's file and folder counts, the smart folder bar, the JSON
+  preview's collapsed arrays and objects, Multi-Rename's selection count, the
+  Select by Pattern / Select Same Name / comment / attribute / listing toasts,
+  and the Occupied Space summary. Plural forms also follow the language the
+  app is shown in rather than the Mac's region, so an English Unifyl on a
+  Mac set to Korea no longer says "1 files will be renamed".
+- **Tools ▸ Automation never had its six built-in automations** (direct
+  download). The build flattened the bundled scripts into the app's resources,
+  so the folder they are installed from didn't exist, and the AppleScript one
+  was compiled to a form the list can't read. They now appear, each with the
+  same identity on every launch so a save can't duplicate them. Three of them
+  were written against a scripting API Unifyl never had and would have failed
+  on their first run; Batch Rename from CSV, Export File List CSV and Flatten
+  Directory are rewritten as shell scripts, and none of them overwrites an
+  existing file. Convert Images to WebP could not work at all (macOS can read
+  WebP but not write it) and is now Convert Images to HEIC, keeping the
+  originals. Sync Panel Directories says what it really does: a dry run that
+  lists the changes and touches nothing.
+- **Moving a file off a read-only disk left a copy behind.** The move said it
+  failed, but macOS had already copied the file before it found it couldn't
+  remove the original, and the copy stayed in the destination without an
+  Undo entry. A move from a read-only volume is now refused up front with the
+  volume's name, and a failed move no longer leaves a stray copy (a folder's
+  copy is kept, since a half-finished delete may have left it holding the
+  only copy of some files). Copying onto a read-only volume no longer blames
+  "Macintosh HD", and the Trash says the volume is read-only instead of that
+  it "doesn't have" the file.
+- **"Don't show tips at launch" didn't stop the tip in the status bar.** The
+  Tips window's checkbox only stopped the tip card; the status-bar tip read a
+  setting nothing in the app could change. Both now follow the checkbox.
+- **Settings ▸ General ▸ Show path bar did nothing.** It now hides the path bar
+  above each panel (an archive or smart folder still shows its own bar, since
+  that's how you leave it).
+
+- **Comparing, syncing or hashing big files on an external drive could use as
+  much memory as the files were big.** Compare Directories, Folder Sync's
+  checksum mode, Reclaim Space, the diff heatmap, File Split/Merge, the binary
+  diff, File X-Ray, the preview's file-type check and the list's text tooltip
+  read whole files where they needed a stream or a few bytes; on a USB or
+  network volume macOS doesn't map such reads, so comparing two 3 GB files
+  took 6.4 GB. They now read in pieces (9 MB for the same pair). Merging
+  split parts onto a full disk no longer quits the app.
+- **Amazon S3 requests were signed for the wrong query string.** "/" in a
+  parameter (every folder listing sends `delimiter=/`) was left unencoded in
+  the signature; signing now matches AWS's published example.
+- **FTP listings collapsed double spaces in names**, so "my  file.txt" showed
+  as a file that didn't exist (SFTP was fixed in 1.5.0).
+- **Find Duplicates could offer two different unreadable files as exact
+  duplicates**, because a read error was hashed as the end of the file.
+- **Select by Pattern's `*.*` skipped files without an extension** (Makefile,
+  README). As in Total Commander, `*.*` is now every file, and `*.` means
+  "no extension".
+- **Text encoding conversion refused every UTF-16 file** as binary.
+- **Sizes one byte short of the next unit read "1024.0 KB"**; they now read
+  "1.0 MB". The Large File Finder sorts names the way Finder does ("2" before
+  "10").
+
+### Security
+
+- **A file name could run a command through the terminal's variables when
+  they were typed inside quotes.** `$F`, `$S` and the rest were quoted for use
+  on their own, so `open "$F"` on a file named `x$(command).txt` ran the
+  command, and so did a name containing ";" used as `"$(basename $F)"`. A
+  file name is now never part of the command text: the values are assigned to
+  shell variables at the start of the command and `$F` refers to them, which
+  the shell does not parse again in any quoting.
+- **HTML and SVG previews ran the file's scripts and loaded remote content**,
+  which let a sent file report that it had been opened. Previews now run no
+  scripts, fetch nothing from the network and can't navigate away.
+- **SMB (direct download): a name containing ";" on a server ran as extra
+  smbclient commands.** Such names are now refused with an explanation.
+
+### Performance
+
+- Listing a folder no longer throws away the file details it has just read in
+  one batch and reads them again one by one: a 100,000-item folder lists in
+  1.9 s instead of 2.3 s. Most of what's left is reading each file's Finder
+  tags.
+
 ## [2.0.5] — 2026-11-23
 
 ### Fixed
@@ -2397,7 +2490,8 @@ Initial public release.
 - **Themes & customization**: 12 built-in themes, custom editor, SVG icon packs, 120+ keyboard shortcuts.
 - **Cloud & remote**: FTP, SFTP, WebDAV, S3, Google Drive, Dropbox, OneDrive.
 
-[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v2.0.4...HEAD
+[Unreleased]: https://github.com/goodbug89/Unifyl.app/compare/v2.0.6...HEAD
+[2.0.6]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.6
 [2.0.4]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.4
 [2.0.3]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.3
 [2.0.2]: https://github.com/goodbug89/Unifyl.app/releases/tag/v2.0.2
